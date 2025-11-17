@@ -23,6 +23,11 @@
 - [ ] Implementar tabelas de dados financeiros
 
 ## Deploy & Domain
-- [ ] Deploy no Vercel
-- [ ] Configurar domínio base-xyz.com
-- [ ] Testar acesso via domínio customizado
+- [x] Deploy no Vercel
+- [x] Configurar domínio base-xyz.com
+- [ ] Testar acesso via domínio customizado (aguardando propagação DNS)
+
+## Competitive Analysis
+- [x] Criar página Competitive Landscape com análise de players brasileiros
+- [x] Adicionar tabela comparativa de exchanges e fintechs
+- [x] Incluir análise de licenciamento e regulação dos competidores

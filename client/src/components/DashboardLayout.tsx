@@ -26,6 +26,7 @@ const navItems = [
   { icon: Shield, label: "Licensing & Regulatory", path: "/licensing" },
   { icon: BarChart3, label: "Financial Projections", path: "/financials" },
   { icon: Globe, label: "Expansion Strategy", path: "/expansion" },
+  { icon: Users, label: "Competitive Landscape", path: "/competitive-landscape" },
   { icon: Users, label: "Team & Operations", path: "/team" },
 ];
 

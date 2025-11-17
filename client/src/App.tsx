@@ -8,6 +8,7 @@ import Home from "./pages/Home";
 import CoreOperations from "./pages/CoreOperations";
 import Licensing from "./pages/Licensing";
 import Expansion from "./pages/Expansion";
+import CompetitiveLandscape from "./pages/CompetitiveLandscape";
 import ComingSoon from "./pages/ComingSoon";
 
 function Router() {
@@ -17,6 +18,7 @@ function Router() {
       <Route path={"/core-operations"} component={CoreOperations} />
       <Route path={"/licensing"} component={Licensing} />
       <Route path={"/expansion"} component={Expansion} />
+      <Route path={"/competitive-landscape"} component={CompetitiveLandscape} />
       <Route path={"/payments"}>
         {() => <ComingSoon title="Payments" description="B2B cross-border payment infrastructure analysis" />}
       </Route>
