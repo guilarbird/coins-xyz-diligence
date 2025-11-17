@@ -1,0 +1,5 @@
+server
+shared
+dist
+node_modules
+.git
