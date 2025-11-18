@@ -4,6 +4,7 @@ import { getDb } from "../db";
 import { users, accessRequests, whitelistedEmails } from "../../drizzle/schema";
 import { eq, and } from "drizzle-orm";
 import { TRPCError } from "@trpc/server";
+import { sendApprovalNotification } from "../lib/email";
 
 /**
  * Admin router for managing user approvals and whitelist
@@ -66,6 +67,17 @@ export const adminRouter = router({
       const db = await getDb();
       if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database unavailable" });
 
+      // Get user first
+      const [user] = await db
+        .select()
+        .from(users)
+        .where(eq(users.id, input.userId))
+        .limit(1);
+
+      if (!user) {
+        throw new TRPCError({ code: "NOT_FOUND", message: "User not found" });
+      }
+
       await db
         .update(users)
         .set({
@@ -74,6 +86,15 @@ export const adminRouter = router({
           approvedAt: new Date(),
         })
         .where(eq(users.id, input.userId));
+
+      // Send email notification
+      if (user.email) {
+        try {
+          await sendApprovalNotification(user.email, true);
+        } catch (error) {
+          console.error("Failed to send approval notification:", error);
+        }
+      }
 
       return { success: true };
     }),
@@ -94,6 +115,17 @@ export const adminRouter = router({
       const db = await getDb();
       if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database unavailable" });
 
+      // Get user first
+      const [user] = await db
+        .select()
+        .from(users)
+        .where(eq(users.id, input.userId))
+        .limit(1);
+
+      if (!user) {
+        throw new TRPCError({ code: "NOT_FOUND", message: "User not found" });
+      }
+
       await db
         .update(users)
         .set({
@@ -102,6 +134,15 @@ export const adminRouter = router({
           approvedAt: new Date(),
         })
         .where(eq(users.id, input.userId));
+
+      // Send email notification
+      if (user.email) {
+        try {
+          await sendApprovalNotification(user.email, false);
+        } catch (error) {
+          console.error("Failed to send rejection notification:", error);
+        }
+      }
 
       return { success: true };
     }),
@@ -152,6 +193,13 @@ export const adminRouter = router({
         })
         .where(eq(accessRequests.id, input.requestId));
 
+      // Send email notification
+      try {
+        await sendApprovalNotification(request.email, true);
+      } catch (error) {
+        console.error("Failed to send approval notification:", error);
+      }
+
       return { success: true };
     }),
 
@@ -171,6 +219,17 @@ export const adminRouter = router({
       const db = await getDb();
       if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database unavailable" });
 
+      // Get request first
+      const [request] = await db
+        .select()
+        .from(accessRequests)
+        .where(eq(accessRequests.id, input.requestId))
+        .limit(1);
+
+      if (!request) {
+        throw new TRPCError({ code: "NOT_FOUND", message: "Request not found" });
+      }
+
       await db
         .update(accessRequests)
         .set({
@@ -179,6 +238,13 @@ export const adminRouter = router({
           reviewedAt: new Date(),
         })
         .where(eq(accessRequests.id, input.requestId));
+
+      // Send email notification
+      try {
+        await sendApprovalNotification(request.email, false);
+      } catch (error) {
+        console.error("Failed to send rejection notification:", error);
+      }
 
       return { success: true };
     }),

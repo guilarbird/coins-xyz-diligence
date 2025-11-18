@@ -25,6 +25,7 @@ import Signup from "./pages/Signup";
 import RequestAccess from "./pages/RequestAccess";
 import AdminDashboard from "./pages/AdminDashboard";
 import AuthGuard from "./components/AuthGuard";
+import ChangePassword from "./pages/ChangePassword";
 
 function Router() {
   // make sure to consider if you need authentication for certain routes
@@ -34,6 +35,7 @@ function Router() {
       <Route path="/login" component={Login} />
       <Route path="/signup" component={Signup} />
       <Route path="/request-access" component={RequestAccess} />
+      <Route path="/change-password" component={ChangePassword} />
       
       {/* Admin routes */}
       <Route path="/admin">

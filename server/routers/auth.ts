@@ -1,25 +1,35 @@
 import { z } from "zod";
 import { publicProcedure, protectedProcedure, router } from "../_core/trpc";
 import { getDb } from "../db";
-import { users, accessRequests, whitelistedEmails } from "../../drizzle/schema";
+import { users, accessRequests, whitelistedEmails, APPROVED_DOMAINS } from "../../drizzle/schema";
 import { eq, and } from "drizzle-orm";
 import bcrypt from "bcrypt";
 import { TRPCError } from "@trpc/server";
 import { COOKIE_NAME } from "@shared/const";
 import { getSessionCookieOptions } from "../_core/cookies";
+import { sendAccessRequestNotification } from "../lib/email";
 
 const SALT_ROUNDS = 10;
 
 /**
- * Check if email is whitelisted (pre-approved)
+ * Check if email is whitelisted or from approved domain
  */
-async function isEmailWhitelisted(email: string): Promise<boolean> {
+async function isEmailApproved(email: string): Promise<boolean> {
+  const emailLower = email.toLowerCase();
+  const emailDomain = emailLower.split("@")[1];
+  
+  // Check if domain is auto-approved
+  if (emailDomain && APPROVED_DOMAINS.includes(emailDomain)) {
+    return true;
+  }
+  
+  // Check if email is explicitly whitelisted
   const db = await getDb();
   if (!db) return false;
   const whitelist = await db
     .select()
     .from(whitelistedEmails)
-    .where(eq(whitelistedEmails.email, email.toLowerCase()))
+    .where(eq(whitelistedEmails.email, emailLower))
     .limit(1);
   return whitelist.length > 0;
 }
@@ -64,8 +74,8 @@ export const authRouter = router({
       // Hash password
       const passwordHash = await bcrypt.hash(password, SALT_ROUNDS);
 
-      // Check if email is whitelisted
-      const isWhitelisted = await isEmailWhitelisted(emailLower);
+      // Check if email is approved (whitelist or approved domain)
+      const isApproved = await isEmailApproved(emailLower);
 
       // Create user with appropriate approval status
       const [newUser] = await db.insert(users).values({
@@ -74,11 +84,12 @@ export const authRouter = router({
         passwordHash,
         loginMethod: "password",
         openId: `password_${Date.now()}_${Math.random().toString(36).substring(7)}`, // Generate unique openId for password users
-        approvalStatus: isWhitelisted ? "approved" : "pending",
+        approvalStatus: isApproved ? "approved" : "pending",
+        mustChangePassword: false, // User set their own password
         role: "user",
       });
 
-      if (isWhitelisted) {
+      if (isApproved) {
         // Auto-login whitelisted users
         return {
           success: true,
@@ -185,9 +196,9 @@ export const authRouter = router({
       const { email, name, reason } = input;
       const emailLower = email.toLowerCase();
 
-      // Check if already whitelisted
-      const isWhitelisted = await isEmailWhitelisted(emailLower);
-      if (isWhitelisted) {
+      // Check if already approved
+      const isApproved = await isEmailApproved(emailLower);
+      if (isApproved) {
         return {
           success: true,
           message: "Your email is pre-approved. Please sign up directly.",
@@ -220,6 +231,19 @@ export const authRouter = router({
         status: "pending",
       });
 
+      // Send email notification to admins
+      try {
+        await sendAccessRequestNotification({
+          email: emailLower,
+          name,
+          reason: reason || undefined,
+          timestamp: new Date(),
+        });
+      } catch (error) {
+        console.error("Failed to send access request notification:", error);
+        // Don't fail the request if email fails
+      }
+
       return {
         success: true,
         message: "Access request submitted successfully",
@@ -233,7 +257,65 @@ export const authRouter = router({
   checkWhitelist: publicProcedure
     .input(z.object({ email: z.string().email() }))
     .query(async ({ input }) => {
-      const isWhitelisted = await isEmailWhitelisted(input.email);
-      return { whitelisted: isWhitelisted };
+      const isApproved = await isEmailApproved(input.email);
+      return { whitelisted: isApproved };
     }),
+
+  /**
+   * Change password (requires authentication)
+   */
+  changePassword: protectedProcedure
+    .input(
+      z.object({
+        currentPassword: z.string(),
+        newPassword: z.string().min(8),
+      })
+    )
+    .mutation(async ({ input, ctx }) => {
+      const { currentPassword, newPassword } = input;
+      const userId = ctx.user.id;
+
+      // Get user from database
+      const db = await getDb();
+      if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database unavailable" });
+      const [user] = await db
+        .select()
+        .from(users)
+        .where(eq(users.id, userId))
+        .limit(1);
+
+      if (!user || !user.passwordHash) {
+        throw new TRPCError({
+          code: "NOT_FOUND",
+          message: "User not found or password not set",
+        });
+      }
+
+      // Verify current password
+      const isValid = await bcrypt.compare(currentPassword, user.passwordHash);
+      if (!isValid) {
+        throw new TRPCError({
+          code: "UNAUTHORIZED",
+          message: "Current password is incorrect",
+        });
+      }
+
+      // Hash new password
+      const newPasswordHash = await bcrypt.hash(newPassword, SALT_ROUNDS);
+
+      // Update password and clear mustChangePassword flag
+      await db
+        .update(users)
+        .set({
+          passwordHash: newPasswordHash,
+          mustChangePassword: false,
+        })
+        .where(eq(users.id, userId));
+
+      return {
+        success: true,
+        message: "Password changed successfully",
+      };
+    }),
+
 });

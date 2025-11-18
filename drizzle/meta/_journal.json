@@ -15,6 +15,13 @@
       "when": 1763470100513,
       "tag": "0001_uneven_wallow",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1763473169848,
+      "tag": "0002_solid_monster_badoon",
+      "breakpoints": true
     }
   ]
 }

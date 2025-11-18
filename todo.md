@@ -49,3 +49,15 @@
 - [ ] Test authentication flows (password, OAuth, approval)
 - [ ] Create script to add first admin user
 - [ ] Deploy and verify in production
+
+## Domain-Based Auto-Approval & Email Notifications
+- [x] Adicionar auto-approve para domínios @coins.xyz, @coins.ph, @parafi.com
+- [x] Remover Google OAuth login (apenas email/password)
+- [x] Implementar senha padrão "coins99" com força de troca no primeiro login
+- [x] Adicionar campo mustChangePassword no schema de users
+- [x] Criar página de "Change Password" forçada
+- [x] Implementar email notifications para access requests
+- [x] Configurar emails de destino: gui@coins.ph, gui@base-xyz.com, gui@coins.xyz, geral@guilabird.com
+- [ ] Testar fluxo completo de signup com domínio aprovado
+- [ ] Testar fluxo de request access com email notification
+- [ ] Deploy para produção

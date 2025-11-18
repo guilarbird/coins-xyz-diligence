@@ -34,6 +34,12 @@ export default function AuthGuard({ children, requireAuth = true, requireAdmin =
       return;
     }
 
+    // If user must change password, redirect to change-password page
+    if (user && user.mustChangePassword && window.location.pathname !== "/change-password") {
+      setLocation("/change-password");
+      return;
+    }
+
     // If admin is required but user is not admin
     if (requireAdmin && user?.role !== "admin") {
       setLocation("/");

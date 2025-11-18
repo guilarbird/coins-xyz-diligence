@@ -1,4 +1,7 @@
-import { int, mysqlEnum, mysqlTable, text, timestamp, varchar } from "drizzle-orm/mysql-core";
+import { boolean, int, mysqlEnum, mysqlTable, text, timestamp, varchar } from "drizzle-orm/mysql-core";
+
+// Auto-approved email domains
+export const APPROVED_DOMAINS = ["coins.xyz", "coins.ph", "parafi.com"];
 
 /**
  * Core user table backing auth flow.
@@ -25,6 +28,8 @@ export const users = mysqlTable("users", {
   approvedBy: int("approvedBy"),
   /** Timestamp of approval/rejection */
   approvedAt: timestamp("approvedAt"),
+  /** Flag to force password change on next login */
+  mustChangePassword: boolean("mustChangePassword").default(false).notNull(),
   createdAt: timestamp("createdAt").defaultNow().notNull(),
   updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
   lastSignedIn: timestamp("lastSignedIn").defaultNow().notNull(),
