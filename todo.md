@@ -104,4 +104,4 @@
 ## URL Change
 - [x] Mudar rota de /simple-login para /investor-access
 - [x] Atualizar redirects no SimpleAuthGuard
-- [ ] Testar e fazer deploy
+- [x] Testar e fazer deploy
