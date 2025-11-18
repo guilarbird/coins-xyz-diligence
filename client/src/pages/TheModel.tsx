@@ -1,4 +1,5 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import DashboardLayout from "@/components/DashboardLayout";
 import { ArrowRight, CheckCircle2, TrendingUp, DollarSign, Repeat, Building2 } from "lucide-react";
 
@@ -129,17 +130,19 @@ export default function TheModel() {
 
         {/* Detailed Rail Explanations */}
         <div className="space-y-6">
-          <h2 className="text-3xl font-bold">How Each Rail Works</h2>
+          <h2 className="text-3xl font-bold mb-4">How Each Rail Works</h2>
 
+          <Accordion type="single" collapsible className="space-y-4">
           {/* Rail 1: Exchange */}
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2 text-blue-400">
+          <AccordionItem value="rail-1" className="border rounded-lg px-6">
+            <AccordionTrigger className="hover:no-underline">
+              <div className="flex items-center gap-2 text-blue-400 font-semibold text-lg">
                 <TrendingUp className="h-5 w-5" />
                 Rail 1: Spot Exchange
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4 text-muted-foreground">
+              </div>
+            </AccordionTrigger>
+            <AccordionContent>
+              <div className="space-y-4 text-muted-foreground pt-4">
               <p>
                 The Exchange is a regulated orderbook with full KYC/AML compliance, integrated with local banking rails 
                 (PIX in Brazil, Mobile Money in Nigeria/Ghana). It serves retail and semi-institutional traders who need 
@@ -159,18 +162,20 @@ export default function TheModel() {
                   <p className="text-sm">KYC/AML stack (Zoloz, SmileID) and reporting infrastructure for PI/VASP licensing</p>
                 </div>
               </div>
-            </CardContent>
-          </Card>
+              </div>
+            </AccordionContent>
+          </AccordionItem>
 
           {/* Rail 2: Payments */}
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2 text-green-400">
+          <AccordionItem value="rail-2" className="border rounded-lg px-6">
+            <AccordionTrigger className="hover:no-underline">
+              <div className="flex items-center gap-2 text-green-400 font-semibold text-lg">
                 <ArrowRight className="h-5 w-5" />
                 Rail 2: Payments
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4 text-muted-foreground">
+              </div>
+            </AccordionTrigger>
+            <AccordionContent>
+              <div className="space-y-4 text-muted-foreground pt-4">
               <p>
                 The Payments rail enables pay-ins and pay-outs via local PSPs, merchant settlement, and cross-border 
                 remittances. It drives stablecoin adoption by making USDT/USDC as easy to use as local currency.
@@ -197,18 +202,20 @@ export default function TheModel() {
                   <p className="text-sm">Invoice payments and supplier settlements using USDT as the settlement layer</p>
                 </div>
               </div>
-            </CardContent>
-          </Card>
+              </div>
+            </AccordionContent>
+          </AccordionItem>
 
           {/* Rail 3: OTC */}
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2 text-purple-400">
+          <AccordionItem value="rail-3" className="border rounded-lg px-6">
+            <AccordionTrigger className="hover:no-underline">
+              <div className="flex items-center gap-2 text-purple-400 font-semibold text-lg">
                 <Building2 className="h-5 w-5" />
                 Rail 3: OTC / Trade Desk
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4 text-muted-foreground">
+              </div>
+            </AccordionTrigger>
+            <AccordionContent>
+              <div className="space-y-4 text-muted-foreground pt-4">
               <p>
                 The OTC desk handles Request for Quote (RFQ) flows for SMEs and corporates, especially import/export 
                 businesses needing FX execution. The China–Brazil corridor is a key use case: importers pay Chinese 
@@ -236,18 +243,20 @@ export default function TheModel() {
                   <p className="text-sm">Large-ticket trades executed OTC with better pricing than public orderbook</p>
                 </div>
               </div>
-            </CardContent>
-          </Card>
+              </div>
+            </AccordionContent>
+          </AccordionItem>
 
           {/* Rail 4: OCBS */}
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2 text-orange-400">
+          <AccordionItem value="rail-4" className="border rounded-lg px-6">
+            <AccordionTrigger className="hover:no-underline">
+              <div className="flex items-center gap-2 text-orange-400 font-semibold text-lg">
                 <DollarSign className="h-5 w-5" />
                 Rail 4: On-Chain Brokerage & Stablecoin Treasury (OCBS)
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4 text-muted-foreground">
+              </div>
+            </AccordionTrigger>
+            <AccordionContent>
+              <div className="space-y-4 text-muted-foreground pt-4">
               <p>
                 OCBS provides stablecoin treasury management, yield optimization, and on-chain settlement for merchants 
                 and SMEs. It enables "treasury mobility"—companies can hold dollar-denominated assets (USDT/USDC) and 
@@ -267,8 +276,10 @@ export default function TheModel() {
                   <p className="text-sm">Lock in BRL–USD rates by holding stablecoins, protecting against local currency devaluation</p>
                 </div>
               </div>
-            </CardContent>
-          </Card>
+              </div>
+            </AccordionContent>
+          </AccordionItem>
+          </Accordion>
         </div>
 
         {/* Why Full-Stack Compounds */}

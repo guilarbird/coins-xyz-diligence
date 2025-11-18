@@ -12,7 +12,7 @@ import CompetitiveLandscape from "./pages/CompetitiveLandscape";
 import TheModel from "./pages/TheModel";
 import Markets from "./pages/Markets";
 import Blueprint from "./pages/Blueprint";
-import Metrics from "./pages/Metrics";
+import DataAI from "./pages/DataAI";
 import Infrastructure from "./pages/Infrastructure";
 import Community from "./pages/Community";
 import Regulation from "./pages/Regulation";
@@ -33,7 +33,7 @@ function Router() {
       <Route path={"/the-model"} component={TheModel} />
       <Route path={"/markets"} component={Markets} />
       <Route path={"/blueprint"} component={Blueprint} />
-      <Route path={"/metrics"} component={Metrics} />
+      <Route path={"/data-ai"} component={DataAI} />
       <Route path={"/infrastructure"} component={Infrastructure} />
       <Route path={"/community"} component={Community} />
       <Route path={"/regulation"} component={Regulation} />

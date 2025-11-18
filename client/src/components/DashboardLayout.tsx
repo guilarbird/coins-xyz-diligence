@@ -29,7 +29,7 @@ const navItems = [
   { icon: Layers, label: "The Model", path: "/the-model" },
   { icon: Globe, label: "Markets", path: "/markets" },
   { icon: Map, label: "Blueprint", path: "/blueprint" },
-  { icon: TrendingUp, label: "Metrics", path: "/metrics" },
+  { icon: TrendingUp, label: "Data and AI", path: "/data-ai" },
   { icon: Server, label: "Infrastructure", path: "/infrastructure" },
   { icon: Users, label: "Community", path: "/community" },
   { icon: Shield, label: "Regulation", path: "/regulation" },

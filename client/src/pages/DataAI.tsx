@@ -49,14 +49,14 @@ const ocbsData = [
   { month: 'Nov 24', settlement: 2020 },
 ];
 
-export default function Metrics() {
+export default function DataAI() {
   return (
     <DashboardLayout>
       <div className="p-6 space-y-12">
         {/* Header */}
         <div className="space-y-4">
           <h1 className="text-4xl md:text-5xl font-bold">
-            Metrics & Traction
+            Data & AI Intelligence
           </h1>
           <p className="text-xl text-muted-foreground max-w-3xl">
             <strong className="text-foreground">Coins is not a speculative exchange; it is an emerging-market settlement network.</strong> 
@@ -367,6 +367,121 @@ export default function Metrics() {
                 <p className="text-xs text-muted-foreground mt-1">
                   Average account balance: $7,040 USDT
                 </p>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Real-Time Operational Data (from CSV) */}
+        <Card>
+          <CardHeader>
+            <CardTitle className="text-2xl">Real-Time Operational Data (Brazil)</CardTitle>
+            <p className="text-sm text-muted-foreground pt-2">
+              Live fiat deposit and withdrawal metrics extracted from production database (PostgreSQL). 
+              Data refreshed daily via PSP webhooks (Transfeera, Qyon).
+            </p>
+          </CardHeader>
+          <CardContent>
+            <div className="grid md:grid-cols-2 gap-6">
+              <div className="space-y-4">
+                <h3 className="font-semibold text-lg">Fiat Deposits (BRL)</h3>
+                <div className="space-y-2">
+                  <div className="flex justify-between text-sm">
+                    <span className="text-muted-foreground">Total Volume:</span>
+                    <span className="font-semibold">R$ 915,552.46</span>
+                  </div>
+                  <div className="flex justify-between text-sm">
+                    <span className="text-muted-foreground">Transaction Count:</span>
+                    <span className="font-semibold">454</span>
+                  </div>
+                  <div className="flex justify-between text-sm">
+                    <span className="text-muted-foreground">Unique Users:</span>
+                    <span className="font-semibold">105</span>
+                  </div>
+                  <div className="flex justify-between text-sm">
+                    <span className="text-muted-foreground">Avg per User:</span>
+                    <span className="font-semibold">R$ {(915552.46 / 105).toFixed(2)}</span>
+                  </div>
+                  <div className="flex justify-between text-sm">
+                    <span className="text-muted-foreground">Avg Transaction Size:</span>
+                    <span className="font-semibold">R$ {(915552.46 / 454).toFixed(2)}</span>
+                  </div>
+                </div>
+              </div>
+              <div className="space-y-4">
+                <h3 className="font-semibold text-lg">Fiat Withdrawals (BRL)</h3>
+                <div className="space-y-2">
+                  <div className="flex justify-between text-sm">
+                    <span className="text-muted-foreground">Total Volume:</span>
+                    <span className="font-semibold">R$ 881,066.30</span>
+                  </div>
+                  <div className="flex justify-between text-sm">
+                    <span className="text-muted-foreground">Transaction Count:</span>
+                    <span className="font-semibold">571</span>
+                  </div>
+                  <div className="flex justify-between text-sm">
+                    <span className="text-muted-foreground">Unique Users:</span>
+                    <span className="font-semibold">117</span>
+                  </div>
+                  <div className="flex justify-between text-sm">
+                    <span className="text-muted-foreground">Avg per User:</span>
+                    <span className="font-semibold">R$ {(881066.30 / 117).toFixed(2)}</span>
+                  </div>
+                  <div className="flex justify-between text-sm">
+                    <span className="text-muted-foreground">Avg Transaction Size:</span>
+                    <span className="font-semibold">R$ {(881066.30 / 571).toFixed(2)}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="mt-6 p-4 bg-accent/30 rounded-lg">
+              <div className="flex justify-between items-center">
+                <span className="font-semibold">Net Fiat Flow (Deposits - Withdrawals):</span>
+                <span className="text-2xl font-bold text-primary">R$ {(915552.46 - 881066.30).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</span>
+              </div>
+              <p className="text-xs text-muted-foreground mt-2">
+                Positive net flow indicates healthy user acquisition and deposit growth
+              </p>
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Data Sources & Partner Logos */}
+        <Card>
+          <CardHeader>
+            <CardTitle className="text-2xl">Data Sources & Integration Partners</CardTitle>
+            <p className="text-sm text-muted-foreground pt-2">
+              Real-time data feeds from exchanges, PSPs, and compliance providers powering AI analytics
+            </p>
+          </CardHeader>
+          <CardContent>
+            <div className="grid grid-cols-3 md:grid-cols-5 lg:grid-cols-6 gap-4">
+              <div className="flex items-center justify-center p-3 bg-background rounded-lg border border-border hover:border-primary/50 transition-colors">
+                <img src="/logos/binance-smart-chain-bsc-logo-png_seeklogo-446621.png" alt="Binance" className="h-6 w-auto object-contain opacity-70 hover:opacity-100 transition-opacity" />
+              </div>
+              <div className="flex items-center justify-center p-3 bg-background rounded-lg border border-border hover:border-primary/50 transition-colors">
+                <img src="/logos/bybit-logo_brandlogos.net_viubj.png" alt="Bybit" className="h-6 w-auto object-contain opacity-70 hover:opacity-100 transition-opacity" />
+              </div>
+              <div className="flex items-center justify-center p-3 bg-background rounded-lg border border-border hover:border-primary/50 transition-colors">
+                <img src="/logos/Logo-foxbit.png" alt="Foxbit" className="h-6 w-auto object-contain opacity-70 hover:opacity-100 transition-opacity" />
+              </div>
+              <div className="flex items-center justify-center p-3 bg-background rounded-lg border border-border hover:border-primary/50 transition-colors">
+                <img src="/logos/1_Ca4d9hGg8Qafy_18RuX8fQ.png" alt="Mercado Bitcoin" className="h-6 w-auto object-contain opacity-70 hover:opacity-100 transition-opacity" />
+              </div>
+              <div className="flex items-center justify-center p-3 bg-background rounded-lg border border-border hover:border-primary/50 transition-colors">
+                <img src="/logos/00021_Transfeera.png" alt="Transfeera" className="h-6 w-auto object-contain opacity-70 hover:opacity-100 transition-opacity" />
+              </div>
+              <div className="flex items-center justify-center p-3 bg-background rounded-lg border border-border hover:border-primary/50 transition-colors">
+                <img src="/logos/arbi.png" alt="ARBI" className="h-6 w-auto object-contain opacity-70 hover:opacity-100 transition-opacity" />
+              </div>
+              <div className="flex items-center justify-center p-3 bg-background rounded-lg border border-border hover:border-primary/50 transition-colors">
+                <img src="/logos/Bitget-Logo-Icon.png" alt="Bitget" className="h-6 w-auto object-contain opacity-70 hover:opacity-100 transition-opacity" />
+              </div>
+              <div className="flex items-center justify-center p-3 bg-background rounded-lg border border-border hover:border-primary/50 transition-colors">
+                <img src="/logos/okx_okb_logo_by_saphyl_dfj37e6-fullview.png" alt="OKX" className="h-6 w-auto object-contain opacity-70 hover:opacity-100 transition-opacity" />
+              </div>
+              <div className="flex items-center justify-center p-3 bg-background rounded-lg border border-border hover:border-primary/50 transition-colors">
+                <img src="/logos/crypto.com-logo.png" alt="Crypto.com" className="h-6 w-auto object-contain opacity-70 hover:opacity-100 transition-opacity" />
               </div>
             </div>
           </CardContent>
