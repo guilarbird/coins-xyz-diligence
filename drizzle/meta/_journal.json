@@ -22,6 +22,20 @@
       "when": 1763473169848,
       "tag": "0002_solid_monster_badoon",
       "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "5",
+      "when": 1763475611198,
+      "tag": "0003_worried_lady_deathstrike",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "5",
+      "when": 1763475654269,
+      "tag": "0004_military_chameleon",
+      "breakpoints": true
     }
   ]
 }

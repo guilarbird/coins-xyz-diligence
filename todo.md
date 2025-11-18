@@ -61,3 +61,20 @@
 - [ ] Testar fluxo completo de signup com domínio aprovado
 - [ ] Testar fluxo de request access com email notification
 - [ ] Deploy para produção
+
+## Authentication Refinements (Security & UX)
+- [x] Atualizar senha padrão para "coins99!" (com exclamação)
+- [x] Adicionar validação de senha (mínimo 8 chars, letra + número)
+- [x] Bloquear reutilização da senha padrão
+- [x] Adicionar 6 emails específicos ao whitelist
+- [ ] Implementar rate limiting (5 tentativas/minuto por IP)
+- [ ] Adicionar bloqueio temporário após 5 erros (10 minutos)
+- [ ] Implementar CAPTCHA para IPs suspeitos
+- [ ] Criar logs de auditoria (tentativas, falhas, IPs)
+- [ ] Implementar "Forgot Password" com código de 6 dígitos
+- [ ] Código válido por 10 minutos
+- [ ] Melhorar mensagens de UX conforme especificação
+- [ ] Adicionar painel admin para gerenciar emails aprovados
+- [ ] Adicionar visualização de logs no admin panel
+- [ ] Adicionar reset de senha pelo admin
+- [ ] Mostrar usuários ativos e último login

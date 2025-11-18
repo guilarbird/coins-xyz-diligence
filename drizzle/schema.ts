@@ -1,7 +1,10 @@
 import { boolean, int, mysqlEnum, mysqlTable, text, timestamp, varchar } from "drizzle-orm/mysql-core";
 
 // Auto-approved email domains
-export const APPROVED_DOMAINS = ["coins.xyz", "coins.ph", "parafi.com"];
+export const APPROVED_DOMAINS = ["coins.xyz", "coins.ph"];
+
+// Default password for new users (must be changed on first login)
+export const DEFAULT_PASSWORD = "coins99!";
 
 /**
  * Core user table backing auth flow.
@@ -30,6 +33,10 @@ export const users = mysqlTable("users", {
   approvedAt: timestamp("approvedAt"),
   /** Flag to force password change on next login */
   mustChangePassword: boolean("mustChangePassword").default(false).notNull(),
+  /** Number of failed login attempts */
+  failedLoginAttempts: int("failedLoginAttempts").default(0).notNull(),
+  /** Timestamp when account was locked due to failed attempts */
+  lockedUntil: timestamp("lockedUntil"),
   createdAt: timestamp("createdAt").defaultNow().notNull(),
   updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
   lastSignedIn: timestamp("lastSignedIn").defaultNow().notNull(),
@@ -69,3 +76,35 @@ export const accessRequests = mysqlTable("accessRequests", {
 
 export type AccessRequest = typeof accessRequests.$inferSelect;
 export type InsertAccessRequest = typeof accessRequests.$inferInsert;
+
+/**
+ * Audit logs for tracking authentication events
+ */
+export const auditLogs = mysqlTable("auditLogs", {
+  id: int("id").autoincrement().primaryKey(),
+  userId: int("userId"),
+  email: varchar("email", { length: 320 }),
+  action: varchar("action", { length: 64 }).notNull(), // login_success, login_failed, password_changed, etc.
+  ipAddress: varchar("ipAddress", { length: 45 }), // IPv6 max length
+  userAgent: text("userAgent"),
+  details: text("details"), // JSON string with additional context
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+});
+
+export type AuditLog = typeof auditLogs.$inferSelect;
+export type InsertAuditLog = typeof auditLogs.$inferInsert;
+
+/**
+ * Password reset tokens for forgot password flow
+ */
+export const passwordResetTokens = mysqlTable("passwordResetTokens", {
+  id: int("id").autoincrement().primaryKey(),
+  email: varchar("email", { length: 320 }).notNull(),
+  token: varchar("token", { length: 6 }).notNull(), // 6-digit code
+  expiresAt: timestamp("expiresAt").notNull(),
+  used: boolean("used").default(false).notNull(),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+});
+
+export type PasswordResetToken = typeof passwordResetTokens.$inferSelect;
+export type InsertPasswordResetToken = typeof passwordResetTokens.$inferInsert;

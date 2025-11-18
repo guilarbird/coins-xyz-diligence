@@ -76,8 +76,8 @@ export default function ChangePassword() {
             <CardTitle className="text-2xl">Change Password Required</CardTitle>
             <CardDescription>
               {user?.mustChangePassword
-                ? "You are using a default password. Please set a new secure password to continue."
-                : "Update your password to keep your account secure"}
+                ? "Primeiro acesso detectado. Defina sua nova senha."
+                : "Atualize sua senha para manter sua conta segura"}
             </CardDescription>
           </div>
         </CardHeader>
@@ -110,7 +110,7 @@ export default function ChangePassword() {
               />
               {user?.mustChangePassword && (
                 <p className="text-xs text-muted-foreground">
-                  Your current password is: <code className="bg-muted px-1 py-0.5 rounded">coins99</code>
+                  Sua senha atual é: <code className="bg-muted px-1 py-0.5 rounded">coins99!</code>
                 </p>
               )}
             </div>
@@ -127,7 +127,7 @@ export default function ChangePassword() {
                 minLength={8}
                 disabled={isLoading || !!success}
               />
-              <p className="text-xs text-muted-foreground">Minimum 8 characters</p>
+              <p className="text-xs text-muted-foreground">Mínimo 8 caracteres, incluir letra e número</p>
             </div>
 
             <div className="space-y-2">

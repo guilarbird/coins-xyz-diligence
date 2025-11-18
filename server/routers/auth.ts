@@ -8,6 +8,8 @@ import { TRPCError } from "@trpc/server";
 import { COOKIE_NAME } from "@shared/const";
 import { getSessionCookieOptions } from "../_core/cookies";
 import { sendAccessRequestNotification } from "../lib/email";
+import { validatePassword } from "../lib/password-validator";
+import { DEFAULT_PASSWORD } from "../../drizzle/schema";
 
 const SALT_ROUNDS = 10;
 
@@ -68,6 +70,15 @@ export const authRouter = router({
         throw new TRPCError({
           code: "CONFLICT",
           message: "User with this email already exists",
+        });
+      }
+
+      // Validate password
+      const validation = validatePassword(password);
+      if (!validation.valid) {
+        throw new TRPCError({
+          code: "BAD_REQUEST",
+          message: validation.errors.join(". "),
         });
       }
 
@@ -274,6 +285,15 @@ export const authRouter = router({
     .mutation(async ({ input, ctx }) => {
       const { currentPassword, newPassword } = input;
       const userId = ctx.user.id;
+
+      // Validate new password
+      const validation = validatePassword(newPassword);
+      if (!validation.valid) {
+        throw new TRPCError({
+          code: "BAD_REQUEST",
+          message: validation.errors.join(". "),
+        });
+      }
 
       // Get user from database
       const db = await getDb();
