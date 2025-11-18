@@ -1,4 +1,5 @@
 import { useState } from "react";
+import DashboardLayout from "@/components/DashboardLayout";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Badge } from "@/components/ui/badge";
@@ -9,6 +10,7 @@ export default function Regulation() {
   const [currencyMode, setCurrencyMode] = useState<"BRL" | "USD">("USD");
 
   return (
+    <DashboardLayout>
     <div className="min-h-screen bg-background">
       <div className="container mx-auto py-8 space-y-8">
         {/* Header */}
@@ -77,6 +79,7 @@ export default function Regulation() {
         </Accordion>
       </div>
     </div>
+    </DashboardLayout>
   );
 }
 

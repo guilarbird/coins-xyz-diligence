@@ -253,3 +253,9 @@
 - [ ] Implementar currency dual-display (USD primary, BRL secondary)
 - [ ] Criar placeholders para: PH, TH, NG, GH, KE, MX, AR, VN
 - [ ] Testar e fazer commit/push
+
+
+## Fix Regulation Page Layout
+- [x] Adicionar DashboardLayout wrapper na página Regulation
+- [ ] Testar navegação e menu lateral
+- [ ] Commit e push para GitHub
