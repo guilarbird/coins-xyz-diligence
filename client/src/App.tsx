@@ -17,6 +17,7 @@ import Infrastructure from "./pages/Infrastructure";
 import Community from "./pages/Community";
 import Regulation from "./pages/Regulation";
 import InvestorQA from "./pages/InvestorQA";
+import ApiDocs from "./pages/ApiDocs";
 import ComingSoon from "./pages/ComingSoon";
 
 function Router() {
@@ -36,6 +37,7 @@ function Router() {
       <Route path={"/community"} component={Community} />
       <Route path={"/regulation"} component={Regulation} />
       <Route path={"/investor-qa"} component={InvestorQA} />
+      <Route path={"/api-docs"} component={ApiDocs} />
       <Route path={"/payments"}>
         {() => <ComingSoon title="Payments" description="B2B cross-border payment infrastructure analysis" />}
       </Route>

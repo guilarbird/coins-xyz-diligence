@@ -9,6 +9,7 @@ import {
   Users, 
   Shield, 
   HelpCircle,
+  Code,
   Menu,
   X,
   Sun,
@@ -33,6 +34,7 @@ const navItems = [
   { icon: Users, label: "Community", path: "/community" },
   { icon: Shield, label: "Regulation", path: "/regulation" },
   { icon: HelpCircle, label: "Investor Q&A", path: "/investor-qa" },
+  { icon: Code, label: "API Documentation", path: "/api-docs" },
 ];
 
 function ThemeToggle() {

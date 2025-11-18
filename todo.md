@@ -207,3 +207,16 @@
 - [ ] Melhorar spacing mobile
 - [ ] Adicionar toggle sections em Q&A
 - [ ] Charts/tables scroll em mobile
+
+
+## API Documentation Page
+- [ ] Acessar https://api-docs.coinsbrasil.xyz/ e extrair informações
+- [x] Criar página API Documentation com seções:
+  - [x] Overview e autenticação
+  - [x] PIX Payments endpoints
+  - [x] OTC Trading endpoints
+  - [x] Exemplos de código
+  - [x] Rate limits e best practices
+- [x] Adicionar rota /api-docs no App.tsx
+- [x] Adicionar item "API Documentation" no DashboardLayout menu
+- [ ] Testar página e fazer commit/push para GitHub
