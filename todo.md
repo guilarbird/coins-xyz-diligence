@@ -40,3 +40,10 @@
 - [x] Adicionar botão hambúrguer para menu mobile
 - [x] Tornar sidebar colapsável em dispositivos móveis
 - [x] Adicionar overlay para fechar menu ao clicar fora
+
+## Expansion Framework
+- [x] Criar seção Four-Rail Market Readiness Framework (FRM-R)
+- [x] Adicionar tabela comparativa de países (PRR + FIR + GSA scores)
+- [x] Refatorar Overview com framework institucional
+- [x] Adicionar diagrama visual do framework com 3 layers
+- [x] Incluir análise detalhada por país (Brasil, Nigéria, Gana, Argentina, México)
