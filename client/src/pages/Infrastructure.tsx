@@ -1,4 +1,5 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import DashboardLayout from "@/components/DashboardLayout";
 import { CheckCircle2, Link as LinkIcon, Eye, Handshake, Plug } from "lucide-react";
 
@@ -58,9 +59,29 @@ const ecosystemLayers: {
         description: "Banking-as-a-Service and account infrastructure integrated directly into Coins' settlement architecture.",
       },
       {
+        name: "BS2",
+        relationship: "direct",
+        description: "Brazilian digital bank providing account infrastructure and settlement services",
+      },
+      {
+        name: "Topazio Bank Account",
+        relationship: "direct",
+        description: "FX bank account for cross-border settlement and remittance flows",
+      },
+      {
+        name: "Remessa Online via Topazio",
+        relationship: "strategic",
+        description: "Cross-border remittance platform integrated via Topazio banking infrastructure",
+      },
+      {
         name: "Onz",
         relationship: "strategic",
         description: "Alternative PSP for redundancy and failover",
+      },
+      {
+        name: "Bluegreen",
+        relationship: "direct",
+        description: "Payment gateway for merchant integration and checkout flows",
       },
     ],
   },
@@ -102,12 +123,12 @@ const ecosystemLayers: {
       {
         name: "Circle (USDC)",
         relationship: "strategic",
-        description: "Primary stablecoin issuer, regulated USD-backed reserves",
+        description: "Primary stablecoin issuer, regulated USD-backed reserves. USDC is the preferred stablecoin for institutional treasury settlement.",
       },
       {
         name: "Tether (USDT)",
         relationship: "strategic",
-        description: "Dominant stablecoin in LatAm and Africa, high liquidity",
+        description: "Dominant stablecoin in LatAm and Africa, high liquidity. USDT is the primary stablecoin for retail and OTC flows.",
       },
       {
         name: "Braza Bank",
@@ -120,9 +141,9 @@ const ecosystemLayers: {
         description: "BRL-backed stablecoin issued by Braza Bank; domestic settlement alternative integrated into Coins' treasury architecture.",
       },
       {
-        name: "Transfero",
-        relationship: "counterparty",
-        description: "Institutional OTC desk, stablecoin liquidity provider",
+        name: "ARBI",
+        relationship: "strategic",
+        description: "FX infrastructure provider for cross-border settlement and currency conversion",
       },
     ],
   },
@@ -170,6 +191,16 @@ const ecosystemLayers: {
         name: "Transfero",
         relationship: "counterparty",
         description: "Local OTC desk, BRL-USDT corridor specialist",
+      },
+      {
+        name: "Conduit",
+        relationship: "counterparty",
+        description: "OTC desk for institutional crypto liquidity and large-ticket execution",
+      },
+      {
+        name: "Capitual",
+        relationship: "counterparty",
+        description: "OTC desk specializing in LatAm institutional flows",
       },
       {
         name: "B2C2",
@@ -251,24 +282,31 @@ export default function Infrastructure() {
           </CardContent>
         </Card>
 
-        {/* Ecosystem Layers */}
-        <div className="space-y-8">
+        {/* Ecosystem Layers - Accordion */}
+        <Accordion type="single" collapsible className="space-y-4">
           {ecosystemLayers.map((layer, idx) => (
-            <Card key={idx} className="border-primary/20">
-              <CardHeader>
-                <CardTitle className="text-2xl text-primary">{layer.title}</CardTitle>
-                <p className="text-sm text-muted-foreground pt-2">{layer.description}</p>
-              </CardHeader>
-              <CardContent>
-                <div className="grid md:grid-cols-2 gap-4">
+            <AccordionItem key={idx} value={`layer-${idx}`} className="border rounded-lg">
+              <AccordionTrigger className="px-6 hover:no-underline">
+                <div className="flex items-center gap-4 text-left">
+                  <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
+                    <span className="text-xl font-bold text-primary">{idx + 1}</span>
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-semibold text-foreground">{layer.title}</h3>
+                    <p className="text-sm text-muted-foreground">{layer.description}</p>
+                  </div>
+                </div>
+              </AccordionTrigger>
+              <AccordionContent className="px-6 pb-6">
+                <div className="grid md:grid-cols-2 gap-4 mt-4">
                   {layer.providers.map((provider, pIdx) => (
                     <ProviderCard key={pIdx} provider={provider} />
                   ))}
                 </div>
-              </CardContent>
-            </Card>
+              </AccordionContent>
+            </AccordionItem>
           ))}
-        </div>
+        </Accordion>
 
         {/* Strategic Insights */}
         <Card className="bg-primary/5 border-primary/30">

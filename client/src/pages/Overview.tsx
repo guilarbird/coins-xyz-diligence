@@ -100,7 +100,7 @@ export default function Overview() {
               </h2>
               <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
                 Before evaluating any market with FRM-R, we filter for structural traits that define the Global South. 
-                This is "Layer 0" — the prerequisite conditions that make the four-rail model viable.
+                This is "Layer 0" — the prerequisite conditions that make the four-rail model viable. <strong className="text-primary">Brazil proved all six traits work together.</strong> Now we replicate where these conditions exist.
               </p>
             </div>
 
@@ -166,12 +166,12 @@ export default function Overview() {
                   </div>
                 </div>
 
-                <div className="mt-6 p-4 rounded-lg bg-accent/50 text-sm text-muted-foreground">
-                  <p>
-                    <strong className="text-foreground">Why Layer 0 Matters:</strong> These structural traits are not "nice-to-haves" — 
-                    they are prerequisites. Without them, the four-rail flywheel cannot spin. Brazil, Nigeria, and Ghana pass Layer 0. 
-                    Argentina and Mexico have some traits but lack others (e.g., regulatory clarity, banking access), which is why 
-                    they remain selective-entry markets.
+                <div className="mt-6 p-4 rounded-lg bg-primary/10 border border-primary/20 text-sm">
+                  <p className="text-foreground">
+                    <strong className="text-primary">Brazil is the proof:</strong> All six structural traits converged in Brazil, enabling Coins to build and validate the full four-rail model in production. PIX provided instant settlement, high stablecoin adoption created natural demand, FX volatility drove treasury hedging, China trade corridors fueled OTC flows, and a massive creator economy adopted crypto-native payment solutions.
+                  </p>
+                  <p className="text-muted-foreground mt-3">
+                    Nigeria and Ghana replicate these conditions at scale. Argentina and Mexico have partial traits (high FX volatility, China corridors) but lack critical infrastructure (instant payment rails, regulatory clarity), making them selective-entry markets until Layer 0 prerequisites are met.
                   </p>
                 </div>
               </CardContent>
@@ -558,70 +558,7 @@ export default function Overview() {
           </div>
         </section>
 
-        {/* Blueprint Preview Section */}
-        <section className="px-6 py-16">
-          <div className="max-w-7xl mx-auto space-y-8">
-            <div className="text-center space-y-4">
-              <h2 className="text-3xl md:text-4xl font-bold">
-                The Brazil Blueprint
-              </h2>
-              <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-                Brazil proved that the four-rail model works in Global South markets. Now we're replicating it.
-              </p>
-            </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <Card className="border-primary/20">
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2">
-                    <span className="text-2xl">🏗️</span>
-                    <span>Infrastructure Proven</span>
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="text-sm text-muted-foreground">
-                  PIX integration, KYC/AML stack (Zoloz), bank partnerships, PSP settlement, and regulatory 
-                  compliance (PI + VASP licensing in progress) all validated in production.
-                </CardContent>
-              </Card>
-
-              <Card className="border-primary/20">
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2">
-                    <span className="text-2xl">💱</span>
-                    <span>BRL–USDT Corridor</span>
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="text-sm text-muted-foreground">
-                  Highly efficient regulated FX structures enable global treasuries to move value between BRL and 
-                  stablecoins with minimal friction, bypassing legacy correspondent banking.
-                </CardContent>
-              </Card>
-
-              <Card className="border-primary/20">
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2">
-                    <span className="text-2xl">🔄</span>
-                    <span>Four-Rail Flywheel</span>
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="text-sm text-muted-foreground">
-                  Exchange, Payments, OTC, and OCBS compound: B2C liquidity feeds B2B execution; payments drive 
-                  stablecoin adoption; treasury services enable corporate FX hedging.
-                </CardContent>
-              </Card>
-            </div>
-
-            <div className="text-center pt-4">
-              <Button 
-                size="lg"
-                onClick={() => window.location.href = '/blueprint'}
-              >
-                Read Full Blueprint
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </Button>
-            </div>
-          </div>
-        </section>
       </div>
     </DashboardLayout>
   );
