@@ -4,7 +4,7 @@
 - [x] Simplificar Infrastructure page - remover accordion nested
 - [x] Usar Tabs ou botões para alternar entre layers
 - [x] Melhorar espaçamento e reduzir elementos aninhados
-- [ ] Testar e fazer commit/push
+- [x] Testar e fazer commit/push
 
 ## Completed Tasks
 - [x] Mover "The Brazil Blueprint" section da Overview para dentro do Blueprint page
