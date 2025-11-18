@@ -219,4 +219,14 @@
   - [x] Rate limits e best practices
 - [x] Adicionar rota /api-docs no App.tsx
 - [x] Adicionar item "API Documentation" no DashboardLayout menu
-- [ ] Testar página e fazer commit/push para GitHub
+- [x] Testar página e fazer commit/push para GitHub
+
+
+## API Documentation Improvements
+- [x] Adicionar Tabs component do shadcn/ui
+- [x] Adicionar exemplos de código com syntax highlighting
+- [x] Simular responses JSON para cada endpoint
+- [x] Adicionar exemplos em múltiplas linguagens (cURL, JavaScript, Python)
+- [x] Melhorar layout com sidebar de navegação interna
+- [x] Adicionar copy button para código
+- [ ] Testar e fazer commit/push
