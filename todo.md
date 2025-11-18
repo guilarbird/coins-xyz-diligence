@@ -229,4 +229,4 @@
 - [x] Adicionar exemplos em múltiplas linguagens (cURL, JavaScript, Python)
 - [x] Melhorar layout com sidebar de navegação interna
 - [x] Adicionar copy button para código
-- [ ] Testar e fazer commit/push
+- [x] Testar e fazer commit/push
