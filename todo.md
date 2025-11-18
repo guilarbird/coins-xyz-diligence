@@ -99,4 +99,4 @@
 
 ## Password Input Fix
 - [x] Permitir paste (colar) no campo de senha
-- [ ] Testar e fazer deploy
+- [x] Testar e fazer deploy
