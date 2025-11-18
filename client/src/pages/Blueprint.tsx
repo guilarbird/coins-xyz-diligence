@@ -90,48 +90,7 @@ const replicationRequirements = [
   },
 ];
 
-const weeklyTimeline = [
-  {
-    week: "Week 1-3",
-    layer: "Layer A: Compliance Foundation",
-    tasks: [
-      "KYC/AML provider integration (Zoloz for LatAm, SmileID for Africa)",
-      "Travel Rule setup for institutional flows",
-      "Regulatory entity registration (if required)",
-      "AML monitoring dashboard configuration",
-    ],
-  },
-  {
-    week: "Week 4-6",
-    layer: "Layer B: Payment Rails",
-    tasks: [
-      "PSP integration (PIX for Brazil, Mobile Money for Africa)",
-      "Fiat on/off-ramp testing",
-      "Settlement reconciliation logic",
-      "Treasury account setup (local currency + USDT)",
-    ],
-  },
-  {
-    week: "Week 7-9",
-    layer: "Layer C: Liquidity & Exchange",
-    tasks: [
-      "Exchange API integration (Binance, local venues)",
-      "Orderbook configuration for local pairs (e.g., NGN-USDT, GHS-USDT)",
-      "Liquidity depth testing",
-      "Spread optimization for local market conditions",
-    ],
-  },
-  {
-    week: "Week 10-12",
-    layer: "Launch Preparation",
-    tasks: [
-      "OTC RFQ engine deployment",
-      "Business Portal onboarding (first 10 merchants)",
-      "Community activation (creators, ambassadors)",
-      "Soft launch with limited user cohort",
-    ],
-  },
-];
+
 
 export default function Blueprint() {
   return (
@@ -303,44 +262,7 @@ export default function Blueprint() {
           </div>
         </div>
 
-        {/* Section 4: 12-Week Market Replication Framework */}
-        <div className="space-y-6">
-          <div>
-            <h2 className="text-3xl font-bold mb-2">12-Week Market Replication Framework</h2>
-            <p className="text-muted-foreground">
-              Brazil took 18 months to build from scratch. Nigeria and Ghana take 12 weeks to replicate because 
-              the three operating systems are already built—we're deploying, not developing.
-            </p>
-          </div>
 
-          <div className="space-y-4">
-            {weeklyTimeline.map((phase, idx) => (
-              <Card key={idx} className="border-primary/20">
-                <CardHeader>
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
-                      <Globe className="h-5 w-5 text-primary" />
-                    </div>
-                    <div>
-                      <CardTitle className="text-lg">{phase.week}</CardTitle>
-                      <p className="text-sm text-muted-foreground">{phase.layer}</p>
-                    </div>
-                  </div>
-                </CardHeader>
-                <CardContent>
-                  <ul className="grid md:grid-cols-2 gap-3">
-                    {phase.tasks.map((task, tIdx) => (
-                      <li key={tIdx} className="flex items-start gap-2 text-sm">
-                        <CheckCircle2 className="h-4 w-4 mt-0.5 flex-shrink-0 text-primary" />
-                        <span className="text-muted-foreground">{task}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
 
         {/* Strategic Insights */}
         <Card className="bg-accent/30 border-primary/20">
@@ -363,10 +285,10 @@ export default function Blueprint() {
             <div className="flex items-start gap-3">
               <CheckCircle2 className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
               <div>
-                <p className="font-semibold text-foreground mb-1">12 Weeks vs 18 Months</p>
+                <p className="font-semibold text-foreground mb-1">Rapid Market Replication</p>
                 <p>
                   Brazil required 18 months to build the three operating systems from zero. Nigeria and Ghana 
-                  require 12 weeks because we're deploying pre-built modules, not developing new infrastructure. 
+                  replicate much faster because we're deploying pre-built modules, not developing new infrastructure. 
                   This is why the blueprint compounds—each new market becomes faster and cheaper to launch.
                 </p>
               </div>
@@ -386,15 +308,7 @@ export default function Blueprint() {
           </CardContent>
         </Card>
 
-        {/* Disclaimer */}
-        <div className="p-4 rounded-lg bg-accent/50 text-xs text-muted-foreground border border-border">
-          <p>
-            <strong className="text-foreground">Disclaimer:</strong> The 12-week timeline assumes regulatory 
-            pre-clearance and provider partnerships are in place. Delays in licensing (e.g., Nigeria VASP approval) 
-            or PSP integration may extend the timeline. This framework reflects the technical deployment timeline, 
-            not the regulatory approval timeline.
-          </p>
-        </div>
+
       </div>
     </DashboardLayout>
   );

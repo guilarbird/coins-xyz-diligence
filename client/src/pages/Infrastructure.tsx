@@ -54,8 +54,8 @@ const ecosystemLayers: {
       },
       {
         name: "Stark Bank",
-        relationship: "strategic",
-        description: "Banking-as-a-Service, account management",
+        relationship: "direct",
+        description: "Banking-as-a-Service and account infrastructure integrated directly into Coins' settlement architecture.",
       },
       {
         name: "Onz",
@@ -110,9 +110,14 @@ const ecosystemLayers: {
         description: "Dominant stablecoin in LatAm and Africa, high liquidity",
       },
       {
-        name: "Braza / BRLA",
+        name: "Braza Bank",
         relationship: "direct",
-        description: "BRL-backed stablecoin, domestic settlement alternative",
+        description: "Licensed Brazilian financial institution providing BRL settlement, domestic liquidity and fiat-side infrastructure.",
+      },
+      {
+        name: "BRLA",
+        relationship: "strategic",
+        description: "BRL-backed stablecoin issued by Braza Bank; domestic settlement alternative integrated into Coins' treasury architecture.",
       },
       {
         name: "Transfero",
@@ -158,8 +163,8 @@ const ecosystemLayers: {
       },
       {
         name: "Genial Investimentos",
-        relationship: "strategic",
-        description: "Brazilian brokerage, institutional client referrals",
+        relationship: "direct",
+        description: "Brazilian brokerage serving as institutional counterparty and strategic partner for BRL–USDT corridor flows.",
       },
       {
         name: "Transfero",

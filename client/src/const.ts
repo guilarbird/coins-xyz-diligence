@@ -4,7 +4,11 @@ export const ONE_YEAR_MS = 1000 * 60 * 60 * 24 * 365;
 
 export const APP_TITLE = import.meta.env.VITE_APP_TITLE || "Coins.xyz - Investor Due Diligence";
 
-export const APP_LOGO = "/logo-white.png";
+// Logo is now theme-aware - use useTheme() hook to get current theme
+// Light theme: /logo-black.png
+// Dark theme: /logo-white.png
+export const APP_LOGO_LIGHT = "/logo-black.png";
+export const APP_LOGO_DARK = "/logo-white.png";
 
 // Generate login URL at runtime so redirect URI reflects the current origin.
 export const getLoginUrl = () => {

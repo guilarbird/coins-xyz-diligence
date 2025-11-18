@@ -1,4 +1,4 @@
-import { APP_LOGO, APP_TITLE } from "@/const";
+import { APP_LOGO_LIGHT, APP_LOGO_DARK, APP_TITLE } from "@/const";
 import { 
   LayoutDashboard, 
   Layers, 
@@ -62,6 +62,7 @@ function ThemeToggle() {
 export default function DashboardLayout({ children }: DashboardLayoutProps) {
   const [location] = useLocation();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { theme } = useTheme();
 
   const closeMobileMenu = () => setIsMobileMenuOpen(false);
 
@@ -94,7 +95,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
         {/* Logo */}
         <div className="p-6 border-b border-border">
           <div className="flex items-center gap-3">
-            <img src={APP_LOGO} alt={APP_TITLE} className="h-8 w-auto" />
+            <img src={theme === "dark" ? APP_LOGO_DARK : APP_LOGO_LIGHT} alt={APP_TITLE} className="h-8 w-auto" />
           </div>
         </div>
 

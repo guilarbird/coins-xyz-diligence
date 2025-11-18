@@ -157,3 +157,53 @@
 - [x] Adicionar ícones para Exchange, Payments, OTC
 - [x] Garantir responsividade mobile
 - [x] Tom institucional e investor-grade
+
+
+## Final Complete Update - Nov 18, 2025
+
+### Global Fixes & Foundation
+- [x] Fix light theme logo rendering em todas as páginas e breakpoints
+- [x] Enable Q&A toggling (collapsible questions) na página Investor Q&A
+- [x] Remover 12-week framework de todas as páginas (Overview, Blueprint, Markets, Regulation)
+- [ ] Preparar componentes de charts/metrics para aceitar novos dados facilmente
+- [ ] Converter paragraphs longos em tables/charts onde aplicável
+
+### Infrastructure Fixes
+- [x] Stark Bank → "Direct Integration" + nova descrição
+- [x] Split Braza Bank e BRLA em dois cards separados
+- [x] Genial Investimentos → "Direct Counterparty + Strategic Partner" + nova descrição
+
+### Compliance Fixes
+- [x] Adicionar Travel Rule compliance em todas as seções relevantes
+- [x] Adicionar Travel Rule no "How It Works" e Regulation page
+
+### OTC Fixes
+- [x] Inserir OTC lock-in mechanics (D0/D1/D2, 16:00 cutoff) no The Model
+- [x] Adicionar explicação de por que OTC infra é raro
+
+### Payments + Trade Desk Fixes
+- [x] Adicionar explanation block: "Payments and Trade Desk are a single flow"
+
+### Community & UGC Fixes (PRIORITY)
+- [x] Reescrever Community page focando em UGC-driven growth
+- [x] Adicionar métricas reais: +2,000 accounts from KOLs, weekly 50-140 registrations
+- [x] Champions peaks (79-119/week), Telegram (175→315), Affiliates (3→47)
+- [x] Seção "How the UGC Engine Works"
+- [x] Seção "Why UGC Is Our Last-Mile Strategy"
+- [x] Seção "Base XYZ inside Circle"
+- [x] Seção "Talent recruitment from community"
+- [x] Seção secundária: "Chinese-Brazilian Community Pilot (Kawai)"
+
+### Licensing Plan Integration
+- [ ] Acessar documento https://coinscapana-2asaxl4k.manus.space
+- [ ] Integrar Payment Institution (IP) roadmap
+- [ ] Integrar VASP roadmap
+- [ ] Adicionar capital requirements, timeline, dependencies
+- [ ] Converter em tables + diagrams
+
+### Design & Layout Fixes
+- [ ] Fix light theme logo issues
+- [ ] Adicionar ícones para Exchange OS / Payments OS / OTC OS
+- [ ] Melhorar spacing mobile
+- [ ] Adicionar toggle sections em Q&A
+- [ ] Charts/tables scroll em mobile

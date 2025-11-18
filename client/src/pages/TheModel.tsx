@@ -175,6 +175,14 @@ export default function TheModel() {
                 The Payments rail enables pay-ins and pay-outs via local PSPs, merchant settlement, and cross-border 
                 remittances. It drives stablecoin adoption by making USDT/USDC as easy to use as local currency.
               </p>
+              <div className="p-4 rounded-lg bg-green-500/5 border border-green-500/20">
+                <p className="font-semibold text-foreground mb-2">Payments and Trade Desk: A Single Flow</p>
+                <p className="text-sm">
+                  Payments and Trade Desk are not separate products—they're the same infrastructure. When a merchant uses 
+                  Payments to settle an invoice, the backend executes via Trade Desk (OTC) for FX conversion. This unified 
+                  flow reduces friction and ensures consistent pricing across B2C and B2B segments.
+                </p>
+              </div>
               <div className="grid md:grid-cols-3 gap-4 pt-2">
                 <div>
                   <p className="font-semibold text-foreground mb-1">Merchant Flows</p>
@@ -206,6 +214,14 @@ export default function TheModel() {
                 businesses needing FX execution. The China–Brazil corridor is a key use case: importers pay Chinese 
                 suppliers in USDT, bypassing slow and expensive correspondent banking.
               </p>
+              <div className="p-4 rounded-lg bg-purple-500/5 border border-purple-500/20">
+                <p className="font-semibold text-foreground mb-2">OTC Lock-In Window (D0, D1, D2)</p>
+                <p className="text-sm">
+                  Users receive a guaranteed FX quote with a lock-in window until 16:00 local time, allowing intraday 
+                  settlement flexibility critical for SMEs. Few operators can run a compliant OTC network spanning both 
+                  crypto and fiat rails. Coins runs both.
+                </p>
+              </div>
               <div className="grid md:grid-cols-3 gap-4 pt-2">
                 <div>
                   <p className="font-semibold text-foreground mb-1">Import/Export FX</p>

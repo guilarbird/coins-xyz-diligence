@@ -1,10 +1,12 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import DashboardLayout from "@/components/DashboardLayout";
-import { HelpCircle, CheckCircle2 } from "lucide-react";
+import { HelpCircle } from "lucide-react";
+import { Streamdown } from "streamdown";
 
 export default function InvestorQA() {
   const questions = [
     {
+      id: "q1",
       q: "Why not just do B2B (OTC + OCBS) and skip the B2C Exchange and Payments rails?",
       a: `This is the most common question from investors who see B2B as higher margin and lower CAC. The answer is that **B2C rails are not a distraction—they're the customer acquisition engine for B2B.**
 
@@ -21,6 +23,7 @@ Here's how it works:
 **Conclusion:** The four-rail flywheel is not "doing everything." It's a deliberate customer acquisition and retention strategy where B2C feeds B2B.`,
     },
     {
+      id: "q2",
       q: "How do you prioritize expansion? Why Nigeria and Ghana instead of Argentina or Mexico?",
       a: `Expansion is prioritized using the **FRM-R framework** (Foundational Readiness, Regulatory Maturity, Market Readiness). Nigeria and Ghana score higher than Argentina and Mexico on all three dimensions.
 
@@ -44,13 +47,10 @@ Here's how it works:
 - **FIR:** MXN is relatively stable compared to BRL/NGN/GHS, reducing demand for stablecoin hedging.
 - **GSA:** Dominated by Bitso (largest LatAm exchange). Coins would be a late entrant with no differentiation.
 
-**Timeline:**
-- **Q1-Q2 2026:** Nigeria and Ghana launch (12 weeks each, blueprint replication)
-- **2027+:** Argentina and Mexico remain "selective-entry" markets. Coins will monitor regulatory clarity and competitive dynamics before committing resources.
-
 **Conclusion:** Nigeria and Ghana are **de-risked** because they replicate Brazil's conditions. Argentina and Mexico are **watch-and-wait** markets where regulatory and competitive risks are higher.`,
     },
     {
+      id: "q3",
       q: "What's your moat? Why can't Binance or Mercado Bitcoin just copy the four-rail model?",
       a: `The moat is not the **product** (anyone can build an exchange, OTC desk, or payment rail). The moat is the **flywheel** and **local execution.**
 
@@ -75,7 +75,7 @@ Coins is **local-first:** we integrate with PIX, Mobile Money, and local banks. 
 
 **3. Blueprint Replication (Capital Efficiency)**
 
-Coins' moat strengthens with each new market. Brazil took 18 months to build. Nigeria and Ghana will take 12 weeks each because we're replicating a proven blueprint. Competitors starting from scratch would need 18 months per market.
+Coins' moat strengthens with each new market. Brazil took 18 months to build. Nigeria and Ghana will take less time because we're replicating a proven blueprint. Competitors starting from scratch would need 18 months per market.
 
 **Conclusion:** The moat is **time + execution + network effects.** Competitors *could* copy the model, but doing so would require:
 1. Cannibalizing existing revenue streams
@@ -85,6 +85,7 @@ Coins' moat strengthens with each new market. Brazil took 18 months to build. Ni
 By the time they decide to copy, Coins will have captured Brazil, Nigeria, and Ghana.`,
     },
     {
+      id: "q4",
       q: "How do you handle FX risk and liquidity management across multiple currencies?",
       a: `FX risk and liquidity management are core operational challenges for the four-rail model. Here's how Coins handles them:
 
@@ -122,6 +123,7 @@ Coins uses real-time risk monitoring dashboards to track:
 **Conclusion:** FX risk and liquidity management are operational challenges, not existential risks. Coins has proven processes in Brazil and will replicate them in Nigeria and Ghana with local adaptations.`,
     },
     {
+      id: "q5",
       q: "What's the path to profitability? When do you expect to be cash-flow positive?",
       a: `**Current Status (Nov 2024):**
 - Monthly Revenue: $39.2K
@@ -138,7 +140,7 @@ Assuming revenue grows at current 12.5% MoM and OPEX grows at 5% MoM (hiring, in
 
 **Post-Break-Even (Q3 2025 - Q4 2026):**
 
-Nigeria and Ghana launches (Q1-Q2 2026) add incremental revenue with marginal OPEX increase:
+Nigeria and Ghana launches add incremental revenue with marginal OPEX increase:
 
 - **Projected Q4 2026 revenue:** $180K/month (Brazil $80K, Nigeria $60K, Ghana $40K)
 - **Projected Q4 2026 OPEX:** $95K/month
@@ -152,8 +154,8 @@ Nigeria and Ghana launches (Q1-Q2 2026) add incremental revenue with marginal OP
 **Revenue Drivers:**
 
 1. **Brazil Organic Growth:** 12.5% MoM revenue growth from existing users + cross-rail adoption
-2. **Nigeria Launch (Q1 2026):** Estimated $30K/month revenue by Q4 2026
-3. **Ghana Launch (Q2 2026):** Estimated $20K/month revenue by Q4 2026
+2. **Nigeria Launch:** Estimated $30K/month revenue by Q4 2026
+3. **Ghana Launch:** Estimated $20K/month revenue by Q4 2026
 
 **Profitability Timeline:**
 
@@ -164,6 +166,7 @@ Nigeria and Ghana launches (Q1-Q2 2026) add incremental revenue with marginal OP
 **Conclusion:** Coins reaches break-even in 6 months (May 2025) with current growth trajectory. Nigeria and Ghana launches in 2026 accelerate profitability through blueprint replication and cross-market network effects.`,
     },
     {
+      id: "q6",
       q: "How do you compete with unregulated P2P platforms that offer better rates?",
       a: `Unregulated P2P platforms (e.g., LocalBitcoins, Paxful, WhatsApp groups) offer competitive rates because they avoid compliance costs (KYC/AML, licensing, regulatory reporting). However, they expose users to significant risks:
 
@@ -186,169 +189,78 @@ Nigeria and Ghana launches (Q1-Q2 2026) add incremental revenue with marginal OP
 
 **Market Segmentation:**
 
-Coins doesn't compete directly with P2P for **price-sensitive retail users** who prioritize the absolute lowest cost. Instead, Coins targets:
+- **Retail Users (< $5K tickets):** Price-sensitive, may use P2P for small transactions. Coins competes on convenience (PIX, app UX).
+- **SMEs ($5K-$50K tickets):** Compliance-sensitive. Coins wins this segment with full KYC/AML and transaction receipts.
+- **Corporates (> $50K tickets):** Require regulated counterparties. P2P platforms are not an option. Coins is the only full-stack regulated player.
 
-- **Corporates** who need compliance and receipts
-- **High-volume traders** who need liquidity and speed
-- **Remittance users** who value convenience over marginal cost savings
-
-**Conclusion:** Unregulated P2P platforms are a competitor, but they serve a different customer segment (price-sensitive retail). Coins targets **compliance-conscious users** who value trust, speed, and convenience over marginal cost savings.`,
+**Conclusion:** Coins doesn't compete with P2P on price alone. We compete on **compliance, convenience, and full-stack integration.** As users scale from retail to SME to corporate, they graduate from P2P to Coins.`,
     },
     {
-      q: "What happens if Brazil's Central Bank denies your VASP license?",
-      a: `**Short Answer:** Coins continues operating under PSP partnerships while pursuing alternative licensing paths. VASP denial would delay full independence but not shut down operations.
+      id: "q7",
+      q: "What happens if Brazil denies your VASP license?",
+      a: `VASP (Virtual Asset Service Provider) licensing is a regulatory requirement for full crypto exchange operations in Brazil. However, **Coins is already operating compliantly under Payment Institution (PI) licensing**, which allows us to offer Exchange, Payments, and OTC services.
 
-**Detailed Answer:**
+**Current Licensing Status:**
 
-**Current Status:**
-- Coins operates Exchange and Payments rails through PSP partnerships (Transfeera, Qyon, Stark Bank).
-- VASP license application submitted Dec 2024, approval expected Q2 2025.
+- **Payment Institution (PI):** Coins operates under PI licensing, which covers fiat on/off-ramps, payment processing, and settlement. This allows us to run Exchange, Payments, and OTC rails.
+- **VASP Application:** Coins has applied for VASP licensing to future-proof operations and expand product offerings (e.g., custody, staking). VASP approval is expected Q2-Q3 2026.
 
-**If VASP License is Denied:**
+**If VASP Is Denied:**
 
-1. **Continue Operating Under PSPs:** Coins can continue Exchange operations through PSP partnerships. This is how most Brazilian crypto exchanges operate (Mercado Bitcoin, Foxbit, Bitso all use PSPs).
+1. **Continue Operating Under PI:** Coins can continue all current operations (Exchange, Payments, OTC, OCBS) under PI licensing. VASP denial does not shut down the business.
 
-2. **Pursue Alternative Licensing:** If VASP is denied, Coins can apply for a **Payment Institution (PI)** license instead. PI licenses are easier to obtain and allow payment processing (which covers Payments and OTC rails).
+2. **Reapply with Adjustments:** If VASP is denied due to specific compliance gaps, Coins will address those gaps and reapply. Brazil's Central Bank (BCB) provides clear feedback on denial reasons.
 
-3. **Focus on B2B Rails:** If Exchange licensing becomes too difficult, Coins can pivot to focus on OTC and OCBS (B2B rails), which have fewer regulatory restrictions.
-
-**Impact on Business:**
-
-- **Revenue:** Minimal impact. PSP partnerships allow Coins to continue generating revenue from all four rails.
-- **OPEX:** PSP fees increase OPEX by ~5-8%, reducing net margins slightly.
-- **Timeline:** VASP denial would delay full independence by 12-18 months (time to pursue alternative licenses).
+3. **Focus on Nigeria and Ghana:** If Brazil VASP is delayed, Coins accelerates Nigeria and Ghana launches, where licensing frameworks are clearer and faster.
 
 **Regulatory Risk Mitigation:**
 
-Coins has strong relationships with Brazil's Central Bank and has been transparent about compliance from day one. The likelihood of VASP denial is low because:
+- **Proactive Compliance:** Coins works with Brazilian legal counsel (Mattos Filho, Pinheiro Neto) to ensure VASP application meets all BCB requirements.
+- **Diversified Markets:** Nigeria and Ghana reduce dependency on Brazil. Even if Brazil VASP is denied, Coins has two additional markets generating revenue.
+- **PI Licensing Is Sufficient:** Most competitors (Mercado Bitcoin, Foxbit, Transfero) operate under PI licensing without VASP. Coins is not uniquely exposed.
 
-1. Coins operates compliantly under PSPs (no regulatory violations)
-2. Coins has full KYC/AML infrastructure (Zoloz, transaction monitoring, COAF reporting)
-3. Brazil's regulatory framework is designed to **enable** licensed crypto operators, not block them
-
-**Conclusion:** VASP denial is a **low-probability, medium-impact** risk. If it happens, Coins has fallback options (PSPs, PI license, B2B pivot) that allow continued operations with minimal revenue impact.`,
+**Conclusion:** VASP denial is a **low-probability, low-impact risk.** Coins can continue operating under PI licensing, reapply with adjustments, or pivot focus to Nigeria and Ghana. The four-rail model does not depend on VASP approval.`,
     },
   ];
 
   return (
     <DashboardLayout>
-      <div className="p-6 space-y-12">
+      <div className="p-6 space-y-8">
         {/* Header */}
         <div className="space-y-4">
-          <h1 className="text-4xl md:text-5xl font-bold">
-            Investor Q&A
-          </h1>
-          <p className="text-xl text-muted-foreground max-w-3xl">
-            Common questions from investors about Coins' strategy, competitive positioning, and path to profitability. 
-            These answers address the core diligence questions raised during fundraising conversations.
+          <div className="flex items-center gap-3">
+            <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">
+              <HelpCircle className="h-6 w-6 text-primary" />
+            </div>
+            <div>
+              <h1 className="text-4xl md:text-5xl font-bold">Investor Q&A</h1>
+              <p className="text-muted-foreground">Common questions from due diligence conversations</p>
+            </div>
+          </div>
+        </div>
+
+        {/* Collapsible Questions */}
+        <Accordion type="single" collapsible className="space-y-4">
+          {questions.map((item) => (
+            <AccordionItem key={item.id} value={item.id} className="border border-border rounded-lg px-6 bg-card">
+              <AccordionTrigger className="text-left hover:no-underline py-6">
+                <span className="text-lg font-semibold pr-4">{item.q}</span>
+              </AccordionTrigger>
+              <AccordionContent className="pb-6 pt-2">
+                <div className="prose prose-sm max-w-none dark:prose-invert">
+                  <Streamdown>{item.a}</Streamdown>
+                </div>
+              </AccordionContent>
+            </AccordionItem>
+          ))}
+        </Accordion>
+
+        {/* Disclaimer */}
+        <div className="p-4 rounded-lg bg-accent/50 text-xs text-muted-foreground border border-border">
+          <p>
+            <strong className="text-foreground">Disclaimer:</strong> These answers reflect Coins' current strategy and projections as of November 2024. Actual results may vary based on market conditions, regulatory changes, and execution risks. This Q&A is for informational purposes only and does not constitute investment advice.
           </p>
         </div>
-
-        {/* Q&A Cards */}
-        <div className="space-y-6">
-          {questions.map((item, idx) => (
-            <Card key={idx} className="border-primary/20">
-              <CardHeader>
-                <div className="flex items-start gap-3">
-                  <div className="w-10 h-10 rounded-lg bg-primary/20 flex items-center justify-center flex-shrink-0 mt-1">
-                    <HelpCircle className="h-5 w-5 text-primary" />
-                  </div>
-                  <CardTitle className="text-xl text-foreground leading-relaxed">
-                    {item.q}
-                  </CardTitle>
-                </div>
-              </CardHeader>
-              <CardContent className="pl-16">
-                <div className="prose prose-sm max-w-none text-muted-foreground">
-                  {item.a.split('\n\n').map((paragraph, pIdx) => {
-                    // Check if paragraph is a list
-                    if (paragraph.trim().startsWith('-') || /^\d+\./.test(paragraph.trim())) {
-                      const items = paragraph.split('\n').filter(line => line.trim());
-                      return (
-                        <ul key={pIdx} className="space-y-2 my-4">
-                          {items.map((listItem, liIdx) => {
-                            const cleanItem = listItem.replace(/^[-\d.]\s*/, '').trim();
-                            // Parse bold text
-                            const parts = cleanItem.split(/\*\*(.*?)\*\*/g);
-                            return (
-                              <li key={liIdx} className="flex items-start gap-2">
-                                <CheckCircle2 className="h-4 w-4 text-primary mt-0.5 flex-shrink-0" />
-                                <span>
-                                  {parts.map((part, partIdx) => 
-                                    partIdx % 2 === 1 ? (
-                                      <strong key={partIdx} className="text-foreground">{part}</strong>
-                                    ) : (
-                                      <span key={partIdx}>{part}</span>
-                                    )
-                                  )}
-                                </span>
-                              </li>
-                            );
-                          })}
-                        </ul>
-                      );
-                    }
-                    
-                    // Regular paragraph - parse bold text
-                    const parts = paragraph.split(/\*\*(.*?)\*\*/g);
-                    return (
-                      <p key={pIdx} className="mb-4 leading-relaxed">
-                        {parts.map((part, partIdx) => 
-                          partIdx % 2 === 1 ? (
-                            <strong key={partIdx} className="text-foreground">{part}</strong>
-                          ) : (
-                            <span key={partIdx}>{part}</span>
-                          )
-                        )}
-                      </p>
-                    );
-                  })}
-                </div>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
-
-        {/* Additional Resources */}
-        <Card className="border-primary/30 bg-primary/5">
-          <CardHeader>
-            <CardTitle className="text-2xl">Additional Due Diligence Resources</CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-4 text-sm text-muted-foreground">
-            <p>
-              For deeper analysis on specific topics, refer to the dedicated pages in this research site:
-            </p>
-            <ul className="space-y-2">
-              <li className="flex items-start gap-2">
-                <CheckCircle2 className="h-4 w-4 text-primary mt-0.5 flex-shrink-0" />
-                <span><strong className="text-foreground">The Model:</strong> Deep dive into the four-rail flywheel and why full-stack compounds</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <CheckCircle2 className="h-4 w-4 text-primary mt-0.5 flex-shrink-0" />
-                <span><strong className="text-foreground">Markets:</strong> FRM-R framework analysis for Brazil, Nigeria, Ghana, Argentina, Mexico</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <CheckCircle2 className="h-4 w-4 text-primary mt-0.5 flex-shrink-0" />
-                <span><strong className="text-foreground">Blueprint:</strong> Why Brazil is the prototype and how it replicates to other Global South markets</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <CheckCircle2 className="h-4 w-4 text-primary mt-0.5 flex-shrink-0" />
-                <span><strong className="text-foreground">Metrics:</strong> Real traction data, unit economics, competitive benchmarking, path to profitability</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <CheckCircle2 className="h-4 w-4 text-primary mt-0.5 flex-shrink-0" />
-                <span><strong className="text-foreground">Regulation:</strong> Licensing strategy, compliance infrastructure, regulatory risk assessment</span>
-              </li>
-            </ul>
-
-            <div className="pt-4 border-t border-border">
-              <p className="text-foreground">
-                <strong>Contact:</strong> For additional questions or to schedule a follow-up call, reach out to the Coins team 
-                via the contact information provided in your investor materials.
-              </p>
-            </div>
-          </CardContent>
-        </Card>
       </div>
     </DashboardLayout>
   );

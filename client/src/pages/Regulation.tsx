@@ -66,6 +66,16 @@ export default function Regulation() {
                       </p>
                     </div>
                   </div>
+
+                  <div className="flex items-start gap-2">
+                    <CheckCircle2 className="h-4 w-4 text-green-500 mt-0.5 flex-shrink-0" />
+                    <div>
+                      <p className="font-medium text-foreground">Travel Rule Compliance</p>
+                      <p className="text-muted-foreground">
+                        Coins automates full Travel Rule support across Exchange, OTC and on-chain settlement, ensuring FATF-aligned sender/beneficiary data transmission for all large bilateral flows.
+                      </p>
+                    </div>
+                  </div>
                 </div>
               </div>
 
