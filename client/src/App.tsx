@@ -20,11 +20,11 @@ import InvestorQA from "./pages/InvestorQA";
 import OnChainResearch from "./pages/OnChainResearch";
 import ApiDocs from "./pages/ApiDocs";
 import ComingSoon from "./pages/ComingSoon";
-import Login from "./pages/Login";
+import SimpleLogin from "./pages/SimpleLogin";
 import Signup from "./pages/Signup";
 import RequestAccess from "./pages/RequestAccess";
 import AdminDashboard from "./pages/AdminDashboard";
-import AuthGuard from "./components/AuthGuard";
+import { SimpleAuthGuard } from "./components/SimpleAuthGuard";
 import ChangePassword from "./pages/ChangePassword";
 
 function Router() {
@@ -32,7 +32,7 @@ function Router() {
   return (
     <Switch>
       {/* Public auth routes */}
-      <Route path="/login" component={Login} />
+      <Route path="/simple-login" component={SimpleLogin} />
       <Route path="/signup" component={Signup} />
       <Route path="/request-access" component={RequestAccess} />
       <Route path="/change-password" component={ChangePassword} />
@@ -40,73 +40,73 @@ function Router() {
       {/* Admin routes */}
       <Route path="/admin">
         {() => (
-          <AuthGuard requireAdmin>
+          <SimpleAuthGuard>
             <AdminDashboard />
-          </AuthGuard>
+          </SimpleAuthGuard>
         )}
       </Route>
       
       {/* Protected content routes */}
       <Route path="/">
         {() => (
-          <AuthGuard>
+          <SimpleAuthGuard>
             <Overview />
-          </AuthGuard>
+          </SimpleAuthGuard>
         )}
       </Route>
       <Route path={"/core-operations"}>
         {() => (
-          <AuthGuard>
+          <SimpleAuthGuard>
             <CoreOperations />
-          </AuthGuard>
+          </SimpleAuthGuard>
         )}
       </Route>
       <Route path={"/licensing"}>
-        {() => (<AuthGuard><Licensing /></AuthGuard>)}
+        {() => (<SimpleAuthGuard><Licensing /></SimpleAuthGuard>)}
       </Route>
       <Route path={"/expansion"}>
-        {() => (<AuthGuard><Expansion /></AuthGuard>)}
+        {() => (<SimpleAuthGuard><Expansion /></SimpleAuthGuard>)}
       </Route>
       <Route path={"/competitive-landscape"}>
-        {() => (<AuthGuard><CompetitiveLandscape /></AuthGuard>)}
+        {() => (<SimpleAuthGuard><CompetitiveLandscape /></SimpleAuthGuard>)}
       </Route>
       <Route path={"/the-model"}>
         {() => (
-          <AuthGuard>
+          <SimpleAuthGuard>
             <TheModel />
-          </AuthGuard>
+          </SimpleAuthGuard>
         )}
       </Route>
       <Route path={"/markets"}>
         {() => (
-          <AuthGuard>
+          <SimpleAuthGuard>
             <Markets />
-          </AuthGuard>
+          </SimpleAuthGuard>
         )}
       </Route>
       <Route path={"/blueprint"}>
-        {() => (<AuthGuard><Blueprint /></AuthGuard>)}
+        {() => (<SimpleAuthGuard><Blueprint /></SimpleAuthGuard>)}
       </Route>
       <Route path={"/data-ai"}>
-        {() => (<AuthGuard><DataAI /></AuthGuard>)}
+        {() => (<SimpleAuthGuard><DataAI /></SimpleAuthGuard>)}
       </Route>
       <Route path={"/infrastructure"}>
-        {() => (<AuthGuard><Infrastructure /></AuthGuard>)}
+        {() => (<SimpleAuthGuard><Infrastructure /></SimpleAuthGuard>)}
       </Route>
       <Route path={"/community"}>
-        {() => (<AuthGuard><Community /></AuthGuard>)}
+        {() => (<SimpleAuthGuard><Community /></SimpleAuthGuard>)}
       </Route>
       <Route path={"/regulation"}>
-        {() => (<AuthGuard><Regulation /></AuthGuard>)}
+        {() => (<SimpleAuthGuard><Regulation /></SimpleAuthGuard>)}
       </Route>
       <Route path="/investor-qa">
-        {() => (<AuthGuard><InvestorQA /></AuthGuard>)}
+        {() => (<SimpleAuthGuard><InvestorQA /></SimpleAuthGuard>)}
       </Route>
       <Route path="/on-chain-research">
-        {() => (<AuthGuard><OnChainResearch /></AuthGuard>)}
+        {() => (<SimpleAuthGuard><OnChainResearch /></SimpleAuthGuard>)}
       </Route>
       <Route path={"/api-docs"}>
-        {() => (<AuthGuard><ApiDocs /></AuthGuard>)}
+        {() => (<SimpleAuthGuard><ApiDocs /></SimpleAuthGuard>)}
       </Route>
       <Route path={"/payments"}>
         {() => <ComingSoon title="Payments" description="B2B cross-border payment infrastructure analysis" />}

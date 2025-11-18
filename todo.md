@@ -84,3 +84,15 @@
 - [ ] Debugar erro "Invalid email or password" no login
 - [ ] Verificar redirecionamento para change-password após login com senha padrão
 - [ ] Testar fluxo completo de signup → login → change password
+
+## TRPC Authentication Fix (URGENT)
+- [ ] Investigar por que servidor retorna HTML ao invés de JSON
+- [ ] Verificar configuração de rotas TRPC no servidor
+- [ ] Verificar se /api/trpc endpoint está configurado corretamente
+- [ ] Testar login após correção
+
+## Simple Fixed Password Solution (TEMPORARY)
+- [x] Criar página de login simples com senha fixa
+- [x] Usar localStorage para manter sessão
+- [x] Remover complexidade TRPC/database temporariamente
+- [x] Testar e fazer deploy
