@@ -57,8 +57,13 @@ export default function SimpleLogin() {
                 placeholder="Enter access password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
+                onPaste={(e) => {
+                  // Explicitly allow paste
+                  e.stopPropagation();
+                }}
                 required
                 autoFocus
+                autoComplete="off"
               />
             </div>
 

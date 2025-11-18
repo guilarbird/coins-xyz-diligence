@@ -96,3 +96,7 @@
 - [x] Usar localStorage para manter sessão
 - [x] Remover complexidade TRPC/database temporariamente
 - [x] Testar e fazer deploy
+
+## Password Input Fix
+- [x] Permitir paste (colar) no campo de senha
+- [ ] Testar e fazer deploy
