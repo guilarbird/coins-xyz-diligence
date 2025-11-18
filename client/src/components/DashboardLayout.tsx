@@ -8,10 +8,13 @@ import {
   Shield, 
   BarChart3, 
   Globe, 
-  Users 
+  Users,
+  Menu,
+  X
 } from "lucide-react";
 import { Link, useLocation } from "wouter";
 import { cn } from "@/lib/utils";
+import { useState } from "react";
 
 interface DashboardLayoutProps {
   children: React.ReactNode;
@@ -32,11 +35,36 @@ const navItems = [
 
 export default function DashboardLayout({ children }: DashboardLayoutProps) {
   const [location] = useLocation();
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  const closeMobileMenu = () => setIsMobileMenuOpen(false);
 
   return (
     <div className="flex h-screen bg-background">
+      {/* Mobile Menu Button */}
+      <button
+        onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+        className="fixed top-4 left-4 z-50 lg:hidden p-2 rounded-lg bg-card border border-border text-foreground hover:bg-accent"
+        aria-label="Toggle menu"
+      >
+        {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+      </button>
+
+      {/* Overlay for mobile */}
+      {isMobileMenuOpen && (
+        <div
+          className="fixed inset-0 bg-black/50 z-30 lg:hidden"
+          onClick={closeMobileMenu}
+        />
+      )}
+
       {/* Sidebar */}
-      <aside className="w-64 border-r border-border bg-card flex flex-col">
+      <aside
+        className={cn(
+          "fixed lg:static inset-y-0 left-0 z-40 w-64 border-r border-border bg-card flex flex-col transition-transform duration-300",
+          isMobileMenuOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
+        )}
+      >
         {/* Logo */}
         <div className="p-6 border-b border-border">
           <div className="flex items-center gap-3">
@@ -55,6 +83,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
                 <li key={item.path}>
                   <Link href={item.path}>
                     <a
+                      onClick={closeMobileMenu}
                       className={cn(
                         "flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition-colors",
                         isActive
@@ -81,7 +110,8 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
       </aside>
 
       {/* Main Content */}
-      <main className="flex-1 overflow-y-auto">
+      <main className="flex-1 overflow-y-auto lg:ml-0">
+        <div className="lg:hidden h-16" /> {/* Spacer for mobile menu button */}
         {children}
       </main>
     </div>

@@ -35,3 +35,8 @@
 ## Branding
 - [x] Adicionar logos oficiais da Coins.xyz (white e black wordmark)
 - [x] Atualizar DashboardLayout com logo correto
+
+## Mobile Responsiveness
+- [x] Adicionar botão hambúrguer para menu mobile
+- [x] Tornar sidebar colapsável em dispositivos móveis
+- [x] Adicionar overlay para fechar menu ao clicar fora
