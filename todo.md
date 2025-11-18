@@ -21,4 +21,4 @@
   - [x] Mercado Bitcoin (Exchange)
   - [x] Foxbit (Exchange)
   - [x] Bluegreen (Gateway)
-- [ ] Testar e fazer commit/push para GitHub
+- [x] Testar e fazer commit/push para GitHub
