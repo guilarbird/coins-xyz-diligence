@@ -10,8 +10,11 @@ import {
   Shield, 
   HelpCircle,
   Menu,
-  X
+  X,
+  Sun,
+  Moon
 } from "lucide-react";
+import { useTheme } from "@/contexts/ThemeContext";
 import { Link, useLocation } from "wouter";
 import { cn } from "@/lib/utils";
 import { useState } from "react";
@@ -31,6 +34,30 @@ const navItems = [
   { icon: Shield, label: "Regulation", path: "/regulation" },
   { icon: HelpCircle, label: "Investor Q&A", path: "/investor-qa" },
 ];
+
+function ThemeToggle() {
+  const { theme, toggleTheme } = useTheme();
+
+  return (
+    <button
+      onClick={toggleTheme}
+      className="w-full flex items-center justify-center gap-2 px-3 py-2 rounded-lg text-sm font-medium transition-colors bg-accent hover:bg-accent/80 text-foreground"
+      aria-label="Toggle theme"
+    >
+      {theme === "dark" ? (
+        <>
+          <Sun className="h-4 w-4" />
+          <span>Light Mode</span>
+        </>
+      ) : (
+        <>
+          <Moon className="h-4 w-4" />
+          <span>Dark Mode</span>
+        </>
+      )}
+    </button>
+  );
+}
 
 export default function DashboardLayout({ children }: DashboardLayoutProps) {
   const [location] = useLocation();
@@ -100,7 +127,8 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
         </nav>
 
         {/* Footer */}
-        <div className="p-4 border-t border-border">
+        <div className="p-4 border-t border-border space-y-3">
+          <ThemeToggle />
           <p className="text-xs text-muted-foreground text-center">
             © 2025 Coins.xyz
           </p>

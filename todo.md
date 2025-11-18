@@ -119,3 +119,12 @@
 - [x] Incluir Global South pre-selection na lógica de expansão
 - [x] Fortalecer narrativa Brazil → Global South blueprint
 - [x] Reforçar 4-rail flywheel (exchange → payments → OTC → OCBS → exchange)
+
+
+## Light & Dark Theme Implementation (Nov 18, 2025)
+
+- [x] Habilitar theme switching no App.tsx (adicionar prop `switchable`)
+- [x] Adicionar theme toggle button no DashboardLayout header
+- [x] Ajustar cores CSS para light theme no index.css
+- [x] Garantir contraste adequado em ambos os temas
+- [x] Testar todas as páginas em light e dark mode
