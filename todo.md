@@ -82,3 +82,40 @@
 - [x] Implementar menu mobile com hambúrguer
 - [x] Deploy no Vercel
 - [x] Configurar domínio base-xyz.com
+
+
+## Strategic Refactoring (Nov 18, 2025)
+
+### Bug Fix
+- [x] Corrigir erro de nested `<a>` na página Metrics
+
+### Layer 0: Global South Pre-Selection
+- [x] Adicionar seção "Global South Pre-Selection Layer" no Overview
+- [x] Explicar critérios estruturais (população jovem, mobile-first, stablecoin penetration, FX volatility, China corridor, creator economy)
+- [x] Atualizar Markets page para incluir Layer 0 antes do FRM-R
+- [x] Reescrever lógica de expansão com Layer 0
+
+### Strategic Sentence
+- [x] Substituir "Where legacy rails fail..." por nova sentence
+- [x] Nova: "Coins doesn't compete with traditional rails — it completes them. We operate in the structural gaps where banks, PSPs and single-product crypto platforms cannot reach with speed, compliance or settlement optionality."
+- [x] Atualizar Overview, The Model e outras páginas relevantes
+
+### Ecosystem Map (Infrastructure Refactor)
+- [x] Transformar Infrastructure page em Ecosystem Map visual
+- [x] Organizar em 5 layers: Banking & PSP Rails, Exchanges & Liquidity, Stablecoin Issuers, KYC/AML, OTC & Brokerage
+- [x] Classificar cada provider: Direct Integration, Strategic Connectivity, Market Counterparty, Ecosystem Observation
+- [x] Criar diagrama visual do ecossistema
+
+### Metrics KPI Families
+- [x] Reescrever Metrics com KPI families corretos
+- [x] Exchange: 30D spot volume, spread quality, liquidity depth
+- [x] KYC Funnel: L2/L3 conversion, time-to-KYC
+- [x] Payments: PIX in/out, settlement success rate
+- [x] OTC: RFQ volume, corridor flows
+- [x] OCBS: stablecoin settlement volumes
+- [x] Narrativa: "Coins is not a speculative exchange; it is an emerging-market settlement network."
+
+### Overview & The Model Updates
+- [x] Incluir Global South pre-selection na lógica de expansão
+- [x] Fortalecer narrativa Brazil → Global South blueprint
+- [x] Reforçar 4-rail flywheel (exchange → payments → OTC → OCBS → exchange)

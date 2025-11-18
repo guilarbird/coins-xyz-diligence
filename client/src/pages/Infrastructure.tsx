@@ -1,309 +1,336 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import DashboardLayout from "@/components/DashboardLayout";
-import { Building2, Shield, Zap, Globe, AlertCircle } from "lucide-react";
+import { CheckCircle2, Link as LinkIcon, Eye, Handshake, Plug } from "lucide-react";
+
+type RelationshipType = "direct" | "strategic" | "counterparty" | "observation";
+
+interface Provider {
+  name: string;
+  relationship: RelationshipType;
+  description: string;
+}
+
+const relationshipConfig: Record<RelationshipType, { icon: any; label: string; color: string }> = {
+  direct: {
+    icon: Plug,
+    label: "Direct Integration",
+    color: "text-green-400",
+  },
+  strategic: {
+    icon: LinkIcon,
+    label: "Strategic Connectivity",
+    color: "text-blue-400",
+  },
+  counterparty: {
+    icon: Handshake,
+    label: "Market Counterparty",
+    color: "text-purple-400",
+  },
+  observation: {
+    icon: Eye,
+    label: "Ecosystem Observation",
+    color: "text-orange-400",
+  },
+};
+
+const ecosystemLayers: {
+  title: string;
+  description: string;
+  providers: Provider[];
+}[] = [
+  {
+    title: "1. Banking & PSP Rails",
+    description: "Fiat on/off-ramps, settlement infrastructure, and domestic payment channels",
+    providers: [
+      {
+        name: "Transfeera",
+        relationship: "direct",
+        description: "PSP for PIX integration, instant BRL deposits/withdrawals",
+      },
+      {
+        name: "Qyon",
+        relationship: "direct",
+        description: "Payment orchestration, multi-bank connectivity",
+      },
+      {
+        name: "Stark Bank",
+        relationship: "strategic",
+        description: "Banking-as-a-Service, account management",
+      },
+      {
+        name: "Onz",
+        relationship: "strategic",
+        description: "Alternative PSP for redundancy and failover",
+      },
+    ],
+  },
+  {
+    title: "2. Exchanges & Liquidity Venues",
+    description: "Orderbook liquidity, hedging counterparties, and market-making infrastructure",
+    providers: [
+      {
+        name: "Mercado Bitcoin",
+        relationship: "counterparty",
+        description: "Largest Brazilian exchange, BRL-USDT liquidity source",
+      },
+      {
+        name: "Foxbit",
+        relationship: "counterparty",
+        description: "Secondary Brazilian exchange, backup liquidity",
+      },
+      {
+        name: "Binance",
+        relationship: "counterparty",
+        description: "Global exchange, deep USDT liquidity for hedging",
+      },
+      {
+        name: "Bybit",
+        relationship: "counterparty",
+        description: "Alternative global venue, competitive spreads",
+      },
+      {
+        name: "Bitget",
+        relationship: "observation",
+        description: "Emerging exchange, monitoring for future integration",
+      },
+    ],
+  },
+  {
+    title: "3. Stablecoin Issuers & FX Infrastructure",
+    description: "Stablecoin minting/redemption, treasury management, and settlement rails",
+    providers: [
+      {
+        name: "Circle (USDC)",
+        relationship: "strategic",
+        description: "Primary stablecoin issuer, regulated USD-backed reserves",
+      },
+      {
+        name: "Tether (USDT)",
+        relationship: "strategic",
+        description: "Dominant stablecoin in LatAm and Africa, high liquidity",
+      },
+      {
+        name: "Braza / BRLA",
+        relationship: "direct",
+        description: "BRL-backed stablecoin, domestic settlement alternative",
+      },
+      {
+        name: "Transfero",
+        relationship: "counterparty",
+        description: "Institutional OTC desk, stablecoin liquidity provider",
+      },
+    ],
+  },
+  {
+    title: "4. KYC/AML & Compliance",
+    description: "Identity verification, transaction monitoring, and regulatory reporting",
+    providers: [
+      {
+        name: "Zoloz (Ant Group)",
+        relationship: "direct",
+        description: "Biometric KYC, liveness detection, document verification",
+      },
+      {
+        name: "SmileID",
+        relationship: "direct",
+        description: "Africa-focused KYC, Nigeria and Ghana onboarding",
+      },
+      {
+        name: "Sumsub",
+        relationship: "observation",
+        description: "Global KYC alternative, monitoring for multi-region expansion",
+      },
+      {
+        name: "COAF (Brazil)",
+        relationship: "strategic",
+        description: "Financial intelligence unit, AML reporting compliance",
+      },
+    ],
+  },
+  {
+    title: "5. OTC & Brokerage Counterparties",
+    description: "Large-ticket RFQ execution, institutional FX, and treasury services",
+    providers: [
+      {
+        name: "BlockFills",
+        relationship: "counterparty",
+        description: "Institutional OTC desk, multi-million dollar RFQ execution",
+      },
+      {
+        name: "Genial Investimentos",
+        relationship: "strategic",
+        description: "Brazilian brokerage, institutional client referrals",
+      },
+      {
+        name: "Transfero",
+        relationship: "counterparty",
+        description: "Local OTC desk, BRL-USDT corridor specialist",
+      },
+      {
+        name: "B2C2",
+        relationship: "observation",
+        description: "Global liquidity provider, monitoring for future integration",
+      },
+    ],
+  },
+];
+
+function ProviderCard({ provider }: { provider: Provider }) {
+  const config = relationshipConfig[provider.relationship];
+  const Icon = config.icon;
+
+  return (
+    <div className="flex items-start gap-3 p-3 rounded-lg bg-accent/30 hover:bg-accent/50 transition-colors">
+      <div className={`w-10 h-10 rounded-lg bg-background flex items-center justify-center flex-shrink-0 ${config.color}`}>
+        <Icon className="h-5 w-5" />
+      </div>
+      <div className="flex-1 min-w-0">
+        <div className="flex items-center gap-2 mb-1 flex-wrap">
+          <p className="font-semibold text-foreground">{provider.name}</p>
+          <span className={`text-xs px-2 py-0.5 rounded-full bg-background ${config.color}`}>
+            {config.label}
+          </span>
+        </div>
+        <p className="text-sm text-muted-foreground">{provider.description}</p>
+      </div>
+    </div>
+  );
+}
 
 export default function Infrastructure() {
-  const providers = {
-    kyc: [
-      { name: "Zoloz", region: "Brazil", category: "KYC/AML" },
-      { name: "SmileID", region: "Nigeria, Ghana", category: "KYC/AML" },
-    ],
-    banking: [
-      { name: "Transfeera", region: "Brazil", category: "PSP / Payment Rails" },
-      { name: "Qyon", region: "Brazil", category: "PSP / Banking API" },
-      { name: "Stark Bank", region: "Brazil", category: "Banking Infrastructure" },
-      { name: "Onz", region: "Brazil", category: "Payment Processing" },
-    ],
-    liquidity: [
-      { name: "Transfero", region: "Brazil", category: "OTC Liquidity" },
-      { name: "Mercado Bitcoin", region: "Brazil", category: "Exchange Liquidity" },
-      { name: "Foxbit", region: "Brazil", category: "Exchange Liquidity" },
-      { name: "Binance", region: "Global", category: "Exchange Liquidity" },
-      { name: "Bybit", region: "Global", category: "Exchange Liquidity" },
-      { name: "Bitget", region: "Global", category: "Exchange Liquidity" },
-      { name: "BlockFills", region: "Global", category: "Institutional Liquidity" },
-    ],
-    stablecoin: [
-      { name: "Circle (USDC)", region: "Global", category: "Stablecoin Issuer" },
-      { name: "Braza / BRLA", region: "Brazil", category: "BRL Stablecoin" },
-    ],
-    other: [
-      { name: "Genial Investimentos", region: "Brazil", category: "Brokerage / Custody" },
-    ],
-  };
-
   return (
     <DashboardLayout>
       <div className="p-6 space-y-12">
         {/* Header */}
         <div className="space-y-4">
           <h1 className="text-4xl md:text-5xl font-bold">
-            Infrastructure Providers & Market Counterparties
+            Ecosystem Map
           </h1>
           <p className="text-xl text-muted-foreground max-w-3xl">
-            The operational backbone that enables Coins to deploy the four-rail model across Global South markets. 
-            These partnerships provide KYC/AML, banking rails, liquidity, and stablecoin infrastructure.
+            Coins operates as an orchestration layer across a five-tier ecosystem. We integrate directly with critical 
+            infrastructure, maintain strategic connectivity with key partners, and transact with market counterparties 
+            to deliver the four-rail product stack.
           </p>
         </div>
 
-        {/* Disclaimer */}
-        <Card className="border-orange-500/30 bg-orange-500/5">
-          <CardContent className="pt-6">
-            <div className="flex items-start gap-3">
-              <AlertCircle className="h-5 w-5 text-orange-400 mt-0.5 flex-shrink-0" />
-              <p className="text-sm text-muted-foreground">
-                <strong className="text-foreground">Disclaimer:</strong> The logos and names listed below represent infrastructure 
-                providers, liquidity venues, and market counterparties that Coins integrates with or sources services from. 
-                Their inclusion does not imply endorsement, partnership, or commercial relationship beyond standard vendor/counterparty arrangements.
-              </p>
-            </div>
-          </CardContent>
-        </Card>
-
-        {/* KYC/AML & Compliance Stack */}
-        <Card>
+        {/* Relationship Legend */}
+        <Card className="bg-accent/20 border-primary/20">
           <CardHeader>
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-lg bg-blue-500/20 flex items-center justify-center">
-                <Shield className="h-5 w-5 text-blue-400" />
-              </div>
-              <div>
-                <CardTitle className="text-2xl">KYC/AML & Compliance Stack</CardTitle>
-                <p className="text-sm text-muted-foreground">
-                  Identity verification, AML monitoring, and regulatory reporting
-                </p>
-              </div>
-            </div>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <div className="grid md:grid-cols-2 gap-4">
-              {providers.kyc.map((provider, idx) => (
-                <Card key={idx} className="bg-accent/50">
-                  <CardContent className="pt-6">
-                    <div className="space-y-2">
-                      <p className="font-semibold text-lg text-foreground">{provider.name}</p>
-                      <p className="text-sm text-muted-foreground">{provider.category}</p>
-                      <p className="text-xs text-muted-foreground">Region: {provider.region}</p>
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-
-            <div className="pt-4 text-sm text-muted-foreground">
-              <p>
-                <strong className="text-foreground">Zoloz</strong> provides KYC/AML for Brazil operations, including document verification, 
-                liveness detection, and AML screening. <strong className="text-foreground">SmileID</strong> covers Nigeria and Ghana with 
-                local ID verification and biometric authentication.
-              </p>
-            </div>
-          </CardContent>
-        </Card>
-
-        {/* Banking & Payment Rails */}
-        <Card>
-          <CardHeader>
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-lg bg-green-500/20 flex items-center justify-center">
-                <Zap className="h-5 w-5 text-green-400" />
-              </div>
-              <div>
-                <CardTitle className="text-2xl">Banking & Payment Rails</CardTitle>
-                <p className="text-sm text-muted-foreground">
-                  PSPs, bank accounts, PIX integration, and settlement infrastructure
-                </p>
-              </div>
-            </div>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
-              {providers.banking.map((provider, idx) => (
-                <Card key={idx} className="bg-accent/50">
-                  <CardContent className="pt-6">
-                    <div className="space-y-2">
-                      <p className="font-semibold text-foreground">{provider.name}</p>
-                      <p className="text-xs text-muted-foreground">{provider.category}</p>
-                      <p className="text-xs text-muted-foreground">{provider.region}</p>
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-
-            <div className="pt-4 text-sm text-muted-foreground">
-              <p>
-                <strong className="text-foreground">Transfeera</strong> and <strong className="text-foreground">Qyon</strong> provide 
-                PIX integration and payment processing. <strong className="text-foreground">Stark Bank</strong> offers banking APIs 
-                for account management and settlement. <strong className="text-foreground">Onz</strong> handles merchant payment flows.
-              </p>
-            </div>
-          </CardContent>
-        </Card>
-
-        {/* Liquidity & Market Counterparties */}
-        <Card>
-          <CardHeader>
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-lg bg-purple-500/20 flex items-center justify-center">
-                <Building2 className="h-5 w-5 text-purple-400" />
-              </div>
-              <div>
-                <CardTitle className="text-2xl">Liquidity & Market Counterparties</CardTitle>
-                <p className="text-sm text-muted-foreground">
-                  Exchanges, OTC desks, and institutional liquidity providers
-                </p>
-              </div>
-            </div>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
-              {providers.liquidity.map((provider, idx) => (
-                <Card key={idx} className="bg-accent/50">
-                  <CardContent className="pt-6">
-                    <div className="space-y-2">
-                      <p className="font-semibold text-foreground">{provider.name}</p>
-                      <p className="text-xs text-muted-foreground">{provider.category}</p>
-                      <p className="text-xs text-muted-foreground">{provider.region}</p>
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-
-            <div className="pt-4 text-sm text-muted-foreground">
-              <p>
-                Coins sources liquidity from both local (Mercado Bitcoin, Foxbit, Transfero) and global (Binance, Bybit, Bitget) venues. 
-                <strong className="text-foreground"> BlockFills</strong> provides institutional-grade OTC execution for large tickets.
-              </p>
-            </div>
-          </CardContent>
-        </Card>
-
-        {/* Stablecoin Infrastructure */}
-        <Card>
-          <CardHeader>
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-lg bg-orange-500/20 flex items-center justify-center">
-                <Globe className="h-5 w-5 text-orange-400" />
-              </div>
-              <div>
-                <CardTitle className="text-2xl">Stablecoin Infrastructure</CardTitle>
-                <p className="text-sm text-muted-foreground">
-                  USDC, USDT, and BRL-pegged stablecoins
-                </p>
-              </div>
-            </div>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <div className="grid md:grid-cols-2 gap-4">
-              {providers.stablecoin.map((provider, idx) => (
-                <Card key={idx} className="bg-accent/50">
-                  <CardContent className="pt-6">
-                    <div className="space-y-2">
-                      <p className="font-semibold text-lg text-foreground">{provider.name}</p>
-                      <p className="text-sm text-muted-foreground">{provider.category}</p>
-                      <p className="text-xs text-muted-foreground">Region: {provider.region}</p>
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-
-            <div className="pt-4 text-sm text-muted-foreground">
-              <p>
-                <strong className="text-foreground">Circle's USDC</strong> is the primary stablecoin for cross-border settlement. 
-                <strong className="text-foreground"> Braza (BRLA)</strong> provides BRL-pegged stablecoins for local treasury management.
-              </p>
-            </div>
-          </CardContent>
-        </Card>
-
-        {/* Other Infrastructure */}
-        <Card>
-          <CardHeader>
-            <CardTitle className="text-2xl">Custody & Brokerage</CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <div className="grid md:grid-cols-2 gap-4">
-              {providers.other.map((provider, idx) => (
-                <Card key={idx} className="bg-accent/50">
-                  <CardContent className="pt-6">
-                    <div className="space-y-2">
-                      <p className="font-semibold text-lg text-foreground">{provider.name}</p>
-                      <p className="text-sm text-muted-foreground">{provider.category}</p>
-                      <p className="text-xs text-muted-foreground">Region: {provider.region}</p>
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          </CardContent>
-        </Card>
-
-        {/* Replicability Blueprint */}
-        <Card className="border-primary/30 bg-primary/5">
-          <CardHeader>
-            <CardTitle className="text-2xl">Replicability: 12-Week Deployment Checklist</CardTitle>
-            <p className="text-sm text-muted-foreground">
-              What's needed to launch in a new market (Nigeria, Ghana, others)
+            <CardTitle className="text-xl">Relationship Classifications</CardTitle>
+            <p className="text-sm text-muted-foreground pt-2">
+              Each provider is classified by the depth and nature of our relationship:
             </p>
           </CardHeader>
-          <CardContent className="space-y-6">
-            <div className="grid md:grid-cols-2 gap-6">
-              <div className="space-y-4">
-                <div>
-                  <h4 className="font-semibold text-foreground mb-2">Weeks 1-4: Vendor Onboarding</h4>
-                  <ul className="space-y-1 text-sm text-muted-foreground">
-                    <li>• KYC/AML provider selection and integration</li>
-                    <li>• Bank account opening and PSP partnerships</li>
-                    <li>• Payment rails integration (Mobile Money, ACH)</li>
-                    <li>• Liquidity venue onboarding</li>
-                  </ul>
-                </div>
-
-                <div>
-                  <h4 className="font-semibold text-foreground mb-2">Weeks 5-8: Compliance Setup</h4>
-                  <ul className="space-y-1 text-sm text-muted-foreground">
-                    <li>• Licensing applications (Exchange, PI, VASP)</li>
-                    <li>• Regulatory reporting infrastructure</li>
-                    <li>• AML monitoring and transaction screening</li>
-                    <li>• Data privacy and LGPD/GDPR compliance</li>
-                  </ul>
-                </div>
-              </div>
-
-              <div className="space-y-4">
-                <div>
-                  <h4 className="font-semibold text-foreground mb-2">Weeks 9-10: Infrastructure Deployment</h4>
-                  <ul className="space-y-1 text-sm text-muted-foreground">
-                    <li>• Orderbook engine and matching logic</li>
-                    <li>• API banking integrations</li>
-                    <li>• Blockchain infrastructure (custody, settlement)</li>
-                    <li>• Security and risk management systems</li>
-                  </ul>
-                </div>
-
-                <div>
-                  <h4 className="font-semibold text-foreground mb-2">Weeks 11-12: Testing & Launch</h4>
-                  <ul className="space-y-1 text-sm text-muted-foreground">
-                    <li>• End-to-end testing (KYC, deposits, trading, withdrawals)</li>
-                    <li>• Soft launch with limited users</li>
-                    <li>• Monitoring and incident response</li>
-                    <li>• Full launch and marketing</li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-
-            <div className="pt-4 border-t border-border text-sm text-muted-foreground">
-              <p>
-                <strong className="text-foreground">Brazil took 18 months</strong> because we built everything from scratch. 
-                <strong className="text-foreground"> Nigeria and Ghana will take 12 weeks</strong> because we're replicating a proven blueprint 
-                with known vendors and processes.
-              </p>
+          <CardContent>
+            <div className="grid md:grid-cols-2 gap-4">
+              {Object.entries(relationshipConfig).map(([key, config]) => {
+                const Icon = config.icon;
+                return (
+                  <div key={key} className="flex items-start gap-3">
+                    <div className={`w-10 h-10 rounded-lg bg-background flex items-center justify-center flex-shrink-0 ${config.color}`}>
+                      <Icon className="h-5 w-5" />
+                    </div>
+                    <div>
+                      <p className={`font-semibold ${config.color}`}>{config.label}</p>
+                      <p className="text-sm text-muted-foreground">
+                        {key === "direct" && "API-level integration, contractual SLA, critical dependency"}
+                        {key === "strategic" && "Partnership agreement, shared roadmap, mutual referrals"}
+                        {key === "counterparty" && "Transactional relationship, no exclusive agreement"}
+                        {key === "observation" && "Monitoring for future integration, no active relationship"}
+                      </p>
+                    </div>
+                  </div>
+                );
+              })}
             </div>
           </CardContent>
         </Card>
+
+        {/* Ecosystem Layers */}
+        <div className="space-y-8">
+          {ecosystemLayers.map((layer, idx) => (
+            <Card key={idx} className="border-primary/20">
+              <CardHeader>
+                <CardTitle className="text-2xl text-primary">{layer.title}</CardTitle>
+                <p className="text-sm text-muted-foreground pt-2">{layer.description}</p>
+              </CardHeader>
+              <CardContent>
+                <div className="grid md:grid-cols-2 gap-4">
+                  {layer.providers.map((provider, pIdx) => (
+                    <ProviderCard key={pIdx} provider={provider} />
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+
+        {/* Strategic Insights */}
+        <Card className="bg-primary/5 border-primary/30">
+          <CardHeader>
+            <CardTitle className="text-2xl">Why This Ecosystem Structure Matters</CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-4 text-sm text-muted-foreground">
+            <div className="flex items-start gap-3">
+              <CheckCircle2 className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
+              <div>
+                <p className="font-semibold text-foreground mb-1">Redundancy & Resilience</p>
+                <p>
+                  Multiple providers per layer ensure zero single points of failure. If Transfeera goes down, 
+                  Qyon and Onz provide backup PSP connectivity. If Binance liquidity dries up, Bybit and Mercado 
+                  Bitcoin absorb the flow.
+                </p>
+              </div>
+            </div>
+
+            <div className="flex items-start gap-3">
+              <CheckCircle2 className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
+              <div>
+                <p className="font-semibold text-foreground mb-1">Blueprint Replicability</p>
+                <p>
+                  The five-layer structure is not Brazil-specific—it's the template for all markets. Nigeria 
+                  replicates Layer 1 (PSPs) with Flutterwave and Paystack, Layer 4 (KYC) with SmileID, and 
+                  Layer 2 (exchanges) with Binance and Luno. Same blueprint, different providers.
+                </p>
+              </div>
+            </div>
+
+            <div className="flex items-start gap-3">
+              <CheckCircle2 className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
+              <div>
+                <p className="font-semibold text-foreground mb-1">Competitive Moat Through Integration Depth</p>
+                <p>
+                  Competitors like Mercado Bitcoin or Binance operate within a single layer (exchange). Coins 
+                  orchestrates across all five layers, creating cross-layer network effects that single-product 
+                  platforms cannot replicate without rebuilding their entire business model.
+                </p>
+              </div>
+            </div>
+
+            <div className="flex items-start gap-3">
+              <CheckCircle2 className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
+              <div>
+                <p className="font-semibold text-foreground mb-1">12-Week Market Entry Timeline</p>
+                <p>
+                  Because the ecosystem structure is standardized, Coins can deploy to new markets in 12 weeks: 
+                  Week 1-3 (KYC/AML setup), Week 4-6 (PSP integration), Week 7-9 (exchange liquidity), Week 10-12 
+                  (OTC partnerships). Brazil took 18 months to build; Nigeria and Ghana take 12 weeks to replicate.
+                </p>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Disclaimer */}
+        <div className="p-4 rounded-lg bg-accent/50 text-xs text-muted-foreground border border-border">
+          <p>
+            <strong className="text-foreground">Disclaimer:</strong> Provider relationships are subject to change. 
+            "Direct Integration" and "Strategic Connectivity" classifications reflect contractual agreements as of 
+            November 2024. "Market Counterparty" and "Ecosystem Observation" classifications reflect transactional 
+            relationships with no exclusivity. This ecosystem map is for due diligence purposes and does not constitute 
+            an endorsement or recommendation of any provider.
+          </p>
+        </div>
       </div>
     </DashboardLayout>
   );

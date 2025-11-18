@@ -33,9 +33,10 @@ export default function Overview() {
               BRL–USDT corridor and beyond. Brazil is the blueprint; Nigeria and Ghana are scaling now.
             </p>
 
-            {/* Supporting Line */}
+            {/* Supporting Line - NEW STRATEGIC SENTENCE */}
             <p className="text-sm md:text-base italic text-muted-foreground/60 max-w-2xl mx-auto">
-              Where legacy rails fail and single-product platforms fragment, Coins delivers the full stack.
+              Coins doesn't compete with traditional rails — it completes them. We operate in the structural gaps 
+              where banks, PSPs and single-product crypto platforms cannot reach with speed, compliance or settlement optionality.
             </p>
 
             {/* Strategic Statement */}
@@ -87,6 +88,97 @@ export default function Overview() {
         </section>
 
         {/* Four-Rail Market Readiness Framework */}
+        {/* Layer 0: Global South Pre-Selection */}
+        <section className="px-6 py-16 bg-gradient-to-b from-background to-accent/20">
+          <div className="max-w-6xl mx-auto space-y-8">
+            <div className="text-center space-y-4">
+              <div className="inline-block px-4 py-2 rounded-full bg-orange-500/10 border border-orange-500/20">
+                <span className="text-xs font-semibold uppercase tracking-widest text-orange-400">Layer 0</span>
+              </div>
+              <h2 className="text-3xl md:text-4xl font-bold">
+                Global South Pre-Selection
+              </h2>
+              <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
+                Before evaluating any market with FRM-R, we filter for structural traits that define the Global South. 
+                This is "Layer 0" — the prerequisite conditions that make the four-rail model viable.
+              </p>
+            </div>
+
+            <Card className="bg-orange-500/5 border-orange-500/20">
+              <CardHeader>
+                <CardTitle className="text-xl">Structural Traits Required</CardTitle>
+                <p className="text-sm text-muted-foreground pt-2">
+                  Markets must exhibit these characteristics to qualify for FRM-R evaluation:
+                </p>
+              </CardHeader>
+              <CardContent>
+                <div className="grid md:grid-cols-2 gap-6">
+                  <div className="space-y-4">
+                    <div className="flex items-start gap-3">
+                      <CheckCircle2 className="h-5 w-5 text-orange-400 mt-0.5 flex-shrink-0" />
+                      <div>
+                        <p className="font-semibold text-foreground">Young, Digital-Savvy Population</p>
+                        <p className="text-sm text-muted-foreground">High smartphone penetration, crypto-native demographics, comfort with digital finance</p>
+                      </div>
+                    </div>
+
+                    <div className="flex items-start gap-3">
+                      <CheckCircle2 className="h-5 w-5 text-orange-400 mt-0.5 flex-shrink-0" />
+                      <div>
+                        <p className="font-semibold text-foreground">Mobile-Money First</p>
+                        <p className="text-sm text-muted-foreground">Instant payment rails (PIX, Mobile Money, ACH) that enable zero-friction on/off-ramps</p>
+                      </div>
+                    </div>
+
+                    <div className="flex items-start gap-3">
+                      <CheckCircle2 className="h-5 w-5 text-orange-400 mt-0.5 flex-shrink-0" />
+                      <div>
+                        <p className="font-semibold text-foreground">High Stablecoin Penetration</p>
+                        <p className="text-sm text-muted-foreground">Existing USDT/USDC adoption for remittances, trade settlement, or treasury management</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="space-y-4">
+                    <div className="flex items-start gap-3">
+                      <CheckCircle2 className="h-5 w-5 text-orange-400 mt-0.5 flex-shrink-0" />
+                      <div>
+                        <p className="font-semibold text-foreground">FX Volatility & Dollar Restrictions</p>
+                        <p className="text-sm text-muted-foreground">Local currency devaluation creates demand for dollar-denominated assets and hedging</p>
+                      </div>
+                    </div>
+
+                    <div className="flex items-start gap-3">
+                      <CheckCircle2 className="h-5 w-5 text-orange-400 mt-0.5 flex-shrink-0" />
+                      <div>
+                        <p className="font-semibold text-foreground">Import/Export Dependency (China Corridor)</p>
+                        <p className="text-sm text-muted-foreground">Trade flows with China create natural OTC demand for stablecoin settlement</p>
+                      </div>
+                    </div>
+
+                    <div className="flex items-start gap-3">
+                      <CheckCircle2 className="h-5 w-5 text-orange-400 mt-0.5 flex-shrink-0" />
+                      <div>
+                        <p className="font-semibold text-foreground">Informality & Creator-Driven Economy</p>
+                        <p className="text-sm text-muted-foreground">Large informal economy and creator/gig workers who need cross-border payment solutions</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="mt-6 p-4 rounded-lg bg-accent/50 text-sm text-muted-foreground">
+                  <p>
+                    <strong className="text-foreground">Why Layer 0 Matters:</strong> These structural traits are not "nice-to-haves" — 
+                    they are prerequisites. Without them, the four-rail flywheel cannot spin. Brazil, Nigeria, and Ghana pass Layer 0. 
+                    Argentina and Mexico have some traits but lack others (e.g., regulatory clarity, banking access), which is why 
+                    they remain selective-entry markets.
+                  </p>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        </section>
+
         <section id="framework" className="px-6 py-16 bg-accent/30">
           <div className="max-w-7xl mx-auto space-y-12">
             {/* Framework Header */}
@@ -95,8 +187,8 @@ export default function Overview() {
                 Four-Rail Market Readiness Framework (FRM-R)
               </h2>
               <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-                Coins does not prioritize markets by geography. We prioritize markets by the ability to operate 
-                our full four-rail product stack. Full-stack markets compound; partial markets don't.
+                After passing Layer 0, we evaluate markets using FRM-R. Coins does not prioritize markets by geography — 
+                we prioritize by the ability to operate our full four-rail product stack. Full-stack markets compound; partial markets don't.
               </p>
             </div>
 
