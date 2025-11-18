@@ -4,21 +4,38 @@ import NotFound from "@/pages/NotFound";
 import { Route, Switch } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
-import Home from "./pages/Home";
+import Overview from "./pages/Overview";
 import CoreOperations from "./pages/CoreOperations";
 import Licensing from "./pages/Licensing";
 import Expansion from "./pages/Expansion";
 import CompetitiveLandscape from "./pages/CompetitiveLandscape";
+import TheModel from "./pages/TheModel";
+import Markets from "./pages/Markets";
+import Blueprint from "./pages/Blueprint";
+import Metrics from "./pages/Metrics";
+import Infrastructure from "./pages/Infrastructure";
+import Community from "./pages/Community";
+import Regulation from "./pages/Regulation";
+import InvestorQA from "./pages/InvestorQA";
 import ComingSoon from "./pages/ComingSoon";
 
 function Router() {
+  // make sure to consider if you need authentication for certain routes
   return (
     <Switch>
-      <Route path={"/"} component={Home} />
+        <Route path="/" component={Overview} />
       <Route path={"/core-operations"} component={CoreOperations} />
       <Route path={"/licensing"} component={Licensing} />
       <Route path={"/expansion"} component={Expansion} />
       <Route path={"/competitive-landscape"} component={CompetitiveLandscape} />
+      <Route path={"/the-model"} component={TheModel} />
+      <Route path={"/markets"} component={Markets} />
+      <Route path={"/blueprint"} component={Blueprint} />
+      <Route path={"/metrics"} component={Metrics} />
+      <Route path={"/infrastructure"} component={Infrastructure} />
+      <Route path={"/community"} component={Community} />
+      <Route path={"/regulation"} component={Regulation} />
+      <Route path={"/investor-qa"} component={InvestorQA} />
       <Route path={"/payments"}>
         {() => <ComingSoon title="Payments" description="B2B cross-border payment infrastructure analysis" />}
       </Route>

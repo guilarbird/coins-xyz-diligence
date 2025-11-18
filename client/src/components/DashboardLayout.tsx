@@ -1,14 +1,14 @@
 import { APP_LOGO, APP_TITLE } from "@/const";
 import { 
   LayoutDashboard, 
-  Building2, 
-  CreditCard, 
-  ArrowLeftRight, 
-  TrendingUp, 
-  Shield, 
-  BarChart3, 
+  Layers, 
   Globe, 
-  Users,
+  Map, 
+  TrendingUp, 
+  Server, 
+  Users, 
+  Shield, 
+  HelpCircle,
   Menu,
   X
 } from "lucide-react";
@@ -22,15 +22,14 @@ interface DashboardLayoutProps {
 
 const navItems = [
   { icon: LayoutDashboard, label: "Overview", path: "/" },
-  { icon: Building2, label: "Core Operations", path: "/core-operations" },
-  { icon: CreditCard, label: "Payments", path: "/payments" },
-  { icon: ArrowLeftRight, label: "Exchange", path: "/exchange" },
-  { icon: TrendingUp, label: "Trade Desk", path: "/trade-desk" },
-  { icon: Shield, label: "Licensing & Regulatory", path: "/licensing" },
-  { icon: BarChart3, label: "Financial Projections", path: "/financials" },
-  { icon: Globe, label: "Expansion Strategy", path: "/expansion" },
-  { icon: Users, label: "Competitive Landscape", path: "/competitive-landscape" },
-  { icon: Users, label: "Team & Operations", path: "/team" },
+  { icon: Layers, label: "The Model", path: "/the-model" },
+  { icon: Globe, label: "Markets", path: "/markets" },
+  { icon: Map, label: "Blueprint", path: "/blueprint" },
+  { icon: TrendingUp, label: "Metrics", path: "/metrics" },
+  { icon: Server, label: "Infrastructure", path: "/infrastructure" },
+  { icon: Users, label: "Community", path: "/community" },
+  { icon: Shield, label: "Regulation", path: "/regulation" },
+  { icon: HelpCircle, label: "Investor Q&A", path: "/investor-qa" },
 ];
 
 export default function DashboardLayout({ children }: DashboardLayoutProps) {

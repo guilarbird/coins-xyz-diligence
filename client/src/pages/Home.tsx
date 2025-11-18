@@ -3,6 +3,8 @@ import DashboardLayout from "@/components/DashboardLayout";
 import { DollarSign, Users, TrendingUp, Globe, CheckCircle2, Circle } from "lucide-react";
 
 export default function Home() {
+  // Authentication can be added later if needed
+
   return (
     <DashboardLayout>
       <div className="p-6 space-y-8">
