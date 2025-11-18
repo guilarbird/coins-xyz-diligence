@@ -210,7 +210,7 @@ export default function Overview() {
                     <CheckCircle2 className="h-5 w-5 text-blue-400 mt-0.5 flex-shrink-0" />
                     <div>
                       <p className="font-medium">OCBS</p>
-                      <p className="text-xs text-muted-foreground">Stablecoin treasury & settlement</p>
+                      <p className="text-xs text-muted-foreground">Convert/swap & stablecoin treasury</p>
                     </div>
                   </div>
                   <div className="flex items-start gap-2">

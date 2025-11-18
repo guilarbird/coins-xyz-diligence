@@ -33,3 +33,7 @@
 ### UX Improvements
 - [x] Transformar "How Each Rail Works" em accordion collapsible
 - [ ] Adicionar botão de voltar em todas as páginas
+
+### Content Corrections
+- [x] Corrigir descrição do Rail 4 (OCBS) - é Convert/Swap, não apenas treasury management
+- [x] Revisar todas as menções a OCBS no site para refletir funcionalidade de conversão on-chain

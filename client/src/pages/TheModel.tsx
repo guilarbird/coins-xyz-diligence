@@ -258,18 +258,19 @@ export default function TheModel() {
             <AccordionContent>
               <div className="space-y-4 text-muted-foreground pt-4">
               <p>
-                OCBS provides stablecoin treasury management, yield optimization, and on-chain settlement for merchants 
-                and SMEs. It enables "treasury mobility"—companies can hold dollar-denominated assets (USDT/USDC) and 
-                move them globally without touching the legacy banking system.
+                OCBS (On-Chain Brokerage & Swap) is the **convert/swap layer** that enables instant on-chain conversion 
+                between crypto assets and stablecoins. Users can swap BRL-pegged balances to USDT, BTC to USDC, or any 
+                supported pair without leaving the platform. This rail also provides stablecoin treasury management, allowing 
+                companies to hold dollar-denominated assets (USDT/USDC) and move them globally without touching legacy banking.
               </p>
               <div className="grid md:grid-cols-3 gap-4 pt-2">
                 <div>
-                  <p className="font-semibold text-foreground mb-1">Treasury Management</p>
-                  <p className="text-sm">Corporates hold USDT treasuries, earning yield while maintaining dollar exposure</p>
+                  <p className="font-semibold text-foreground mb-1">Instant Conversion/Swap</p>
+                  <p className="text-sm">Convert between crypto and stablecoins on-chain (BRL→USDT, BTC→USDC) with competitive rates</p>
                 </div>
                 <div>
-                  <p className="font-semibold text-foreground mb-1">Global Settlement</p>
-                  <p className="text-sm">Pay suppliers globally using on-chain rails, settling in minutes instead of days</p>
+                  <p className="font-semibold text-foreground mb-1">Treasury Management</p>
+                  <p className="text-sm">Hold USDT/USDC balances for cross-border payments and supplier settlements</p>
                 </div>
                 <div>
                   <p className="font-semibold text-foreground mb-1">FX Hedging</p>

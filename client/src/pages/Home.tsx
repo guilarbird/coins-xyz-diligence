@@ -96,7 +96,7 @@ export default function Home() {
                 <ul className="space-y-1 text-sm">
                   <li className="flex items-start gap-2">
                     <CheckCircle2 className="h-4 w-4 text-blue-400 mt-0.5 flex-shrink-0" />
-                    <span>OCBS (stablecoin treasury, settlement)</span>
+                    <span>OCBS (convert/swap, stablecoin treasury)</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <CheckCircle2 className="h-4 w-4 text-blue-400 mt-0.5 flex-shrink-0" />

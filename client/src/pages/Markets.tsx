@@ -123,7 +123,7 @@ export default function Markets() {
                     <div className="space-y-2">
                       <div className="flex items-center gap-2">
                         <CheckCircle2 className="h-4 w-4 text-green-400" />
-                        <span className="text-sm">OCBS (stablecoin treasury, settlement)</span>
+                        <span className="text-sm">OCBS (convert/swap, stablecoin treasury)</span>
                       </div>
                       <div className="flex items-center gap-2">
                         <CheckCircle2 className="h-4 w-4 text-green-400" />
@@ -238,7 +238,7 @@ export default function Markets() {
                       </div>
                       <div className="flex items-center gap-2">
                         <CheckCircle2 className="h-4 w-4 text-green-400" />
-                        <span className="text-sm">OCBS (stablecoin treasury for Naira hedging)</span>
+                        <span className="text-sm">OCBS (convert/swap for Naira hedging)</span>
                       </div>
                     </div>
                   </div>
@@ -334,7 +334,7 @@ export default function Markets() {
                       </div>
                       <div className="flex items-center gap-2">
                         <CheckCircle2 className="h-4 w-4 text-green-400" />
-                        <span className="text-sm">OCBS (stablecoin treasury, settlement)</span>
+                        <span className="text-sm">OCBS (convert/swap, stablecoin treasury)</span>
                       </div>
                     </div>
                   </div>
