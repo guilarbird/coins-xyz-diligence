@@ -1,420 +1,409 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import DashboardLayout from "@/components/DashboardLayout";
-import { Shield, CheckCircle2, Clock, AlertTriangle } from "lucide-react";
+import { useState } from "react";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import { Badge } from "@/components/ui/badge";
+import { regulatoryData, type CountryRegulation } from "@/data/regulatoryData";
+import { CheckCircle2, Clock, AlertCircle, DollarSign, Building2, FileText, Shield } from "lucide-react";
 
 export default function Regulation() {
+  const [currencyMode, setCurrencyMode] = useState<"BRL" | "USD">("USD");
+
   return (
-    <DashboardLayout>
-      <div className="p-6 space-y-12">
+    <div className="min-h-screen bg-background">
+      <div className="container mx-auto py-8 space-y-8">
         {/* Header */}
         <div className="space-y-4">
-          <h1 className="text-4xl md:text-5xl font-bold">
-            Licensing & Regulatory Strategy
-          </h1>
-          <p className="text-xl text-muted-foreground max-w-3xl">
-            Coins operates in a regulated environment across all markets. Brazil, Nigeria, and Ghana each have evolving crypto 
-            frameworks. Our strategy is to build compliant infrastructure first, then pursue full licensing as regulations mature.
-          </p>
+          <div className="flex items-center justify-between flex-wrap gap-4">
+            <div>
+              <h1 className="text-4xl font-bold tracking-tight">Licensing & Regulatory Strategy</h1>
+              <p className="text-lg text-muted-foreground mt-2 max-w-3xl">
+                Coins operates in a regulated environment across all markets. Our strategy is to build compliant
+                infrastructure first, then pursue full licensing as regulations mature.
+              </p>
+            </div>
+            
+            {/* Currency Toggle */}
+            <div className="flex gap-2">
+              <button
+                onClick={() => setCurrencyMode("USD")}
+                className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
+                  currencyMode === "USD"
+                    ? "bg-primary text-primary-foreground"
+                    : "bg-muted text-muted-foreground hover:bg-muted/80"
+                }`}
+              >
+                USD ($)
+              </button>
+              <button
+                onClick={() => setCurrencyMode("BRL")}
+                className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
+                  currencyMode === "BRL"
+                    ? "bg-primary text-primary-foreground"
+                    : "bg-muted text-muted-foreground hover:bg-muted/80"
+                }`}
+              >
+                BRL (R$)
+              </button>
+            </div>
+          </div>
         </div>
 
-        {/* Brazil Regulatory Landscape */}
-        <Card>
-          <CardHeader>
-            <div className="flex items-center gap-3">
-              <span className="text-3xl">🇧🇷</span>
-              <div>
-                <CardTitle className="text-2xl">Brazil: Regulatory Clarity</CardTitle>
-                <p className="text-sm text-muted-foreground">
-                  Central Bank (BCB) and CVM provide clear frameworks for crypto operations
-                </p>
-              </div>
-            </div>
-          </CardHeader>
-          <CardContent className="space-y-6">
-            <div className="grid md:grid-cols-2 gap-6">
-              <div className="space-y-4">
-                <h4 className="font-semibold text-foreground">Current Regulatory Framework</h4>
-                <div className="space-y-3 text-sm">
-                  <div className="flex items-start gap-2">
-                    <CheckCircle2 className="h-4 w-4 text-green-500 mt-0.5 flex-shrink-0" />
-                    <div>
-                      <p className="font-medium text-foreground">PI (Payment Institution) License</p>
-                      <p className="text-muted-foreground">
-                        Required for PIX integration and payment processing. Coins operates under PSP partnerships (Transfeera, Qyon) 
-                        while pursuing direct PI license.
-                      </p>
+        {/* Country Accordion */}
+        <Accordion type="single" collapsible className="space-y-4">
+          {regulatoryData.map((country) => (
+            <AccordionItem key={country.country} value={country.country} className="border rounded-lg">
+              <AccordionTrigger className="px-6 hover:no-underline">
+                <div className="flex items-center gap-4 w-full">
+                  <span className="text-4xl">{country.flag}</span>
+                  <div className="flex-1 text-left">
+                    <div className="flex items-center gap-3 flex-wrap">
+                      <h2 className="text-2xl font-semibold">{country.country}</h2>
+                      <StatusBadge status={country.status} />
                     </div>
-                  </div>
-
-                  <div className="flex items-start gap-2">
-                    <CheckCircle2 className="h-4 w-4 text-green-500 mt-0.5 flex-shrink-0" />
-                    <div>
-                      <p className="font-medium text-foreground">VASP (Virtual Asset Service Provider)</p>
-                      <p className="text-muted-foreground">
-                        Brazil's Central Bank requires VASP registration for crypto exchanges. Coins is in the application process, 
-                        expected approval Q2 2025.
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="flex items-start gap-2">
-                    <CheckCircle2 className="h-4 w-4 text-green-500 mt-0.5 flex-shrink-0" />
-                    <div>
-                      <p className="font-medium text-foreground">KYC/AML Compliance</p>
-                      <p className="text-muted-foreground">
-                        Full KYC/AML via Zoloz, transaction monitoring, and regulatory reporting to COAF (Brazil's FIU).
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="flex items-start gap-2">
-                    <CheckCircle2 className="h-4 w-4 text-green-500 mt-0.5 flex-shrink-0" />
-                    <div>
-                      <p className="font-medium text-foreground">Travel Rule Compliance</p>
-                      <p className="text-muted-foreground">
-                        Coins automates full Travel Rule support across Exchange, OTC and on-chain settlement, ensuring FATF-aligned sender/beneficiary data transmission for all large bilateral flows.
-                      </p>
-                    </div>
+                    <p className="text-sm text-muted-foreground mt-1">{country.summary}</p>
                   </div>
                 </div>
-              </div>
-
-              <div className="space-y-4">
-                <h4 className="font-semibold text-foreground">Licensing Timeline</h4>
-                <div className="space-y-3 text-sm">
-                  <div className="flex items-start gap-2">
-                    <Clock className="h-4 w-4 text-blue-500 mt-0.5 flex-shrink-0" />
-                    <div>
-                      <p className="font-medium text-foreground">Q2 2025: VASP Registration</p>
-                      <p className="text-muted-foreground">
-                        Application submitted Dec 2024, approval expected Q2 2025. This enables full exchange operations.
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="flex items-start gap-2">
-                    <Clock className="h-4 w-4 text-blue-500 mt-0.5 flex-shrink-0" />
-                    <div>
-                      <p className="font-medium text-foreground">Q4 2025: PI License</p>
-                      <p className="text-muted-foreground">
-                        Direct Payment Institution license application in progress. This reduces dependency on PSP partners.
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="flex items-start gap-2">
-                    <Clock className="h-4 w-4 text-blue-500 mt-0.5 flex-shrink-0" />
-                    <div>
-                      <p className="font-medium text-foreground">2026: Full Compliance</p>
-                      <p className="text-muted-foreground">
-                        With VASP and PI licenses, Coins will operate fully independently without reliance on third-party infrastructure.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="pt-4 border-t border-border text-sm text-muted-foreground">
-              <p>
-                <strong className="text-foreground">Regulatory Risk Mitigation:</strong> Brazil's crypto regulation is mature and stable. 
-                The Central Bank has been clear about licensing requirements since 2022. Coins' strategy is to operate compliantly under 
-                PSP partnerships while pursuing direct licenses in parallel.
-              </p>
-            </div>
-          </CardContent>
-        </Card>
-
-        {/* Nigeria Regulatory Landscape */}
-        <Card>
-          <CardHeader>
-            <div className="flex items-center gap-3">
-              <span className="text-3xl">🇳🇬</span>
-              <div>
-                <CardTitle className="text-2xl">Nigeria: Licensing in Progress</CardTitle>
-                <p className="text-sm text-muted-foreground">
-                  SEC (Securities and Exchange Commission) regulates crypto exchanges
-                </p>
-              </div>
-            </div>
-          </CardHeader>
-          <CardContent className="space-y-6">
-            <div className="grid md:grid-cols-2 gap-6">
-              <div className="space-y-4">
-                <h4 className="font-semibold text-foreground">Current Status</h4>
-                <div className="space-y-3 text-sm">
-                  <div className="flex items-start gap-2">
-                    <Clock className="h-4 w-4 text-orange-500 mt-0.5 flex-shrink-0" />
-                    <div>
-                      <p className="font-medium text-foreground">Exchange License Application</p>
-                      <p className="text-muted-foreground">
-                        Nigeria SEC requires exchange licensing. Coins submitted application in Q4 2024, approval expected Q2-Q3 2025.
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="flex items-start gap-2">
-                    <CheckCircle2 className="h-4 w-4 text-green-500 mt-0.5 flex-shrink-0" />
-                    <div>
-                      <p className="font-medium text-foreground">KYC/AML Infrastructure</p>
-                      <p className="text-muted-foreground">
-                        SmileID integration complete, compliant with Nigeria's EFCC (Economic and Financial Crimes Commission) requirements.
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="flex items-start gap-2">
-                    <CheckCircle2 className="h-4 w-4 text-green-500 mt-0.5 flex-shrink-0" />
-                    <div>
-                      <p className="font-medium text-foreground">Banking Partnerships</p>
-                      <p className="text-muted-foreground">
-                        MTN Mobile Money and Airtel Money integrations enable instant NGN on/off-ramps.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="space-y-4">
-                <h4 className="font-semibold text-foreground">Regulatory Environment</h4>
-                <div className="space-y-3 text-sm text-muted-foreground">
-                  <p>
-                    Nigeria's crypto regulation has evolved rapidly since 2021. The Central Bank initially banned crypto transactions 
-                    in 2021, then reversed the ban in 2023 after recognizing the need for regulatory frameworks instead of prohibition.
-                  </p>
-                  <p>
-                    The SEC now requires exchanges to register and comply with KYC/AML, capital requirements, and consumer protection 
-                    standards. This creates a clearer path for licensed operators like Coins.
-                  </p>
-                  <p className="pt-2 border-t border-border">
-                    <strong className="text-foreground">Timeline:</strong> Soft launch with limited users in Q1 2026, full launch 
-                    post-licensing in Q2-Q3 2026.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-
-        {/* Ghana Regulatory Landscape */}
-        <Card>
-          <CardHeader>
-            <div className="flex items-center gap-3">
-              <span className="text-3xl">🇬🇭</span>
-              <div>
-                <CardTitle className="text-2xl">Ghana: Soft Launch Approved</CardTitle>
-                <p className="text-sm text-muted-foreground">
-                  No product restrictions, full-stack deployment from day one
-                </p>
-              </div>
-            </div>
-          </CardHeader>
-          <CardContent className="space-y-6">
-            <div className="grid md:grid-cols-2 gap-6">
-              <div className="space-y-4">
-                <h4 className="font-semibold text-foreground">Current Status</h4>
-                <div className="space-y-3 text-sm">
-                  <div className="flex items-start gap-2">
-                    <CheckCircle2 className="h-4 w-4 text-green-500 mt-0.5 flex-shrink-0" />
-                    <div>
-                      <p className="font-medium text-foreground">Soft Launch Approved</p>
-                      <p className="text-muted-foreground">
-                        Ghana's SEC allows soft launches for crypto platforms. Coins can operate with full product suite while 
-                        pursuing formal licensing.
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="flex items-start gap-2">
-                    <CheckCircle2 className="h-4 w-4 text-green-500 mt-0.5 flex-shrink-0" />
-                    <div>
-                      <p className="font-medium text-foreground">Mobile Money Integration</p>
-                      <p className="text-muted-foreground">
-                        MTN Mobile Money and Vodafone Cash partnerships enable instant GHS on/off-ramps.
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="flex items-start gap-2">
-                    <Clock className="h-4 w-4 text-blue-500 mt-0.5 flex-shrink-0" />
-                    <div>
-                      <p className="font-medium text-foreground">Formal Licensing (2026)</p>
-                      <p className="text-muted-foreground">
-                        Ghana is developing a comprehensive crypto regulatory framework. Coins will apply for formal licensing 
-                        once the framework is finalized.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="space-y-4">
-                <h4 className="font-semibold text-foreground">Regulatory Environment</h4>
-                <div className="space-y-3 text-sm text-muted-foreground">
-                  <p>
-                    Ghana's approach to crypto regulation is pragmatic: allow innovation while developing frameworks. The SEC 
-                    permits soft launches with KYC/AML compliance, consumer protection, and transaction monitoring.
-                  </p>
-                  <p>
-                    This creates a favorable environment for Coins to deploy the full four-rail stack immediately, building traction 
-                    and user base while formal licensing processes are finalized.
-                  </p>
-                  <p className="pt-2 border-t border-border">
-                    <strong className="text-foreground">Timeline:</strong> Soft launch Q1 2026, formal licensing application Q2 2026, 
-                    full license expected Q4 2026.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-
-        {/* Compliance Infrastructure */}
-        <Card>
-          <CardHeader>
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-lg bg-green-500/20 flex items-center justify-center">
-                <Shield className="h-5 w-5 text-green-400" />
-              </div>
-              <div>
-                <CardTitle className="text-2xl">Compliance Infrastructure</CardTitle>
-                <p className="text-sm text-muted-foreground">
-                  How Coins ensures regulatory compliance across all markets
-                </p>
-              </div>
-            </div>
-          </CardHeader>
-          <CardContent className="space-y-6">
-            <div className="grid md:grid-cols-2 gap-6">
-              <div className="space-y-4">
-                <h4 className="font-semibold text-foreground">KYC/AML Stack</h4>
-                <ul className="space-y-2 text-sm text-muted-foreground">
-                  <li className="flex items-start gap-2">
-                    <CheckCircle2 className="h-4 w-4 text-primary mt-0.5 flex-shrink-0" />
-                    <span><strong className="text-foreground">Zoloz (Brazil):</strong> Document verification, liveness detection, AML screening</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <CheckCircle2 className="h-4 w-4 text-primary mt-0.5 flex-shrink-0" />
-                    <span><strong className="text-foreground">SmileID (Nigeria, Ghana):</strong> Local ID verification, biometric authentication</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <CheckCircle2 className="h-4 w-4 text-primary mt-0.5 flex-shrink-0" />
-                    <span><strong className="text-foreground">Transaction Monitoring:</strong> Real-time screening for suspicious activity, automated alerts</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <CheckCircle2 className="h-4 w-4 text-primary mt-0.5 flex-shrink-0" />
-                    <span><strong className="text-foreground">Regulatory Reporting:</strong> Automated reporting to COAF (Brazil), EFCC (Nigeria), SEC (Ghana)</span>
-                  </li>
-                </ul>
-              </div>
-
-              <div className="space-y-4">
-                <h4 className="font-semibold text-foreground">Data Privacy & Security</h4>
-                <ul className="space-y-2 text-sm text-muted-foreground">
-                  <li className="flex items-start gap-2">
-                    <CheckCircle2 className="h-4 w-4 text-primary mt-0.5 flex-shrink-0" />
-                    <span><strong className="text-foreground">LGPD Compliance (Brazil):</strong> Data protection law compliance, user consent management</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <CheckCircle2 className="h-4 w-4 text-primary mt-0.5 flex-shrink-0" />
-                    <span><strong className="text-foreground">NDPR Compliance (Nigeria):</strong> Nigeria Data Protection Regulation compliance</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <CheckCircle2 className="h-4 w-4 text-primary mt-0.5 flex-shrink-0" />
-                    <span><strong className="text-foreground">Encryption & Custody:</strong> End-to-end encryption, multi-sig wallets, cold storage</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <CheckCircle2 className="h-4 w-4 text-primary mt-0.5 flex-shrink-0" />
-                    <span><strong className="text-foreground">Incident Response:</strong> 24/7 security monitoring, incident response protocols</span>
-                  </li>
-                </ul>
-              </div>
-            </div>
-
-            <div className="pt-4 border-t border-border text-sm text-muted-foreground">
-              <p>
-                <strong className="text-foreground">Compliance-First Approach:</strong> Coins builds compliance infrastructure before 
-                launching in new markets. This reduces regulatory risk and positions Coins as a trusted partner for regulators and users.
-              </p>
-            </div>
-          </CardContent>
-        </Card>
-
-        {/* Regulatory Risk Assessment */}
-        <Card className="border-orange-500/30 bg-orange-500/5">
-          <CardHeader>
-            <div className="flex items-center gap-3">
-              <AlertTriangle className="h-6 w-6 text-orange-400" />
-              <div>
-                <CardTitle className="text-2xl">Regulatory Risk Assessment</CardTitle>
-                <p className="text-sm text-muted-foreground">
-                  Potential regulatory challenges and mitigation strategies
-                </p>
-              </div>
-            </div>
-          </CardHeader>
-          <CardContent className="space-y-6">
-            <div className="grid md:grid-cols-2 gap-6 text-sm">
-              <div className="space-y-4">
-                <div>
-                  <h4 className="font-semibold text-foreground mb-2">Risk: Licensing Delays</h4>
-                  <p className="text-muted-foreground mb-2">
-                    Regulatory approval processes can take longer than expected, delaying full product launches in Nigeria and Ghana.
-                  </p>
-                  <p className="text-foreground">
-                    <strong>Mitigation:</strong> Operate under PSP partnerships and soft launch approvals while pursuing direct licenses. 
-                    This allows revenue generation and user acquisition during licensing processes.
-                  </p>
-                </div>
-
-                <div>
-                  <h4 className="font-semibold text-foreground mb-2">Risk: Regulatory Changes</h4>
-                  <p className="text-muted-foreground mb-2">
-                    Crypto regulations in Global South markets are evolving. New requirements (capital, reporting, product restrictions) 
-                    could emerge.
-                  </p>
-                  <p className="text-foreground">
-                    <strong>Mitigation:</strong> Maintain close relationships with regulators, participate in industry associations, 
-                    and build flexible compliance infrastructure that can adapt to new requirements.
-                  </p>
-                </div>
-              </div>
-
-              <div className="space-y-4">
-                <div>
-                  <h4 className="font-semibold text-foreground mb-2">Risk: Banking Access</h4>
-                  <p className="text-muted-foreground mb-2">
-                    Banks in some markets are hesitant to serve crypto companies, creating friction for fiat on/off-ramps.
-                  </p>
-                  <p className="text-foreground">
-                    <strong>Mitigation:</strong> Diversify banking partnerships (multiple PSPs, Mobile Money providers) and pursue 
-                    direct PI licenses to reduce dependency on third-party banks.
-                  </p>
-                </div>
-
-                <div>
-                  <h4 className="font-semibold text-foreground mb-2">Risk: Tax Treatment Uncertainty</h4>
-                  <p className="text-muted-foreground mb-2">
-                    Tax treatment of crypto transactions varies by market and can change. This creates compliance complexity for users.
-                  </p>
-                  <p className="text-foreground">
-                    <strong>Mitigation:</strong> Provide clear transaction receipts, tax reporting tools, and work with local accountants 
-                    to educate users on tax obligations.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div className="pt-4 border-t border-border text-sm text-muted-foreground">
-              <p>
-                <strong className="text-foreground">Overall Risk Level: Medium.</strong> Brazil's regulatory environment is stable and 
-                mature. Nigeria and Ghana have evolving frameworks but are moving toward clarity. Coins' compliance-first approach and 
-                diversified partnerships reduce regulatory risk.
-              </p>
-            </div>
-          </CardContent>
-        </Card>
+              </AccordionTrigger>
+              
+              <AccordionContent className="px-6 pb-6">
+                {country.country === "Brazil" ? (
+                  <BrazilContent country={country} currencyMode={currencyMode} />
+                ) : (
+                  <PlaceholderContent country={country} />
+                )}
+              </AccordionContent>
+            </AccordionItem>
+          ))}
+        </Accordion>
       </div>
-    </DashboardLayout>
+    </div>
+  );
+}
+
+function StatusBadge({ status }: { status: string }) {
+  const config = {
+    "Active": { icon: CheckCircle2, className: "bg-green-500/10 text-green-700 dark:text-green-400 border-green-500/20" },
+    "In Progress": { icon: Clock, className: "bg-blue-500/10 text-blue-700 dark:text-blue-400 border-blue-500/20" },
+    "Planned": { icon: AlertCircle, className: "bg-yellow-500/10 text-yellow-700 dark:text-yellow-400 border-yellow-500/20" }
+  };
+  
+  const { icon: Icon, className } = config[status as keyof typeof config] || config["Planned"];
+  
+  return (
+    <Badge variant="outline" className={className}>
+      <Icon className="w-3 h-3 mr-1" />
+      {status}
+    </Badge>
+  );
+}
+
+function BrazilContent({ country, currencyMode }: { country: CountryRegulation; currencyMode: "BRL" | "USD" }) {
+  return (
+    <div className="space-y-8 mt-6">
+      {/* Executive Summary */}
+      <Card>
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2">
+            <Building2 className="w-5 h-5" />
+            Executive Summary
+          </CardTitle>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="p-4 bg-muted rounded-lg">
+              <div className="text-sm text-muted-foreground">Total Capital Required</div>
+              <div className="text-2xl font-bold mt-1">
+                {currencyMode === "BRL" ? country.totalCapitalBRL : country.totalCapitalUSD}
+              </div>
+            </div>
+            <div className="p-4 bg-muted rounded-lg">
+              <div className="text-sm text-muted-foreground">Dual Licenses</div>
+              <div className="text-2xl font-bold mt-1">VASP + IP</div>
+            </div>
+            <div className="p-4 bg-muted rounded-lg">
+              <div className="text-sm text-muted-foreground">Full Compliance</div>
+              <div className="text-2xl font-bold mt-1">Jan 2028</div>
+            </div>
+          </div>
+          
+          {country.corporateStructure && (
+            <div className="mt-4 p-4 border rounded-lg">
+              <div className="font-semibold mb-2">Corporate Structure</div>
+              <div className="text-sm text-muted-foreground mb-3">
+                Controller: <span className="font-medium text-foreground">{country.corporateStructure.controller}</span>
+              </div>
+              <div className="space-y-2">
+                {country.corporateStructure.entities.map((entity, idx) => (
+                  <div key={idx} className="flex items-start gap-2 text-sm">
+                    <div className="w-2 h-2 rounded-full bg-primary mt-1.5" />
+                    <div>
+                      <div className="font-medium">{entity.name}</div>
+                      <div className="text-muted-foreground">{entity.license}</div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+        </CardContent>
+      </Card>
+
+      {/* Capital Requirements */}
+      {country.capitalRequirements && (
+        <Card>
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <DollarSign className="w-5 h-5" />
+              Capital Requirements
+            </CardTitle>
+            <CardDescription>
+              Phased capital injection strategy coordinated with regulatory milestones
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-4">
+              {country.capitalRequirements.map((req, idx) => (
+                <div key={idx} className="p-4 border rounded-lg">
+                  <div className="flex items-start justify-between flex-wrap gap-4">
+                    <div className="flex-1 min-w-[200px]">
+                      <div className="font-semibold">{req.entity}</div>
+                      <div className="text-sm text-muted-foreground mt-1">{req.license}</div>
+                      <div className="text-sm mt-2">{req.purpose}</div>
+                    </div>
+                    <div className="text-right">
+                      <div className="text-2xl font-bold">
+                        {currencyMode === "BRL" ? req.amountBRL : req.amountUSD}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
+      )}
+
+      {/* Regulatory Timeline */}
+      {country.milestones && (
+        <Card>
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <Clock className="w-5 h-5" />
+              Regulatory Timeline
+            </CardTitle>
+            <CardDescription>
+              Two parallel authorization threads (IP + VASP) with exact dates and regulatory cutoffs
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-3">
+              {country.milestones.map((milestone, idx) => (
+                <div key={idx} className="flex flex-col md:flex-row gap-4 p-4 border rounded-lg hover:bg-muted/50 transition-colors">
+                  <div className="flex-shrink-0 md:w-32">
+                    <div className="text-sm font-medium">{milestone.date}</div>
+                    <StatusBadge status={milestone.status} />
+                  </div>
+                  <div className="flex-1">
+                    <div className="flex flex-col md:flex-row items-start justify-between gap-4">
+                      <div className="flex-1">
+                        <div className="font-semibold">{milestone.title}</div>
+                        <Badge variant="outline" className="mt-1 text-xs">
+                          {milestone.entity}
+                        </Badge>
+                        <div className="text-sm text-muted-foreground mt-2">{milestone.description}</div>
+                        <div className="text-xs text-muted-foreground mt-1 italic">
+                          Regulatory cutoff: {milestone.regulatoryCutoff}
+                        </div>
+                      </div>
+                      {milestone.amountBRL && (
+                        <div className="text-right">
+                          <div className="font-bold">
+                            {currencyMode === "BRL" ? milestone.amountBRL : milestone.amountUSD}
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
+      )}
+
+      {/* Licenses */}
+      {country.licenses && (
+        <Card>
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <FileText className="w-5 h-5" />
+              Licensing Details
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-6">
+            {country.licenses.map((license, idx) => (
+              <div key={idx} className="space-y-3">
+                <div className="flex items-start justify-between flex-wrap gap-3">
+                  <div>
+                    <h3 className="font-semibold text-lg">{license.name}</h3>
+                    <p className="text-sm text-muted-foreground">{license.type}</p>
+                  </div>
+                  <Badge>{license.status}</Badge>
+                </div>
+                <p className="text-sm">{license.description}</p>
+                
+                {license.requirements && (
+                  <div>
+                    <div className="text-sm font-medium mb-2">Requirements:</div>
+                    <ul className="space-y-1">
+                      {license.requirements.map((req, i) => (
+                        <li key={i} className="text-sm text-muted-foreground flex items-start gap-2">
+                          <CheckCircle2 className="w-4 h-4 text-green-600 mt-0.5 flex-shrink-0" />
+                          {req}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+                
+                {license.timeline && (
+                  <div className="p-3 bg-muted rounded-md">
+                    <div className="text-sm font-medium">Timeline</div>
+                    <div className="text-sm text-muted-foreground mt-1">{license.timeline}</div>
+                  </div>
+                )}
+                
+                {idx < (country.licenses?.length || 0) - 1 && <div className="border-t" />}
+              </div>
+            ))}
+          </CardContent>
+        </Card>
+      )}
+
+      {/* Compliance Infrastructure */}
+      {country.compliance && (
+        <Card>
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <Shield className="w-5 h-5" />
+              Compliance Infrastructure
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-6">
+            {/* KYC/AML */}
+            <div>
+              <h3 className="font-semibold mb-3">KYC/AML Stack</h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                {country.compliance.kycAml.map((provider, idx) => (
+                  <div key={idx} className="p-3 border rounded-lg">
+                    <div className="font-medium">{provider.name}</div>
+                    <div className="text-xs text-muted-foreground mt-1">{provider.category}</div>
+                    <div className="text-sm mt-2">{provider.purpose}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Travel Rule */}
+            {country.compliance.travelRule && (
+              <div>
+                <h3 className="font-semibold mb-2">Travel Rule Compliance</h3>
+                <p className="text-sm text-muted-foreground">{country.compliance.travelRule}</p>
+              </div>
+            )}
+
+            {/* Data Privacy */}
+            <div>
+              <h3 className="font-semibold mb-2">Data Privacy & Security</h3>
+              <ul className="space-y-1">
+                {country.compliance.dataPrivacy.map((item, idx) => (
+                  <li key={idx} className="text-sm text-muted-foreground flex items-start gap-2">
+                    <CheckCircle2 className="w-4 h-4 text-green-600 mt-0.5 flex-shrink-0" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Reporting */}
+            {country.compliance.reporting && (
+              <div>
+                <h3 className="font-semibold mb-2">Regulatory Reporting</h3>
+                <ul className="space-y-1">
+                  {country.compliance.reporting.map((item, idx) => (
+                    <li key={idx} className="text-sm text-muted-foreground flex items-start gap-2">
+                      <CheckCircle2 className="w-4 h-4 text-green-600 mt-0.5 flex-shrink-0" />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+          </CardContent>
+        </Card>
+      )}
+
+      {/* Regulatory Risks */}
+      {country.risks && (
+        <Card>
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <AlertCircle className="w-5 h-5" />
+              Regulatory Risk Assessment
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            {country.risks.map((risk, idx) => (
+              <div key={idx} className="p-4 border rounded-lg">
+                <div className="font-semibold text-red-600 dark:text-red-400">{risk.risk}</div>
+                <p className="text-sm mt-2">{risk.description}</p>
+                <div className="mt-3 p-3 bg-muted rounded-md">
+                  <div className="text-sm font-medium">Mitigation Strategy</div>
+                  <p className="text-sm text-muted-foreground mt-1">{risk.mitigation}</p>
+                </div>
+              </div>
+            ))}
+          </CardContent>
+        </Card>
+      )}
+
+      {/* Additional Notes */}
+      {country.notes && country.notes.length > 0 && (
+        <Card>
+          <CardHeader>
+            <CardTitle>Additional Notes</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <ul className="space-y-2">
+              {country.notes.map((note, idx) => (
+                <li key={idx} className="text-sm text-muted-foreground flex items-start gap-2">
+                  <div className="w-1.5 h-1.5 rounded-full bg-primary mt-2 flex-shrink-0" />
+                  {note}
+                </li>
+              ))}
+            </ul>
+          </CardContent>
+        </Card>
+      )}
+    </div>
+  );
+}
+
+function PlaceholderContent({ country }: { country: CountryRegulation }) {
+  return (
+    <div className="mt-6 p-8 border-2 border-dashed rounded-lg text-center">
+      <AlertCircle className="w-12 h-12 mx-auto text-muted-foreground mb-4" />
+      <h3 className="font-semibold text-lg mb-2">Regulatory Content In Development</h3>
+      <p className="text-sm text-muted-foreground max-w-md mx-auto">
+        Detailed regulatory information for {country.country} will be added as licensing processes progress.
+      </p>
+      {country.notes && country.notes.length > 0 && (
+        <ul className="mt-4 space-y-1 text-sm text-muted-foreground">
+          {country.notes.map((note, idx) => (
+            <li key={idx}>{note}</li>
+          ))}
+        </ul>
+      )}
+    </div>
   );
 }

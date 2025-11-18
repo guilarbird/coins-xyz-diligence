@@ -33,6 +33,7 @@ const navItems = [
   { icon: Server, label: "Infrastructure", path: "/infrastructure" },
   { icon: Users, label: "Community", path: "/community" },
   { icon: Shield, label: "Regulation", path: "/regulation" },
+  { icon: Code, label: "On-Chain Research", path: "/on-chain-research" },
   { icon: HelpCircle, label: "Investor Q&A", path: "/investor-qa" },
   { icon: Code, label: "API Documentation", path: "/api-docs" },
 ];

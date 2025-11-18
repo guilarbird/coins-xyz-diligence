@@ -230,3 +230,26 @@
 - [x] Melhorar layout com sidebar de navegação interna
 - [x] Adicionar copy button para código
 - [x] Testar e fazer commit/push
+
+
+## Regulation Page Refactor - Country Collapsible Structure
+- [ ] Acessar 3 fontes e extrair conteúdo regulatório do Brasil
+  - [ ] https://coinscapana-2asaxl4k.manus.space/
+  - [ ] https://www.base-xyz.com/
+  - [ ] https://vercel.com/coins-brasil/coins-xyz-diligence
+- [x] Criar estrutura de dados JSON para regulação por país
+- [ ] Refatorar Regulation page com Accordion collapsible
+- [ ] Brasil - Conteúdo completo:
+  - [ ] Dual licensing (PI + VASP)
+  - [ ] Capital requirements (BRL + USD)
+  - [ ] Timelines e milestones
+  - [ ] Entity names e corporate structure
+  - [ ] AML/COAF obligations
+  - [ ] KYC providers stack
+  - [ ] IN1888 compliance
+  - [ ] Data residency requirements
+  - [ ] Tabelas e sub-sections expandíveis
+- [ ] Adicionar menu item "On-Chain Research" (placeholder)
+- [ ] Implementar currency dual-display (USD primary, BRL secondary)
+- [ ] Criar placeholders para: PH, TH, NG, GH, KE, MX, AR, VN
+- [ ] Testar e fazer commit/push
