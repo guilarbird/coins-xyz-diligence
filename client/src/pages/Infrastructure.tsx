@@ -1,5 +1,5 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import DashboardLayout from "@/components/DashboardLayout";
 import { CheckCircle2, Link as LinkIcon, Eye, Handshake, Plug } from "lucide-react";
 
@@ -11,36 +11,44 @@ interface Provider {
   description: string;
 }
 
-const relationshipConfig: Record<RelationshipType, { icon: any; label: string; color: string }> = {
+const relationshipConfig: Record<RelationshipType, { icon: any; label: string; color: string; bgColor: string }> = {
   direct: {
     icon: Plug,
     label: "Direct Integration",
     color: "text-green-400",
+    bgColor: "bg-green-500/10",
   },
   strategic: {
     icon: LinkIcon,
     label: "Strategic Connectivity",
     color: "text-blue-400",
+    bgColor: "bg-blue-500/10",
   },
   counterparty: {
     icon: Handshake,
     label: "Market Counterparty",
     color: "text-purple-400",
+    bgColor: "bg-purple-500/10",
   },
   observation: {
     icon: Eye,
     label: "Ecosystem Observation",
     color: "text-orange-400",
+    bgColor: "bg-orange-500/10",
   },
 };
 
 const ecosystemLayers: {
+  id: string;
   title: string;
+  shortTitle: string;
   description: string;
   providers: Provider[];
 }[] = [
   {
-    title: "1. Banking & PSP Rails",
+    id: "banking",
+    title: "Banking & PSP Rails",
+    shortTitle: "Banking",
     description: "Fiat on/off-ramps, settlement infrastructure, and domestic payment channels",
     providers: [
       {
@@ -86,7 +94,9 @@ const ecosystemLayers: {
     ],
   },
   {
-    title: "2. Exchanges & Liquidity Venues",
+    id: "exchanges",
+    title: "Exchanges & Liquidity Venues",
+    shortTitle: "Exchanges",
     description: "Orderbook liquidity, hedging counterparties, and market-making infrastructure",
     providers: [
       {
@@ -117,7 +127,9 @@ const ecosystemLayers: {
     ],
   },
   {
-    title: "3. Stablecoin Issuers & FX Infrastructure",
+    id: "stablecoins",
+    title: "Stablecoin Issuers & FX Infrastructure",
+    shortTitle: "Stablecoins",
     description: "Stablecoin minting/redemption, treasury management, and settlement rails",
     providers: [
       {
@@ -148,7 +160,9 @@ const ecosystemLayers: {
     ],
   },
   {
-    title: "4. KYC/AML & Compliance",
+    id: "compliance",
+    title: "KYC/AML & Compliance",
+    shortTitle: "Compliance",
     description: "Identity verification, transaction monitoring, and regulatory reporting",
     providers: [
       {
@@ -174,7 +188,9 @@ const ecosystemLayers: {
     ],
   },
   {
-    title: "5. OTC & Brokerage Counterparties",
+    id: "otc",
+    title: "OTC & Brokerage Counterparties",
+    shortTitle: "OTC",
     description: "Large-ticket RFQ execution, institutional FX, and treasury services",
     providers: [
       {
@@ -211,32 +227,10 @@ const ecosystemLayers: {
   },
 ];
 
-function ProviderCard({ provider }: { provider: Provider }) {
-  const config = relationshipConfig[provider.relationship];
-  const Icon = config.icon;
-
-  return (
-    <div className="flex items-start gap-3 p-3 rounded-lg bg-accent/30 hover:bg-accent/50 transition-colors">
-      <div className={`w-10 h-10 rounded-lg bg-background flex items-center justify-center flex-shrink-0 ${config.color}`}>
-        <Icon className="h-5 w-5" />
-      </div>
-      <div className="flex-1 min-w-0">
-        <div className="flex items-center gap-2 mb-1 flex-wrap">
-          <p className="font-semibold text-foreground">{provider.name}</p>
-          <span className={`text-xs px-2 py-0.5 rounded-full bg-background ${config.color}`}>
-            {config.label}
-          </span>
-        </div>
-        <p className="text-sm text-muted-foreground">{provider.description}</p>
-      </div>
-    </div>
-  );
-}
-
 export default function Infrastructure() {
   return (
     <DashboardLayout>
-      <div className="p-6 space-y-12">
+      <div className="p-6 space-y-8">
         {/* Header */}
         <div className="space-y-4">
           <h1 className="text-4xl md:text-5xl font-bold">
@@ -250,63 +244,85 @@ export default function Infrastructure() {
         </div>
 
         {/* Relationship Legend */}
-        <Card className="bg-accent/20 border-primary/20">
-          <CardHeader>
-            <CardTitle className="text-xl">Relationship Classifications</CardTitle>
-            <p className="text-sm text-muted-foreground pt-2">
-              Each provider is classified by the depth and nature of our relationship:
-            </p>
-          </CardHeader>
-          <CardContent>
-            <div className="grid md:grid-cols-2 gap-4">
-              {Object.entries(relationshipConfig).map(([key, config]) => {
-                const Icon = config.icon;
-                return (
-                  <div key={key} className="flex items-start gap-3">
-                    <div className={`w-10 h-10 rounded-lg bg-background flex items-center justify-center flex-shrink-0 ${config.color}`}>
-                      <Icon className="h-5 w-5" />
-                    </div>
-                    <div>
-                      <p className={`font-semibold ${config.color}`}>{config.label}</p>
-                      <p className="text-sm text-muted-foreground">
-                        {key === "direct" && "API-level integration, contractual SLA, critical dependency"}
-                        {key === "strategic" && "Partnership agreement, shared roadmap, mutual referrals"}
-                        {key === "counterparty" && "Transactional relationship, no exclusive agreement"}
-                        {key === "observation" && "Monitoring for future integration, no active relationship"}
-                      </p>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-          </CardContent>
-        </Card>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+          {Object.entries(relationshipConfig).map(([key, config]) => {
+            const Icon = config.icon;
+            return (
+              <div key={key} className={`p-3 rounded-lg border ${config.bgColor} border-border`}>
+                <div className="flex items-center gap-2 mb-1">
+                  <Icon className={`h-4 w-4 ${config.color}`} />
+                  <span className={`text-xs font-semibold ${config.color}`}>{config.label}</span>
+                </div>
+                <p className="text-xs text-muted-foreground">
+                  {key === "direct" && "API integration, SLA"}
+                  {key === "strategic" && "Partnership, shared roadmap"}
+                  {key === "counterparty" && "Transactional relationship"}
+                  {key === "observation" && "Monitoring for future"}
+                </p>
+              </div>
+            );
+          })}
+        </div>
 
-        {/* Ecosystem Layers - Accordion */}
-        <Accordion type="single" collapsible className="space-y-4">
-          {ecosystemLayers.map((layer, idx) => (
-            <AccordionItem key={idx} value={`layer-${idx}`} className="border rounded-lg">
-              <AccordionTrigger className="px-6 hover:no-underline">
-                <div className="flex items-center gap-4 text-left">
-                  <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
-                    <span className="text-xl font-bold text-primary">{idx + 1}</span>
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-semibold text-foreground">{layer.title}</h3>
-                    <p className="text-sm text-muted-foreground">{layer.description}</p>
-                  </div>
-                </div>
-              </AccordionTrigger>
-              <AccordionContent className="px-6 pb-6">
-                <div className="grid md:grid-cols-2 gap-4 mt-4">
-                  {layer.providers.map((provider, pIdx) => (
-                    <ProviderCard key={pIdx} provider={provider} />
-                  ))}
-                </div>
-              </AccordionContent>
-            </AccordionItem>
+        {/* Tabs for Layers */}
+        <Tabs defaultValue="banking" className="w-full">
+          <TabsList className="grid w-full grid-cols-5 mb-8">
+            {ecosystemLayers.map((layer, idx) => (
+              <TabsTrigger key={layer.id} value={layer.id} className="text-xs md:text-sm">
+                <span className="hidden md:inline">{layer.shortTitle}</span>
+                <span className="md:hidden">{idx + 1}</span>
+              </TabsTrigger>
+            ))}
+          </TabsList>
+
+          {ecosystemLayers.map((layer) => (
+            <TabsContent key={layer.id} value={layer.id} className="space-y-6">
+              {/* Layer Header */}
+              <div className="text-center space-y-2 pb-4 border-b">
+                <h2 className="text-2xl md:text-3xl font-bold">{layer.title}</h2>
+                <p className="text-muted-foreground">{layer.description}</p>
+              </div>
+
+              {/* Providers Table */}
+              <div className="overflow-x-auto">
+                <table className="w-full">
+                  <thead>
+                    <tr className="border-b">
+                      <th className="text-left p-3 font-semibold">Provider</th>
+                      <th className="text-left p-3 font-semibold hidden md:table-cell">Relationship</th>
+                      <th className="text-left p-3 font-semibold">Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {layer.providers.map((provider, idx) => {
+                      const config = relationshipConfig[provider.relationship];
+                      const Icon = config.icon;
+                      return (
+                        <tr key={idx} className="border-b hover:bg-accent/50 transition-colors">
+                          <td className="p-3">
+                            <div className="font-semibold text-foreground">{provider.name}</div>
+                            <div className="md:hidden mt-1">
+                              <span className={`text-xs px-2 py-0.5 rounded-full ${config.bgColor} ${config.color}`}>
+                                {config.label}
+                              </span>
+                            </div>
+                          </td>
+                          <td className="p-3 hidden md:table-cell">
+                            <div className="flex items-center gap-2">
+                              <Icon className={`h-4 w-4 ${config.color}`} />
+                              <span className={`text-sm ${config.color}`}>{config.label}</span>
+                            </div>
+                          </td>
+                          <td className="p-3 text-sm text-muted-foreground">{provider.description}</td>
+                        </tr>
+                      );
+                    })}
+                  </tbody>
+                </table>
+              </div>
+            </TabsContent>
           ))}
-        </Accordion>
+        </Tabs>
 
         {/* Strategic Insights */}
         <Card className="bg-primary/5 border-primary/30">
@@ -349,31 +365,8 @@ export default function Infrastructure() {
                 </p>
               </div>
             </div>
-
-            <div className="flex items-start gap-3">
-              <CheckCircle2 className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
-              <div>
-                <p className="font-semibold text-foreground mb-1">12-Week Market Entry Timeline</p>
-                <p>
-                  Because the ecosystem structure is standardized, Coins can deploy to new markets in 12 weeks: 
-                  Week 1-3 (KYC/AML setup), Week 4-6 (PSP integration), Week 7-9 (exchange liquidity), Week 10-12 
-                  (OTC partnerships). Brazil took 18 months to build; Nigeria and Ghana take 12 weeks to replicate.
-                </p>
-              </div>
-            </div>
           </CardContent>
         </Card>
-
-        {/* Disclaimer */}
-        <div className="p-4 rounded-lg bg-accent/50 text-xs text-muted-foreground border border-border">
-          <p>
-            <strong className="text-foreground">Disclaimer:</strong> Provider relationships are subject to change. 
-            "Direct Integration" and "Strategic Connectivity" classifications reflect contractual agreements as of 
-            November 2024. "Market Counterparty" and "Ecosystem Observation" classifications reflect transactional 
-            relationships with no exclusivity. This ecosystem map is for due diligence purposes and does not constitute 
-            an endorsement or recommendation of any provider.
-          </p>
-        </div>
       </div>
     </DashboardLayout>
   );
