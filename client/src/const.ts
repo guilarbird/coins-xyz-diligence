@@ -1,8 +1,10 @@
-export { COOKIE_NAME, ONE_YEAR_MS } from "@shared/const";
+// Constants previously imported from shared
+export const COOKIE_NAME = "app_session_id";
+export const ONE_YEAR_MS = 1000 * 60 * 60 * 24 * 365;
 
-export const APP_TITLE = import.meta.env.VITE_APP_TITLE || "App";
+export const APP_TITLE = import.meta.env.VITE_APP_TITLE || "Coins.xyz - Investor Due Diligence";
 
-export const APP_LOGO = "https://placehold.co/128x128/E1E7EF/1F2937?text=App";
+export const APP_LOGO = "https://placehold.co/128x128/3B82F6/FFFFFF?text=Coins.xyz";
 
 // Generate login URL at runtime so redirect URI reflects the current origin.
 export const getLoginUrl = () => {
