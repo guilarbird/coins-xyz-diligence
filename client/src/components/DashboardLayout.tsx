@@ -40,11 +40,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
         {/* Logo */}
         <div className="p-6 border-b border-border">
           <div className="flex items-center gap-3">
-            <img src={APP_LOGO} alt={APP_TITLE} className="h-8 w-8" />
-            <div>
-              <h1 className="text-lg font-bold text-foreground">coins.xyz</h1>
-              <p className="text-xs text-muted-foreground">Investor Due Diligence</p>
-            </div>
+            <img src={APP_LOGO} alt={APP_TITLE} className="h-8 w-auto" />
           </div>
         </div>
 

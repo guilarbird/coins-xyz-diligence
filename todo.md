@@ -31,3 +31,7 @@
 - [x] Criar página Competitive Landscape com análise de players brasileiros
 - [x] Adicionar tabela comparativa de exchanges e fintechs
 - [x] Incluir análise de licenciamento e regulação dos competidores
+
+## Branding
+- [x] Adicionar logos oficiais da Coins.xyz (white e black wordmark)
+- [x] Atualizar DashboardLayout com logo correto
