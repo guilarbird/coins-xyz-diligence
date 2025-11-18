@@ -1,0 +1,17 @@
+{
+  "query": "SELECT id, email, passwordHash, mustChangePassword, approvalStatus FROM users WHERE email = 'gui@coins.ph' LIMIT 1;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 2su1zeGdNwQU7bm.root --database YYhw4awnruAaQ6YohF6jp8 --execute SELECT id, email, passwordHash, mustChangePassword, approvalStatus FROM users WHERE email = 'gui@coins.ph' LIMIT 1;",
+  "rows": [
+    {
+      "id": "1",
+      "email": "gui@coins.ph",
+      "passwordHash": "NULL",
+      "mustChangePassword": "0",
+      "approvalStatus": "pending"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\temail\tpasswordHash\tmustChangePassword\tapprovalStatus\n1\tgui@coins.ph\tNULL\t0\tpending\n",
+  "stderr": "",
+  "execution_time_ms": 206
+}

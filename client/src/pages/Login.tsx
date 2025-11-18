@@ -17,10 +17,12 @@ export default function Login() {
   const [isLoading, setIsLoading] = useState(false);
 
   const loginMutation = trpc.auth.login.useMutation({
-    onSuccess: () => {
+    onSuccess: (data) => {
+      console.log("[Login] onSuccess called with data:", data);
       window.location.href = "/"; // Full page reload to refresh auth state
     },
     onError: (err) => {
+      console.error("[Login] onError called:", err);
       setError(err.message);
       setIsLoading(false);
     },
@@ -30,8 +32,10 @@ export default function Login() {
     e.preventDefault();
     setError("");
     setIsLoading(true);
+    console.log("[Login] handleSubmit called", { email });
 
     loginMutation.mutate({ email, password });
+    console.log("[Login] mutation.mutate() called");
   };
 
   return (

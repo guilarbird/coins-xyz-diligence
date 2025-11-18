@@ -78,3 +78,9 @@
 - [ ] Adicionar visualização de logs no admin panel
 - [ ] Adicionar reset de senha pelo admin
 - [ ] Mostrar usuários ativos e último login
+
+## Authentication Debug & Fixes
+- [ ] Adicionar gui@coins.ph e gui@coins.xyz ao whitelist
+- [ ] Debugar erro "Invalid email or password" no login
+- [ ] Verificar redirecionamento para change-password após login com senha padrão
+- [ ] Testar fluxo completo de signup → login → change password

@@ -41,6 +41,22 @@ async function isEmailApproved(email: string): Promise<boolean> {
  */
 export const authRouter = router({
   /**
+   * Get current user
+   */
+  me: publicProcedure.query(opts => opts.ctx.user),
+  
+  /**
+   * Logout
+   */
+  logout: publicProcedure.mutation(({ ctx }) => {
+    const cookieOptions = getSessionCookieOptions(ctx.req);
+    ctx.res.clearCookie(COOKIE_NAME, { ...cookieOptions, maxAge: -1 });
+    return {
+      success: true,
+    } as const;
+  }),
+
+  /**
    * Register new user with email/password
    * - If email is whitelisted → auto-approve
    * - If not whitelisted → create with pending status
@@ -131,6 +147,8 @@ export const authRouter = router({
       const { email, password } = input;
       const emailLower = email.toLowerCase();
 
+      console.log("[Login] Attempting login for:", emailLower);
+
       // Find user
       const db = await getDb();
       if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database unavailable" });
@@ -140,15 +158,29 @@ export const authRouter = router({
         .where(eq(users.email, emailLower))
         .limit(1);
 
-      if (!user || !user.passwordHash) {
+      if (!user) {
+        console.log("[Login] User not found:", emailLower);
         throw new TRPCError({
           code: "UNAUTHORIZED",
           message: "Invalid email or password",
         });
       }
 
+      if (!user.passwordHash) {
+        console.log("[Login] User has no password hash:", emailLower);
+        throw new TRPCError({
+          code: "UNAUTHORIZED",
+          message: "Invalid email or password",
+        });
+      }
+
+      console.log("[Login] User found:", { email: user.email, hasPassword: !!user.passwordHash, approvalStatus: user.approvalStatus });
+
       // Verify password
+      console.log("[Login] Comparing password...");
       const isValid = await bcrypt.compare(password, user.passwordHash);
+      console.log("[Login] Password valid:", isValid);
+      
       if (!isValid) {
         throw new TRPCError({
           code: "UNAUTHORIZED",
@@ -179,7 +211,11 @@ export const authRouter = router({
 
       // Set session cookie (reuse existing OAuth cookie mechanism)
       const cookieOptions = getSessionCookieOptions(ctx.req);
+      console.log("[Login] Cookie options:", JSON.stringify(cookieOptions));
+      console.log("[Login] Setting cookie:", COOKIE_NAME, "=", user.openId);
       ctx.res.cookie(COOKIE_NAME, user.openId, cookieOptions);
+
+      console.log("[Login] Login successful for:", user.email, "| Must change password:", user.mustChangePassword);
 
       return {
         success: true,

@@ -12,6 +12,8 @@ const WHITELIST_EMAILS = [
   "daniel.hott@coins.ph",
   "ding@coins.ph",
   "ding@coins.xyz",
+  "gui@coins.ph",
+  "gui@coins.xyz",
 ];
 
 async function addWhitelistEmails() {
