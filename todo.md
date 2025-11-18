@@ -100,3 +100,8 @@
 ## Password Input Fix
 - [x] Permitir paste (colar) no campo de senha
 - [x] Testar e fazer deploy
+
+## URL Change
+- [x] Mudar rota de /simple-login para /investor-access
+- [x] Atualizar redirects no SimpleAuthGuard
+- [ ] Testar e fazer deploy

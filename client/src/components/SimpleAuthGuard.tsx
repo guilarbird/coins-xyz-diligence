@@ -7,7 +7,7 @@ export function SimpleAuthGuard({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     const isAuthenticated = localStorage.getItem("coins_auth") === "authenticated";
     if (!isAuthenticated) {
-      setLocation("/simple-login");
+      setLocation("/investor-access");
     }
   }, [setLocation]);
 

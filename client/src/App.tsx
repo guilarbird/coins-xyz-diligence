@@ -32,7 +32,7 @@ function Router() {
   return (
     <Switch>
       {/* Public auth routes */}
-      <Route path="/simple-login" component={SimpleLogin} />
+      <Route path="/investor-access" component={SimpleLogin} />
       <Route path="/signup" component={Signup} />
       <Route path="/request-access" component={RequestAccess} />
       <Route path="/change-password" component={ChangePassword} />
