@@ -128,3 +128,32 @@
 - [x] Ajustar cores CSS para light theme no index.css
 - [x] Garantir contraste adequado em ambos os temas
 - [x] Testar todas as páginas em light e dark mode
+
+
+## Blueprint Page Refactor - Three Operating Systems (Nov 18, 2025)
+
+### Section 1: Brazil Built Three Operating Systems
+- [x] Criar seção introdutória explicando os 3 Operating Systems
+- [x] Exchange OS (B2C): spot engine, retail KYC, liquidity, community, MOS, app-first UX
+- [x] Payments OS (B2B): Business Portal, backoffice, merchant KYC, Collect→Convert→Settle, PIX/PSP, pricing engine
+- [x] OTC OS (Institutional): RFQ engine, lock-in window D0/D1/D2, institutional liquidity, Travel Rule, China corridor
+
+### Section 2: Why Brazil Is the Prototype
+- [x] Explicar por que Brasil foi escolhido (não aleatório)
+- [x] Listar condições específicas: PIX, stablecoin adoption, FX volatility, SME import/export, creator culture
+- [x] Conectar com 4-rail flywheel end-to-end
+
+### Section 3: How These OS Replicate in New Markets
+- [x] Exchange OS replication requirements
+- [x] Payments OS replication requirements
+- [x] OTC OS replication requirements
+
+### Section 4: 12-Week Market Replication Framework
+- [x] Inserir framework completo de 12 semanas (Layers A-C)
+- [x] Detalhar milestones e dependências
+
+### Layout & UX
+- [x] Card-based layout para os 3 Operating Systems
+- [x] Adicionar ícones para Exchange, Payments, OTC
+- [x] Garantir responsividade mobile
+- [x] Tom institucional e investor-grade

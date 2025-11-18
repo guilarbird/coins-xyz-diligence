@@ -1,6 +1,137 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import DashboardLayout from "@/components/DashboardLayout";
-import { CheckCircle2, ArrowRight, Zap, Shield, Globe, TrendingUp, Building2, Users } from "lucide-react";
+import { TrendingUp, Building2, Briefcase, CheckCircle2, ArrowRight, Globe } from "lucide-react";
+
+const operatingSystems = [
+  {
+    title: "Exchange OS (B2C)",
+    icon: TrendingUp,
+    color: "text-blue-400",
+    bgColor: "bg-blue-500/10",
+    borderColor: "border-blue-500/20",
+    components: [
+      "Spot engine (orderbook)",
+      "Retail KYC tiers (L1/L2/L3)",
+      "Liquidity provisioning",
+      "Community layer (creators, ambassadors, Web3 culture)",
+      "Growth + Performance teams",
+      "MOS (Marketing Operating System)",
+      "App-first UX",
+    ],
+  },
+  {
+    title: "Payments OS (B2B)",
+    icon: Building2,
+    color: "text-green-400",
+    bgColor: "bg-green-500/10",
+    borderColor: "border-green-500/20",
+    components: [
+      "Business Portal",
+      "Backoffice/Admin system",
+      "Merchant KYC/AML",
+      "Collect → Convert → Settle flow",
+      "PIX/PSP integrations",
+      "Pricing engine for spreads",
+      "Reporting & reconciliation",
+      "Treasury settlement logic",
+    ],
+  },
+  {
+    title: "OTC OS (Institutional)",
+    icon: Briefcase,
+    color: "text-purple-400",
+    bgColor: "bg-purple-500/10",
+    borderColor: "border-purple-500/20",
+    components: [
+      "RFQ engine",
+      "Lock-in window (D0/D1/D2) with 16:00 cutoff",
+      "Institutional liquidity network (crypto + fiat)",
+      "Counterparty onboarding",
+      "Treasury accounts (BRL/USDT)",
+      "Travel Rule enforcement",
+      "China corridor execution",
+    ],
+  },
+];
+
+const replicationRequirements = [
+  {
+    os: "Exchange OS",
+    icon: TrendingUp,
+    color: "text-blue-400",
+    requirements: [
+      "KYC provider (Zoloz, SmileID, Sumsub)",
+      "Liquidity venues (Binance, Bybit, local exchanges)",
+      "Community/creator ecosystem",
+      "Regulatory clarity for retail trading",
+    ],
+  },
+  {
+    os: "Payments OS",
+    icon: Building2,
+    color: "text-green-400",
+    requirements: [
+      "Instant local rails (PIX/Mobile Money/ACH)",
+      "PSP partners (Transfeera, Flutterwave, Paystack)",
+      "Merchant onboarding flows",
+      "Settlement infrastructure",
+    ],
+  },
+  {
+    os: "OTC OS",
+    icon: Briefcase,
+    color: "text-purple-400",
+    requirements: [
+      "Institutional counterparties (BlockFills, B2C2, local OTC desks)",
+      "Regulated FX pathways",
+      "Ability to lock quotes + settle D0/D1/D2",
+      "Travel Rule infrastructure",
+    ],
+  },
+];
+
+const weeklyTimeline = [
+  {
+    week: "Week 1-3",
+    layer: "Layer A: Compliance Foundation",
+    tasks: [
+      "KYC/AML provider integration (Zoloz for LatAm, SmileID for Africa)",
+      "Travel Rule setup for institutional flows",
+      "Regulatory entity registration (if required)",
+      "AML monitoring dashboard configuration",
+    ],
+  },
+  {
+    week: "Week 4-6",
+    layer: "Layer B: Payment Rails",
+    tasks: [
+      "PSP integration (PIX for Brazil, Mobile Money for Africa)",
+      "Fiat on/off-ramp testing",
+      "Settlement reconciliation logic",
+      "Treasury account setup (local currency + USDT)",
+    ],
+  },
+  {
+    week: "Week 7-9",
+    layer: "Layer C: Liquidity & Exchange",
+    tasks: [
+      "Exchange API integration (Binance, local venues)",
+      "Orderbook configuration for local pairs (e.g., NGN-USDT, GHS-USDT)",
+      "Liquidity depth testing",
+      "Spread optimization for local market conditions",
+    ],
+  },
+  {
+    week: "Week 10-12",
+    layer: "Launch Preparation",
+    tasks: [
+      "OTC RFQ engine deployment",
+      "Business Portal onboarding (first 10 merchants)",
+      "Community activation (creators, ambassadors)",
+      "Soft launch with limited user cohort",
+    ],
+  },
+];
 
 export default function Blueprint() {
   return (
@@ -12,514 +143,258 @@ export default function Blueprint() {
             Blueprint: Brazil → Global South
           </h1>
           <p className="text-xl text-muted-foreground max-w-3xl">
-            Brazil is the prototype that proves the four-rail model works in Global South markets. What we built in Brazil 
-            from 2022-2025 is now replicating in Nigeria and Ghana. This is the blueprint.
+            Brazil was not a pilot—it was the **prototype**. We built three operating systems in parallel, 
+            stress-tested them under real market conditions, and created a replicable blueprint for Nigeria, 
+            Ghana, and beyond.
           </p>
         </div>
 
-        {/* Why Brazil is the Blueprint */}
-        <Card className="border-primary/30 bg-primary/5">
-          <CardHeader>
-            <CardTitle className="text-2xl">What Makes Brazil the Blueprint?</CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-6">
+        {/* Section 1: Three Operating Systems */}
+        <div className="space-y-6">
+          <div>
+            <h2 className="text-3xl font-bold mb-2">Brazil Built Three Operating Systems</h2>
             <p className="text-muted-foreground">
-              Brazil wasn't chosen randomly. It has the <strong className="text-foreground">exact conditions</strong> that make 
-              the four-rail model viable: advanced payment infrastructure, regulatory clarity, high stablecoin adoption, and 
-              dollar demand driven by FX volatility. These conditions exist in other Global South markets—Nigeria, Ghana, and 
-              eventually others—which is why the blueprint transfers.
+              These three OS modules work independently but compound when integrated. Together, they form 
+              the four-rail flywheel that differentiates Coins from single-product competitors.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-6">
+            {operatingSystems.map((os, idx) => {
+              const Icon = os.icon;
+              return (
+                <Card key={idx} className={`${os.borderColor}`}>
+                  <CardHeader>
+                    <div className={`w-12 h-12 rounded-lg ${os.bgColor} flex items-center justify-center mb-3`}>
+                      <Icon className={`h-6 w-6 ${os.color}`} />
+                    </div>
+                    <CardTitle className="text-xl">{os.title}</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <ul className="space-y-2">
+                      {os.components.map((component, cIdx) => (
+                        <li key={cIdx} className="flex items-start gap-2 text-sm">
+                          <CheckCircle2 className={`h-4 w-4 mt-0.5 flex-shrink-0 ${os.color}`} />
+                          <span className="text-muted-foreground">{component}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </CardContent>
+                </Card>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Section 2: Why Brazil Is the Prototype */}
+        <Card className="bg-primary/5 border-primary/30">
+          <CardHeader>
+            <CardTitle className="text-2xl">Why Brazil Is the Prototype</CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-4 text-sm text-muted-foreground">
+            <p className="text-foreground font-semibold">
+              Brazil was not chosen randomly. It has the exact conditions to build three operating systems at once:
             </p>
 
-            <div className="grid md:grid-cols-2 gap-6">
-              <div className="space-y-4">
-                <div className="flex items-start gap-3">
-                  <div className="w-10 h-10 rounded-lg bg-blue-500/20 flex items-center justify-center flex-shrink-0">
-                    <Zap className="h-5 w-5 text-blue-400" />
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-foreground mb-1">PIX: Instant Payment Rails</h4>
-                    <p className="text-sm text-muted-foreground">
-                      Brazil's PIX system (launched 2020) enables instant, 24/7, zero-fee transfers between any bank accounts. 
-                      This infrastructure makes fiat on/off-ramps seamless for the Exchange and Payments rails. Nigeria and Ghana 
-                      have Mobile Money equivalents (MTN, Airtel) that replicate this.
-                    </p>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-3">
-                  <div className="w-10 h-10 rounded-lg bg-green-500/20 flex items-center justify-center flex-shrink-0">
-                    <Shield className="h-5 w-5 text-green-400" />
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-foreground mb-1">Regulatory Clarity</h4>
-                    <p className="text-sm text-muted-foreground">
-                      Brazil's Central Bank (BCB) established clear crypto regulation with PI (Payment Institution) and VASP 
-                      (Virtual Asset Service Provider) licensing frameworks. This allows Coins to operate compliantly while 
-                      building toward full licensing. Nigeria and Ghana have similar frameworks emerging.
-                    </p>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-3">
-                  <div className="w-10 h-10 rounded-lg bg-purple-500/20 flex items-center justify-center flex-shrink-0">
-                    <TrendingUp className="h-5 w-5 text-purple-400" />
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-foreground mb-1">Stablecoin Penetration</h4>
-                    <p className="text-sm text-muted-foreground">
-                      USDT and USDC are widely adopted in Brazil for remittances, import/export, and treasury management. 
-                      This existing adoption means Coins doesn't need to educate the market—users already understand stablecoins. 
-                      Nigeria has even higher stablecoin adoption.
-                    </p>
-                  </div>
+            <div className="grid md:grid-cols-2 gap-4">
+              <div className="flex items-start gap-3">
+                <CheckCircle2 className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
+                <div>
+                  <p className="font-semibold text-foreground mb-1">Instant Payments (PIX)</p>
+                  <p>
+                    PIX processes 3.9 billion transactions per month, making it the fastest-growing instant payment 
+                    system globally. This enables the Payments OS to operate with sub-10-second settlement.
+                  </p>
                 </div>
               </div>
 
-              <div className="space-y-4">
-                <div className="flex items-start gap-3">
-                  <div className="w-10 h-10 rounded-lg bg-orange-500/20 flex items-center justify-center flex-shrink-0">
-                    <Globe className="h-5 w-5 text-orange-400" />
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-foreground mb-1">FX Volatility & Dollar Demand</h4>
-                    <p className="text-sm text-muted-foreground">
-                      BRL devaluation (2020-2024) drove demand for dollar-denominated assets. Importers, exporters, and corporates 
-                      use USDT to hedge FX risk and settle cross-border payments. This same dynamic exists in Nigeria (NGN), Ghana (GHS), 
-                      and Argentina (ARS).
-                    </p>
-                  </div>
+              <div className="flex items-start gap-3">
+                <CheckCircle2 className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
+                <div>
+                  <p className="font-semibold text-foreground mb-1">High Stablecoin Adoption</p>
+                  <p>
+                    Brazil accounts for 18% of global USDT volume (Chainalysis 2024). Retail users, SMEs, and 
+                    institutions already understand stablecoins—no education layer required.
+                  </p>
                 </div>
+              </div>
 
-                <div className="flex items-start gap-3">
-                  <div className="w-10 h-10 rounded-lg bg-pink-500/20 flex items-center justify-center flex-shrink-0">
-                    <Building2 className="h-5 w-5 text-pink-400" />
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-foreground mb-1">Import/Export Corridors</h4>
-                    <p className="text-sm text-muted-foreground">
-                      Brazil–China trade flows create natural OTC demand: importers pay Chinese suppliers in USDT, bypassing slow 
-                      correspondent banking. Nigeria and Ghana have similar China corridors, plus intra-Africa trade that benefits 
-                      from stablecoin settlement.
-                    </p>
-                  </div>
+              <div className="flex items-start gap-3">
+                <CheckCircle2 className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
+                <div>
+                  <p className="font-semibold text-foreground mb-1">FX Volatility + Dollar Demand</p>
+                  <p>
+                    BRL devalued 22% against USD in 2024. Importers, exporters, and treasury managers need 
+                    dollar-denominated settlement to hedge FX risk—this is the OTC OS use case.
+                  </p>
                 </div>
+              </div>
 
-                <div className="flex items-start gap-3">
-                  <div className="w-10 h-10 rounded-lg bg-cyan-500/20 flex items-center justify-center flex-shrink-0">
-                    <Users className="h-5 w-5 text-cyan-400" />
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-foreground mb-1">Fragmented Competition</h4>
-                    <p className="text-sm text-muted-foreground">
-                      Brazil has single-rail players (Mercado Bitcoin for Exchange, Transfero for OTC, Braza for OCBS) but no 
-                      full-stack competitor. This fragmentation creates an opening for Coins to capture cross-rail flows. Nigeria 
-                      and Ghana have even less competition.
-                    </p>
-                  </div>
+              <div className="flex items-start gap-3">
+                <CheckCircle2 className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
+                <div>
+                  <p className="font-semibold text-foreground mb-1">Large SME Import/Export Base</p>
+                  <p>
+                    Brazil imports $280B annually, with 68% sourced from China. The China corridor (BRL → USDT → CNY) 
+                    is the primary use case for OTC and OCBS.
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-3">
+                <CheckCircle2 className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
+                <div>
+                  <p className="font-semibold text-foreground mb-1">Creator-Driven Culture</p>
+                  <p>
+                    Brazil has the 3rd largest creator economy globally (YouTube, Instagram, TikTok). Creators 
+                    act as last-mile distribution for the Exchange OS, driving retail adoption.
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-3">
+                <CheckCircle2 className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
+                <div>
+                  <p className="font-semibold text-foreground mb-1">4-Rail Flywheel Operates End-to-End</p>
+                  <p>
+                    These five conditions allow Exchange, Payments, OTC, and OCBS to run simultaneously. 
+                    This is why Brazil is the blueprint—not because it's large, but because it's **complete**.
+                  </p>
                 </div>
               </div>
             </div>
           </CardContent>
         </Card>
 
-        {/* BRL-USDT Corridor Advantage */}
-        <Card>
-          <CardHeader>
-            <CardTitle className="text-2xl">The BRL–USDT Corridor Advantage</CardTitle>
-            <p className="text-sm text-muted-foreground">
-              How Coins enables highly efficient regulated FX structures for global treasuries
-            </p>
-          </CardHeader>
-          <CardContent className="space-y-6">
+        {/* Section 3: How These OS Replicate in New Markets */}
+        <div className="space-y-6">
+          <div>
+            <h2 className="text-3xl font-bold mb-2">How These OS Replicate in New Markets</h2>
             <p className="text-muted-foreground">
-              The BRL–USDT corridor is the core of Coins' value proposition in Brazil. Global treasuries, importers, and corporates 
-              need to move value between Brazilian Reais and US Dollars (or dollar-denominated stablecoins) with minimal friction, 
-              cost, and settlement delay. Legacy correspondent banking takes 3-7 days and incurs multiple intermediary fees. 
-              Coins compresses this to <strong className="text-foreground">minutes</strong> with <strong className="text-foreground">highly 
-              efficient regulated structures</strong>.
+              Each operating system has specific replication requirements. Nigeria and Ghana meet these requirements; 
+              Argentina and Mexico do not (yet).
             </p>
+          </div>
 
-            <div className="grid md:grid-cols-3 gap-4">
-              <Card className="bg-accent/50">
-                <CardHeader>
-                  <CardTitle className="text-lg">Legacy Banking</CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-2 text-sm text-muted-foreground">
-                  <p>• 3-7 day settlement</p>
-                  <p>• Multiple intermediary fees</p>
-                  <p>• Correspondent banking friction</p>
-                  <p>• Limited transparency</p>
-                  <p>• High minimum ticket sizes</p>
-                </CardContent>
-              </Card>
+          <div className="grid md:grid-cols-3 gap-6">
+            {replicationRequirements.map((req, idx) => {
+              const Icon = req.icon;
+              return (
+                <Card key={idx} className="border-primary/20">
+                  <CardHeader>
+                    <div className="flex items-center gap-3 mb-2">
+                      <Icon className={`h-5 w-5 ${req.color}`} />
+                      <CardTitle className="text-lg">{req.os} Replication</CardTitle>
+                    </div>
+                  </CardHeader>
+                  <CardContent>
+                    <ul className="space-y-2">
+                      {req.requirements.map((requirement, rIdx) => (
+                        <li key={rIdx} className="flex items-start gap-2 text-sm">
+                          <ArrowRight className={`h-4 w-4 mt-0.5 flex-shrink-0 ${req.color}`} />
+                          <span className="text-muted-foreground">{requirement}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </CardContent>
+                </Card>
+              );
+            })}
+          </div>
+        </div>
 
-              <Card className="bg-primary/10 border-primary/30">
-                <CardHeader>
-                  <CardTitle className="text-lg text-primary">Coins BRL–USDT</CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-2 text-sm">
-                  <p className="flex items-center gap-2">
-                    <CheckCircle2 className="h-4 w-4 text-primary" />
-                    <span>Minutes to settle</span>
-                  </p>
-                  <p className="flex items-center gap-2">
-                    <CheckCircle2 className="h-4 w-4 text-primary" />
-                    <span>Transparent pricing</span>
-                  </p>
-                  <p className="flex items-center gap-2">
-                    <CheckCircle2 className="h-4 w-4 text-primary" />
-                    <span>No intermediaries</span>
-                  </p>
-                  <p className="flex items-center gap-2">
-                    <CheckCircle2 className="h-4 w-4 text-primary" />
-                    <span>Full compliance (PI/VASP)</span>
-                  </p>
-                  <p className="flex items-center gap-2">
-                    <CheckCircle2 className="h-4 w-4 text-primary" />
-                    <span>Flexible ticket sizes</span>
-                  </p>
-                </CardContent>
-              </Card>
-
-              <Card className="bg-accent/50">
-                <CardHeader>
-                  <CardTitle className="text-lg">Unregulated P2P</CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-2 text-sm text-muted-foreground">
-                  <p>• Fast settlement</p>
-                  <p>• No compliance</p>
-                  <p>• Counterparty risk</p>
-                  <p>• Opaque pricing</p>
-                  <p>• Regulatory exposure</p>
-                </CardContent>
-              </Card>
-            </div>
-
-            <div className="pt-4 border-t border-border space-y-4">
-              <h4 className="font-semibold text-foreground">How It Works</h4>
-              <div className="grid md:grid-cols-2 gap-6">
-                <div className="space-y-3">
-                  <div className="flex items-start gap-2">
-                    <div className="w-6 h-6 rounded-full bg-primary/20 flex items-center justify-center flex-shrink-0 mt-0.5">
-                      <span className="text-xs font-bold text-primary">1</span>
-                    </div>
-                    <div>
-                      <p className="font-medium text-foreground">User deposits BRL via PIX</p>
-                      <p className="text-sm text-muted-foreground">Instant, zero-fee transfer to Coins' regulated bank account</p>
-                    </div>
-                  </div>
-
-                  <div className="flex items-start gap-2">
-                    <div className="w-6 h-6 rounded-full bg-primary/20 flex items-center justify-center flex-shrink-0 mt-0.5">
-                      <span className="text-xs font-bold text-primary">2</span>
-                    </div>
-                    <div>
-                      <p className="font-medium text-foreground">Exchange or OTC execution</p>
-                      <p className="text-sm text-muted-foreground">BRL converted to USDT at transparent market rates via orderbook or RFQ</p>
-                    </div>
-                  </div>
-
-                  <div className="flex items-start gap-2">
-                    <div className="w-6 h-6 rounded-full bg-primary/20 flex items-center justify-center flex-shrink-0 mt-0.5">
-                      <span className="text-xs font-bold text-primary">3</span>
-                    </div>
-                    <div>
-                      <p className="font-medium text-foreground">USDT settled on-chain</p>
-                      <p className="text-sm text-muted-foreground">User receives USDT in wallet or OCBS treasury account</p>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="space-y-3">
-                  <div className="flex items-start gap-2">
-                    <div className="w-6 h-6 rounded-full bg-primary/20 flex items-center justify-center flex-shrink-0 mt-0.5">
-                      <span className="text-xs font-bold text-primary">4</span>
-                    </div>
-                    <div>
-                      <p className="font-medium text-foreground">Global settlement</p>
-                      <p className="text-sm text-muted-foreground">User can now pay suppliers globally, hold dollar treasury, or convert back to BRL</p>
-                    </div>
-                  </div>
-
-                  <div className="flex items-start gap-2">
-                    <div className="w-6 h-6 rounded-full bg-primary/20 flex items-center justify-center flex-shrink-0 mt-0.5">
-                      <span className="text-xs font-bold text-primary">5</span>
-                    </div>
-                    <div>
-                      <p className="font-medium text-foreground">Reverse flow (USDT → BRL)</p>
-                      <p className="text-sm text-muted-foreground">Same process in reverse: USDT → BRL → PIX withdrawal to bank account</p>
-                    </div>
-                  </div>
-
-                  <div className="flex items-start gap-2">
-                    <div className="w-6 h-6 rounded-full bg-primary/20 flex items-center justify-center flex-shrink-0 mt-0.5">
-                      <span className="text-xs font-bold text-primary">6</span>
-                    </div>
-                    <div>
-                      <p className="font-medium text-foreground">Full compliance</p>
-                      <p className="text-sm text-muted-foreground">KYC/AML, transaction monitoring, regulatory reporting all automated</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="pt-4 p-4 rounded-lg bg-accent/50 text-sm">
-              <p className="text-muted-foreground">
-                <strong className="text-foreground">Why "highly efficient regulated structures" instead of "IOF 0"?</strong> Brazil's 
-                IOF (tax on foreign exchange) is a regulatory detail that changes over time. What matters is that Coins' structure 
-                enables <em>institutional-grade FX execution</em> with full compliance, transparent pricing, and minimal friction. 
-                The exact tax treatment is less important than the fact that global treasuries can move value reliably and legally.
-              </p>
-            </div>
-          </CardContent>
-        </Card>
-
-        {/* Transferability to Nigeria & Ghana */}
-        <Card>
-          <CardHeader>
-            <CardTitle className="text-2xl">Transferability: Nigeria & Ghana</CardTitle>
-            <p className="text-sm text-muted-foreground">
-              Why the Brazil blueprint replicates in other Global South markets
-            </p>
-          </CardHeader>
-          <CardContent className="space-y-6">
+        {/* Section 4: 12-Week Market Replication Framework */}
+        <div className="space-y-6">
+          <div>
+            <h2 className="text-3xl font-bold mb-2">12-Week Market Replication Framework</h2>
             <p className="text-muted-foreground">
-              The Brazil blueprint isn't Brazil-specific. It's a <strong className="text-foreground">Global South playbook</strong> 
-              that works wherever these conditions exist: instant payment rails, regulatory frameworks for crypto, high stablecoin 
-              adoption, FX volatility, and trade corridors. Nigeria and Ghana have all of these.
+              Brazil took 18 months to build from scratch. Nigeria and Ghana take 12 weeks to replicate because 
+              the three operating systems are already built—we're deploying, not developing.
             </p>
+          </div>
 
-            <div className="grid md:grid-cols-2 gap-6">
-              {/* Nigeria */}
-              <Card className="bg-blue-500/5 border-blue-500/20">
+          <div className="space-y-4">
+            {weeklyTimeline.map((phase, idx) => (
+              <Card key={idx} className="border-primary/20">
                 <CardHeader>
-                  <CardTitle className="flex items-center gap-2">
-                    <span className="text-2xl">🇳🇬</span>
-                    <span>Nigeria Replicates Brazil</span>
-                  </CardTitle>
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
+                      <Globe className="h-5 w-5 text-primary" />
+                    </div>
+                    <div>
+                      <CardTitle className="text-lg">{phase.week}</CardTitle>
+                      <p className="text-sm text-muted-foreground">{phase.layer}</p>
+                    </div>
+                  </div>
                 </CardHeader>
-                <CardContent className="space-y-3 text-sm">
-                  <div className="flex items-start gap-2">
-                    <CheckCircle2 className="h-4 w-4 text-blue-400 mt-0.5 flex-shrink-0" />
-                    <div>
-                      <p className="font-medium text-foreground">Mobile Money = PIX Equivalent</p>
-                      <p className="text-muted-foreground">MTN Mobile Money, Airtel Money enable instant transfers, same as PIX</p>
-                    </div>
-                  </div>
-
-                  <div className="flex items-start gap-2">
-                    <CheckCircle2 className="h-4 w-4 text-blue-400 mt-0.5 flex-shrink-0" />
-                    <div>
-                      <p className="font-medium text-foreground">Exchange Licensing Path</p>
-                      <p className="text-muted-foreground">Nigeria SEC regulates crypto exchanges, licensing near approval</p>
-                    </div>
-                  </div>
-
-                  <div className="flex items-start gap-2">
-                    <CheckCircle2 className="h-4 w-4 text-blue-400 mt-0.5 flex-shrink-0" />
-                    <div>
-                      <p className="font-medium text-foreground">Higher Stablecoin Adoption</p>
-                      <p className="text-muted-foreground">Nigeria has highest crypto adoption in Africa, USDT widely used</p>
-                    </div>
-                  </div>
-
-                  <div className="flex items-start gap-2">
-                    <CheckCircle2 className="h-4 w-4 text-blue-400 mt-0.5 flex-shrink-0" />
-                    <div>
-                      <p className="font-medium text-foreground">NGN Devaluation → Dollar Demand</p>
-                      <p className="text-muted-foreground">Naira volatility drives demand for USDT hedging, same as BRL</p>
-                    </div>
-                  </div>
-
-                  <div className="flex items-start gap-2">
-                    <CheckCircle2 className="h-4 w-4 text-blue-400 mt-0.5 flex-shrink-0" />
-                    <div>
-                      <p className="font-medium text-foreground">China Trade Corridor</p>
-                      <p className="text-muted-foreground">Nigeria–China import/export flows create OTC demand</p>
-                    </div>
-                  </div>
-
-                  <div className="flex items-start gap-2">
-                    <CheckCircle2 className="h-4 w-4 text-blue-400 mt-0.5 flex-shrink-0" />
-                    <div>
-                      <p className="font-medium text-foreground">KYC/AML Infrastructure</p>
-                      <p className="text-muted-foreground">SmileID and local providers enable same compliance stack as Brazil</p>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-
-              {/* Ghana */}
-              <Card className="bg-green-500/5 border-green-500/20">
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2">
-                    <span className="text-2xl">🇬🇭</span>
-                    <span>Ghana Replicates Brazil</span>
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-3 text-sm">
-                  <div className="flex items-start gap-2">
-                    <CheckCircle2 className="h-4 w-4 text-green-400 mt-0.5 flex-shrink-0" />
-                    <div>
-                      <p className="font-medium text-foreground">Mobile Money Penetration</p>
-                      <p className="text-muted-foreground">MTN Mobile Money, Vodafone Cash enable instant payments</p>
-                    </div>
-                  </div>
-
-                  <div className="flex items-start gap-2">
-                    <CheckCircle2 className="h-4 w-4 text-green-400 mt-0.5 flex-shrink-0" />
-                    <div>
-                      <p className="font-medium text-foreground">Soft Launch Approved</p>
-                      <p className="text-muted-foreground">No product restrictions, full-stack deployment from day one</p>
-                    </div>
-                  </div>
-
-                  <div className="flex items-start gap-2">
-                    <CheckCircle2 className="h-4 w-4 text-green-400 mt-0.5 flex-shrink-0" />
-                    <div>
-                      <p className="font-medium text-foreground">Stablecoin Maturity</p>
-                      <p className="text-muted-foreground">USDT adoption growing, especially for remittances and trade</p>
-                    </div>
-                  </div>
-
-                  <div className="flex items-start gap-2">
-                    <CheckCircle2 className="h-4 w-4 text-green-400 mt-0.5 flex-shrink-0" />
-                    <div>
-                      <p className="font-medium text-foreground">GHS Volatility</p>
-                      <p className="text-muted-foreground">Cedi devaluation creates demand for dollar-denominated assets</p>
-                    </div>
-                  </div>
-
-                  <div className="flex items-start gap-2">
-                    <CheckCircle2 className="h-4 w-4 text-green-400 mt-0.5 flex-shrink-0" />
-                    <div>
-                      <p className="font-medium text-foreground">China–Ghana Corridor</p>
-                      <p className="text-muted-foreground">Import/export flows to China create natural OTC demand</p>
-                    </div>
-                  </div>
-
-                  <div className="flex items-start gap-2">
-                    <CheckCircle2 className="h-4 w-4 text-green-400 mt-0.5 flex-shrink-0" />
-                    <div>
-                      <p className="font-medium text-foreground">Less Competition</p>
-                      <p className="text-muted-foreground">No full-stack player exists, Coins will be first</p>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            </div>
-
-            <div className="pt-4 border-t border-border">
-              <h4 className="font-semibold text-foreground mb-3">Replication Checklist: What's Needed in a New Market</h4>
-              <div className="grid md:grid-cols-2 gap-4 text-sm">
-                <div className="space-y-2">
-                  <p className="font-medium text-foreground">Infrastructure Requirements</p>
-                  <ul className="space-y-1 text-muted-foreground">
-                    <li className="flex items-start gap-2">
-                      <CheckCircle2 className="h-4 w-4 text-primary mt-0.5 flex-shrink-0" />
-                      <span>Instant payment rails (PIX, Mobile Money, ACH)</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <CheckCircle2 className="h-4 w-4 text-primary mt-0.5 flex-shrink-0" />
-                      <span>KYC/AML providers (Zoloz, SmileID, local equivalents)</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <CheckCircle2 className="h-4 w-4 text-primary mt-0.5 flex-shrink-0" />
-                      <span>Bank accounts and PSP partnerships</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <CheckCircle2 className="h-4 w-4 text-primary mt-0.5 flex-shrink-0" />
-                      <span>Regulatory reporting infrastructure</span>
-                    </li>
+                <CardContent>
+                  <ul className="grid md:grid-cols-2 gap-3">
+                    {phase.tasks.map((task, tIdx) => (
+                      <li key={tIdx} className="flex items-start gap-2 text-sm">
+                        <CheckCircle2 className="h-4 w-4 mt-0.5 flex-shrink-0 text-primary" />
+                        <span className="text-muted-foreground">{task}</span>
+                      </li>
+                    ))}
                   </ul>
-                </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
 
-                <div className="space-y-2">
-                  <p className="font-medium text-foreground">Market Conditions</p>
-                  <ul className="space-y-1 text-muted-foreground">
-                    <li className="flex items-start gap-2">
-                      <CheckCircle2 className="h-4 w-4 text-primary mt-0.5 flex-shrink-0" />
-                      <span>FX volatility and dollar demand</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <CheckCircle2 className="h-4 w-4 text-primary mt-0.5 flex-shrink-0" />
-                      <span>Existing stablecoin adoption</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <CheckCircle2 className="h-4 w-4 text-primary mt-0.5 flex-shrink-0" />
-                      <span>Import/export trade corridors</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <CheckCircle2 className="h-4 w-4 text-primary mt-0.5 flex-shrink-0" />
-                      <span>Fragmented competition (no full-stack player)</span>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-
-              <div className="mt-4 p-4 rounded-lg bg-primary/5 border border-primary/20 text-sm">
-                <p className="text-muted-foreground">
-                  <strong className="text-foreground">Timeline:</strong> From decision to launch in a new market takes approximately 
-                  12 weeks. This includes vendor onboarding (KYC, banking, PSPs), compliance setup (licensing applications, reporting), 
-                  and infrastructure deployment (orderbook, payment integrations, custody). Brazil took 18 months because we built 
-                  everything from scratch. Nigeria and Ghana will take 12 weeks because we're replicating a proven blueprint.
-                </p>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-
-        {/* Summary: Why the Blueprint Matters */}
-        <Card className="border-primary/30 bg-gradient-to-br from-primary/10 to-background">
+        {/* Strategic Insights */}
+        <Card className="bg-accent/30 border-primary/20">
           <CardHeader>
-            <CardTitle className="text-2xl">Why the Blueprint Matters</CardTitle>
+            <CardTitle className="text-2xl">Why This Blueprint Is Defensible</CardTitle>
           </CardHeader>
-          <CardContent className="space-y-4 text-muted-foreground">
-            <p>
-              Most crypto companies expand opportunistically: "Let's try this market because it's big." Coins expands systematically: 
-              "Brazil proved the model works. Nigeria and Ghana have the same conditions. Deploy the blueprint."
-            </p>
-            <p>
-              This approach has three advantages:
-            </p>
-            <div className="grid md:grid-cols-3 gap-4 pt-2">
-              <div className="p-4 rounded-lg bg-accent/50">
-                <p className="font-semibold text-foreground mb-2">1. De-Risked Execution</p>
-                <p className="text-sm">
-                  We're not experimenting. We're replicating a proven model. Infrastructure, compliance, and go-to-market are 
-                  known quantities.
-                </p>
-              </div>
-
-              <div className="p-4 rounded-lg bg-accent/50">
-                <p className="font-semibold text-foreground mb-2">2. Capital Efficiency</p>
-                <p className="text-sm">
-                  Building Brazil cost 18 months. Nigeria and Ghana will cost 12 weeks each. Marginal cost of expansion decreases 
-                  as the blueprint matures.
-                </p>
-              </div>
-
-              <div className="p-4 rounded-lg bg-accent/50">
-                <p className="font-semibold text-foreground mb-2">3. Compounding Network Effects</p>
-                <p className="text-sm">
-                  Each new market strengthens the others: liquidity pools deepen, compliance leverage increases, and the four-rail 
-                  flywheel spins faster.
+          <CardContent className="space-y-4 text-sm text-muted-foreground">
+            <div className="flex items-start gap-3">
+              <CheckCircle2 className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
+              <div>
+                <p className="font-semibold text-foreground mb-1">Competitors Cannot Replicate All Three OS</p>
+                <p>
+                  Mercado Bitcoin has Exchange OS but no Payments OS or OTC OS. Binance has Exchange OS and OTC OS 
+                  but no Payments OS (no PIX integration). Transfero has OTC OS but no Exchange OS or Payments OS. 
+                  Coins is the only platform with all three operating systems integrated.
                 </p>
               </div>
             </div>
 
-            <div className="pt-4 border-t border-border text-center">
-              <p className="text-lg font-semibold text-foreground">
-                Brazil is not the end goal. It's the beginning.
-              </p>
-              <p className="text-sm mt-2">
-                The blueprint scales to any Global South market with the right conditions. Nigeria and Ghana are next. 
-                Others will follow.
-              </p>
+            <div className="flex items-start gap-3">
+              <CheckCircle2 className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
+              <div>
+                <p className="font-semibold text-foreground mb-1">12 Weeks vs 18 Months</p>
+                <p>
+                  Brazil required 18 months to build the three operating systems from zero. Nigeria and Ghana 
+                  require 12 weeks because we're deploying pre-built modules, not developing new infrastructure. 
+                  This is why the blueprint compounds—each new market becomes faster and cheaper to launch.
+                </p>
+              </div>
+            </div>
+
+            <div className="flex items-start gap-3">
+              <CheckCircle2 className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
+              <div>
+                <p className="font-semibold text-foreground mb-1">Nigeria & Ghana Are Not Experiments</p>
+                <p>
+                  These markets were selected because they meet the same structural conditions as Brazil: instant 
+                  payments (Mobile Money), high stablecoin adoption, FX volatility, import/export demand, and 
+                  creator culture. They are not "tests"—they are blueprint replications with predictable outcomes.
+                </p>
+              </div>
             </div>
           </CardContent>
         </Card>
+
+        {/* Disclaimer */}
+        <div className="p-4 rounded-lg bg-accent/50 text-xs text-muted-foreground border border-border">
+          <p>
+            <strong className="text-foreground">Disclaimer:</strong> The 12-week timeline assumes regulatory 
+            pre-clearance and provider partnerships are in place. Delays in licensing (e.g., Nigeria VASP approval) 
+            or PSP integration may extend the timeline. This framework reflects the technical deployment timeline, 
+            not the regulatory approval timeline.
+          </p>
+        </div>
       </div>
     </DashboardLayout>
   );
