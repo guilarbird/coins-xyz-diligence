@@ -19,6 +19,7 @@ import { useTheme } from "@/contexts/ThemeContext";
 import { Link, useLocation } from "wouter";
 import { cn } from "@/lib/utils";
 import { useState } from "react";
+import { trpc } from "@/lib/trpc";
 
 interface DashboardLayoutProps {
   children: React.ReactNode;
@@ -66,6 +67,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
   const [location] = useLocation();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { theme } = useTheme();
+  const { data: user } = trpc.auth.me.useQuery();
 
   const closeMobileMenu = () => setIsMobileMenuOpen(false);
 
@@ -132,7 +134,28 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
 
         {/* Footer */}
         <div className="p-4 border-t border-border space-y-3">
+          {user?.role === "admin" && (
+            <Link
+              href="/admin"
+              onClick={closeMobileMenu}
+              className={cn(
+                "flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition-colors",
+                location === "/admin"
+                  ? "bg-primary text-primary-foreground"
+                  : "text-muted-foreground hover:bg-accent hover:text-accent-foreground"
+              )}
+            >
+              <Shield className="h-4 w-4" />
+              Admin Dashboard
+            </Link>
+          )}
           <ThemeToggle />
+          {user && (
+            <div className="text-xs text-muted-foreground text-center space-y-1">
+              <p className="font-medium text-foreground">{user.name || user.email}</p>
+              <p className="text-xs">{user.role}</p>
+            </div>
+          )}
           <p className="text-xs text-muted-foreground text-center">
             © 2025 Coins.xyz
           </p>

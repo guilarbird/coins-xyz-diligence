@@ -20,26 +20,92 @@ import InvestorQA from "./pages/InvestorQA";
 import OnChainResearch from "./pages/OnChainResearch";
 import ApiDocs from "./pages/ApiDocs";
 import ComingSoon from "./pages/ComingSoon";
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
+import RequestAccess from "./pages/RequestAccess";
+import AdminDashboard from "./pages/AdminDashboard";
+import AuthGuard from "./components/AuthGuard";
 
 function Router() {
   // make sure to consider if you need authentication for certain routes
   return (
     <Switch>
-        <Route path="/" component={Overview} />
-      <Route path={"/core-operations"} component={CoreOperations} />
-      <Route path={"/licensing"} component={Licensing} />
-      <Route path={"/expansion"} component={Expansion} />
-      <Route path={"/competitive-landscape"} component={CompetitiveLandscape} />
-      <Route path={"/the-model"} component={TheModel} />
-      <Route path={"/markets"} component={Markets} />
-      <Route path={"/blueprint"} component={Blueprint} />
-      <Route path={"/data-ai"} component={DataAI} />
-      <Route path={"/infrastructure"} component={Infrastructure} />
-      <Route path={"/community"} component={Community} />
-      <Route path={"/regulation"} component={Regulation} />
-      <Route path="/investor-qa" component={InvestorQA} />
-      <Route path="/on-chain-research" component={OnChainResearch} />
-      <Route path={"/api-docs"} component={ApiDocs} />
+      {/* Public auth routes */}
+      <Route path="/login" component={Login} />
+      <Route path="/signup" component={Signup} />
+      <Route path="/request-access" component={RequestAccess} />
+      
+      {/* Admin routes */}
+      <Route path="/admin">
+        {() => (
+          <AuthGuard requireAdmin>
+            <AdminDashboard />
+          </AuthGuard>
+        )}
+      </Route>
+      
+      {/* Protected content routes */}
+      <Route path="/">
+        {() => (
+          <AuthGuard>
+            <Overview />
+          </AuthGuard>
+        )}
+      </Route>
+      <Route path={"/core-operations"}>
+        {() => (
+          <AuthGuard>
+            <CoreOperations />
+          </AuthGuard>
+        )}
+      </Route>
+      <Route path={"/licensing"}>
+        {() => (<AuthGuard><Licensing /></AuthGuard>)}
+      </Route>
+      <Route path={"/expansion"}>
+        {() => (<AuthGuard><Expansion /></AuthGuard>)}
+      </Route>
+      <Route path={"/competitive-landscape"}>
+        {() => (<AuthGuard><CompetitiveLandscape /></AuthGuard>)}
+      </Route>
+      <Route path={"/the-model"}>
+        {() => (
+          <AuthGuard>
+            <TheModel />
+          </AuthGuard>
+        )}
+      </Route>
+      <Route path={"/markets"}>
+        {() => (
+          <AuthGuard>
+            <Markets />
+          </AuthGuard>
+        )}
+      </Route>
+      <Route path={"/blueprint"}>
+        {() => (<AuthGuard><Blueprint /></AuthGuard>)}
+      </Route>
+      <Route path={"/data-ai"}>
+        {() => (<AuthGuard><DataAI /></AuthGuard>)}
+      </Route>
+      <Route path={"/infrastructure"}>
+        {() => (<AuthGuard><Infrastructure /></AuthGuard>)}
+      </Route>
+      <Route path={"/community"}>
+        {() => (<AuthGuard><Community /></AuthGuard>)}
+      </Route>
+      <Route path={"/regulation"}>
+        {() => (<AuthGuard><Regulation /></AuthGuard>)}
+      </Route>
+      <Route path="/investor-qa">
+        {() => (<AuthGuard><InvestorQA /></AuthGuard>)}
+      </Route>
+      <Route path="/on-chain-research">
+        {() => (<AuthGuard><OnChainResearch /></AuthGuard>)}
+      </Route>
+      <Route path={"/api-docs"}>
+        {() => (<AuthGuard><ApiDocs /></AuthGuard>)}
+      </Route>
       <Route path={"/payments"}>
         {() => <ComingSoon title="Payments" description="B2B cross-border payment infrastructure analysis" />}
       </Route>

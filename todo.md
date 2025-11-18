@@ -37,3 +37,15 @@
 ### Content Corrections
 - [x] Corrigir descrição do Rail 4 (OCBS) - é Convert/Swap, não apenas treasury management
 - [x] Revisar todas as menções a OCBS no site para refletir funcionalidade de conversão on-chain
+
+## Authentication System Implementation
+- [x] Design database schema (users, access_requests, whitelisted_emails)
+- [x] Implement password authentication backend
+- [x] Add Google OAuth social login
+- [x] Create login/signup UI with social buttons
+- [x] Build "Request Access" flow for non-approved users
+- [x] Create admin dashboard for approving access requests
+- [x] Add authentication middleware to protect all routes
+- [ ] Test authentication flows (password, OAuth, approval)
+- [ ] Create script to add first admin user
+- [ ] Deploy and verify in production
