@@ -1,6 +1,6 @@
 {
   "buildCommand": "pnpm install && pnpm run build",
-  "outputDirectory": "dist",
+  "outputDirectory": "dist/public",
   "installCommand": "pnpm install",
   "devCommand": "cd client && pnpm run dev",
   "framework": null,
