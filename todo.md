@@ -105,3 +105,9 @@
 - [x] Mudar rota de /simple-login para /investor-access
 - [x] Atualizar redirects no SimpleAuthGuard
 - [x] Testar e fazer deploy
+
+## Fix App Title
+- [x] Diagnosticar por que %VITE_APP_TITLE% está aparecendo literal
+- [x] Corrigir configuração do título no index.html
+- [ ] Testar título em produção
+- [ ] Fazer deploy
